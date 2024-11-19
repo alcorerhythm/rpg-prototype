@@ -1,0 +1,145 @@
+html {
+  height: 100%;
+}
+.bg {
+  background-image: url("../../assets/img/bg/landscape_green.jpg");
+/*  height: 100%;*/
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.btn-skill{
+	background: #222;
+    padding: 10px;
+    color: #efefef;
+    font-size: 2vh;
+    border-radius: 10px;
+    border: none
+}
+.btn-skill:hover{
+	background: #efefef;
+}
+.skill-box{
+    width: 360px;
+    height: 100px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #222;
+}
+.skill-icon{
+	width: 8vh;
+}
+
+/* body{
+	background-color: #393939;
+	color: white;
+	font-size: 30px;	
+}*/
+
+
+
+.monster-2, .monster-2 img {
+    /* background-color: #aa21ff; */
+    /* width: 300px; */
+    /* min-height: 300px; */
+    /* padding: 5px; */
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    transform: translate(-25%, -25%);
+    width: 50vh;
+    /* height: 50vw; */
+}
+
+.monster-3, .monster-3 img {
+    /* background-color: #aa21ff; */
+    /* width: 300px; */
+    /* min-height: 300px; */
+    /* padding: 5px; */
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 30%;
+    left: 75%;
+    transform: translate(-75%, -25%);
+    width: 50vh;
+    /* height: 50vw; */
+}
+
+
+
+
+
+
+.monster-1, .monster-1 img{
+	/*background-color: #aa21ff;*/
+	/*width: 300px;*/
+	/*min-height: 300px;*/
+	/*padding: 5px;*/
+	/*display: flex;*/
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 50vh;
+	/*height: 50vw;*/
+}
+
+.progress-indicator-box{
+	display: inline-flex;
+	padding: 0.1vw 2vw
+	border-radius: 3vw;
+}
+.progress-label {
+	padding: 0px 1vw;
+	width: 3vw;
+}
+.progress-indicator {
+	margin-top: 5px;
+	width: 20vw;
+}
+
+
+.monster-status{
+    padding: 1vw;
+    background: #efefef6e;
+    border-radius: 1vw;
+    position: absolute;
+    bottom: 14vh;
+}
+.monster-status-title{
+	padding: 0 1vw!important
+}
+
+.indicator-level{
+
+}
+
+.half{
+	width: 50%
+}
+.progress-bar{
+	display: inline!important
+}
+
+
+@media screen and (max-width: 1000px){
+	span.buttonInfo{visibility: hidden}
+
+/*	.progress-label {
+		padding: 0px 2vw;
+		width: 8vw;
+	}
+	.progress-indicator {
+		width: 60vw;
+	}*/
+
+}

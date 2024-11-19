@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>	</title>
+</head>
+<body>
+	<style type="text/css">
+		body{
+			background-color: #393939;
+			color: white;
+			font-size: 30px;	
+		}
+
+		.monster-1, .monster-1 img{
+			/*background-color: #aa21ff;*/
+			/*width: 300px;*/
+			/*min-height: 300px;*/
+			/*padding: 5px;*/
+			/*display: flex;*/
+			justify-content: center;
+			align-items: center;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 50vh;
+			height: 50vw;
+		}
+
+		.progress-indicator-box{
+			display: inline-flex;
+			padding: 0.1vw 2vw
+			border-radius: 3vw;
+		}
+		.progress-label {
+			padding: 0px 1vw;
+			width: 7vw;
+		}
+		.progress-indicator {
+			margin-top: 5px;
+			width: 38vw;
+		}
+
+
+		.monster-status{
+			padding: 2vw;
+			background: #efefef6e;
+			border-radius: 2vw;
+		}
+		.monster-status-title{
+			padding: 0 1vw!important
+		}
+
+		.indicator-level{
+
+		}
+
+		.half{
+			width: 50%
+		}
+		.progress-bar{
+			display: inline!important
+		}
+
+	</style>
+<script type="text/javascript" src="./assets/js/jquery-3.7.1.min.js"></script>
+<link href="./assets/vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script src="./assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+
+
+
+<div id="battleField"></div>
+<script type="text/javascript">
+	function getlength(number) {
+		return number.toString().length;
+	}
+
+	function setStringIndex(value){
+		let characterLength = getlength(value)
+		if (characterLength < 10) {
+			return "00"+value.toString()
+		}else if(characterLength < 100){
+			return "0"+value.toString()
+		}else{
+			console.log("Err: setStringIndex")
+		}
+	}
+
+	function replaceString(text, param, value){
+		let result = text.replace(param, value);
+		return result;
+	}
+
+	function generateMonsterStatus(){
+
+	}
+
+
+	// let progressBarComponent = 
+	// 	`<div class="progress-indicator-box">
+	// 		<div class="progress-label"><b>HP</b></div>	
+	// 		<div class="progress progress-indicator" role="progressbar" aria-label="Danger example" aria-valuenow="10" aria-valuemin="0" aria-valuemax="10">
+	// 			<div class="progress-bar bg-danger" style="width: 100%">
+	// 				<span class="valueHp"></span>/<span class="valueHpMax"></span>
+	// 			</div>
+	// 		</div>
+	// 	</div>`;
+
+
+	let monster_status = 
+		`<div id="<!id>" class="monster-status">
+			<div class="container-fluid d-flex justify-content-end monster-status-title">
+				<div class="indicator-level justify-content-start half">
+					<b>Slime</b>
+				</div>
+				<div class="indicator-level float-end half">
+					<span class="float-end">Lv. </span>
+					<span id="valueLevel" class="float-end"></span>
+				</div>
+			</div>
+
+			<div class="progress-indicator-box">
+				<div class="progress-label"><b>HP</b></div>	
+				<div class="progress progress-indicator" role="progressbar" aria-label="Danger example" aria-valuenow="10" aria-valuemin="0" aria-valuemax="10">
+					<div class="progress-bar bg-danger" style="width: 100%">
+						<span class="valueHp"></span>/<span class="valueHpMax"></span>
+					</div>
+				</div>
+			</div>
+			<div class="progress-indicator-box">
+				<div class="progress-label"><b>MP</b></div>		
+				<div class="progress progress-indicator" role="progressbar" aria-label="Warning example" aria-valuenow="10" aria-valuemin="0" aria-valuemax="10">
+					<div class="progress-bar text-light" style="width: 100%" right>
+						<span class="valueMp"></span>/<span class="valueMpMax"></span>
+					</div>
+				</div>
+			</div>
+		</div>`;
+	
+
+
+	let main_skill_path = "./assets/img/";
+	let monster_slime = {
+		"path":"monster/slime/",
+		"name":"Slime",
+		"idle":{
+			"path":"idle/",
+			"format":".svg",
+			"length":3
+		},
+		"width":420,
+		"height":360,
+		"level":1,
+		"hp":10,
+		"mp":10
+	};
+
+	let monster_formation = [
+		{
+			"id":1,
+			"amount":1
+		},
+	]
+
+
+	let masterHolder = ['<!id>','<!value>','<!class>','<!onclick>', '<!currentValue>','<!minValue>','<!maxValue>','<!color>']
+	let imgCompoment = "<img id='<!id>' class='<!class>' src='<!value>'>"
+	let divComponent = {
+		"start":"<div id='<!id>' class='<!class>'>",	
+		"end":"</div>"
+	}
+
+	let nameMonsterComponent = '<div class="indicator-level justify-content-start half"><b><!value></b></div>'
+	let levelMonsterComponent = '<div class="indicator-level float-end half"><span id="valueLevel" class="float-end"><b><!value></b></span><span class="float-end">Lv. </span></div>'
+
+
+	let progressBarLabelComponent = '<div class="progress-label"><b><!value></b></div>';
+	let progressBarBodyComponent = { 
+		'start':'<div class="progress progress-indicator" role="progressbar" aria-valuenow="<!currentValue>" aria-valuemin="<!minValue>" aria-valuemax="<!maxValue>">',
+		'end':'</div>'
+		};
+	let progressBarValueComponent = {
+		'start':'<div id="<!id>" class="progress-bar bg-<!color>" style="width: <!value>%">',	
+		'end':'</div>'
+	}
+	let progressBarValueViewerComponent = '<span class="<!class>"><!value></span>'
+
+
+
+	function generateProgressBarValueViewer(name, id, value){
+		let progressBarValueViewerClass = replaceString(progressBarValueViewerComponent, masterHolder[2], id+"-hp-value");
+		let progressBarValueViewer = replaceString(progressBarValueViewerClass, masterHolder[1], value); 
+
+		let color = ""
+		if (name == 'HP') {
+			color = 'danger'
+		}else if(name == 'MP'){
+			color = 'primary'
+		}else if(name == 'EXP'){
+			color = 'success'
+		}else{
+			console.log("Err: color not found!")
+		}
+
+		let progressBox =replaceString(divComponent['start'], masterHolder[2], 'progress-indicator-box')
+
+		let progressBarValueId = replaceString(progressBarValueComponent['start'], masterHolder[0], id+"-hp-bar")
+		let progressBarValueColor = replaceString(progressBarValueId, masterHolder[7], color)
+		let progressBarValue = replaceString(progressBarValueColor, masterHolder[1], "100")
+
+		let progressBarBodyCurrentValue = replaceString(progressBarBodyComponent['start'], masterHolder[4], value)
+		let progressBarBodyMinValue = replaceString(progressBarBodyCurrentValue, masterHolder[5], "0")
+		let progressBarBody= replaceString(progressBarBodyMinValue, masterHolder[6], value)
+
+		let progressBarLabelComponentValue = replaceString(progressBarLabelComponent, masterHolder[1], name)
+
+
+		let composeProgressBarValue = progressBox+progressBarLabelComponentValue+progressBarBody+progressBarValue+progressBarValueViewer+"/"+value+progressBarValueComponent['end']+progressBarBodyComponent['end']+divComponent['end'];
+
+		return composeProgressBarValue
+	}
+
+	function composeProgressBarValueViewer(id, monsterName){
+		let monster = eval(monsterName);
+		let hp = generateProgressBarValueViewer("HP", id, monster['hp']);
+		let mp = generateProgressBarValueViewer("MP", id, monster['mp']);
+
+
+		let monsterStatus = replaceString(divComponent['start'], masterHolder[2],'container-fluid d-flex justify-content-end monster-status-title');
+
+		let nameMonster = replaceString(nameMonsterComponent, masterHolder[1], monster['name']);
+		let levelMonster = replaceString(levelMonsterComponent, masterHolder[1], monster['level']);
+		let monsterBoxStatus = replaceString(divComponent['start'], masterHolder[2], 'monster-status');
+
+		let composeMosnterStatus = monsterBoxStatus+monsterStatus+nameMonster+levelMonster+divComponent['end']+hp+mp+divComponent['end'];
+
+		return composeMosnterStatus;
+	}
+
+
+
+	let monsterAssetIdArr = []
+	let monsterAssetId = {}
+	constructEnemy(1, 'monster_slime')
+	function constructEnemy(id, monsterName) {
+		let monsterStatus = composeProgressBarValueViewer("enemy-"+id, monsterName)
+		let start = replaceString(divComponent["start"], masterHolder[0], "enemy-"+id)
+		let divStart = replaceString(divComponent["start"], masterHolder[2], "monster-"+id)
+		let imgIdGenerate = "monster-"+id+"-idle-";
+
+		let monster = eval(monsterName)
+		let monsterConstruct = ""
+		let monsterAssetIdData = []
+		for (var i = 1; i <= monster["idle"]["length"]; i++) {
+			let setIndex = setStringIndex(i)
+			let imgId = replaceString(imgCompoment, masterHolder[0], imgIdGenerate+setIndex)
+			let full_path = main_skill_path+monster["path"]+monster["idle"]["path"]+setIndex+monster["idle"]["format"]
+			let imgValue = replaceString(imgId, masterHolder[1], full_path)
+			monsterConstruct = monsterConstruct+imgValue
+			monsterAssetIdData.push(imgIdGenerate+setIndex)
+			monsterAssetIdArr.push(imgIdGenerate)
+			monsterAssetId[imgIdGenerate]=monsterAssetIdData
+			
+		}
+		$("#battleField").append(divStart+monsterStatus+monsterConstruct+divComponent["end"])
+		for (var i = 0; i <= monsterAssetIdData.length; i++) {
+			$("#"+monsterAssetIdData[i]).hide()
+		}
+		runMonster(imgIdGenerate,0)
+	}
+
+
+	function hideMonsterAllAssets(id){
+		let assetId = "";
+		for (var i = 0; i < monsterAssetId[id].length; i++) {
+			if (monsterAssetId[id].length-1 == i) {
+				assetId = assetId+"#"+monsterAssetId[id][i]
+			}else{
+				assetId = assetId+"#"+monsterAssetId[id][i]+","
+			}
+		}
+		$(assetId).hide()
+	}
+
+
+
+	function runMonster(id,index){
+		setTimeout(function() {
+			hideMonsterAllAssets(id)
+			$("#"+monsterAssetId[id][index]).show()
+			index++; 
+			if (index < monsterAssetId[id].length) { 
+				runMonster(id, index);
+			}else{
+				runMonster(id, 0);
+			}		
+
+		}, 360)
+	}
+
+
+
+	// function loopMonster(i) {
+	// 	setTimeout(function() {
+	// 		console.log(i);
+	// 		i++; 
+	// 		if (i < 10 && i != 0) { 
+	// 			loopMonster(1);
+	// 		}else{
+	// 		}
+	// 	}, 1000)
+	// }
+
+
+
+	let monster_index = 0;
+	// function runMonster(j){
+	// 	$(".monster-example img").show();
+	// 	if (++j <= monster_slime["idle"]['length']) window.setTimeout(runMonster, 600, j);
+	// 	monster_index = monster_index+1
+
+	// 	let setIndex = setStringIndex(monster_index)
+	// 	let full_path = main_skill_path+monster_slime["path"]+monster_slime["idle"]['path']+setIndex+monster_slime["idle"]['format']
+	// 	// $('.monster-example img').attr('src',full_path);
+
+	// 	if (monster_index == monster_slime["idle"]['length']) {
+	// 		monster_index = 0
+	// 		$(".monster-example img").hide()
+	// 	}
+	// }
+
+	// function loopMonster(i) {
+	// 	// var i = 1;
+	// 	setTimeout(function() {
+	// 		console.log(i);
+	// 		window.setTimeout(runMonster, 1000, 1);
+	// 		i++; 
+	// 		if (i < 10 && i != 0) { 
+	// 			loopMonster(1);
+	// 		}else{
+	// 			// i = 0
+	// 		}
+	// 	}, 1000)
+	// }
+
+	// loopMonster(1)
+</script>
+</body>
+</html>

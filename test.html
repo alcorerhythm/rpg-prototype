@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jQuery Animation Override</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    #image {
+      width: 200px;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+
+<img id="image" src="https://via.placeholder.com/200" alt="Placeholder">
+
+<script>
+  $(document).ready(function() {
+    const $image = $("#image");
+
+    // Start animation
+    $image.animate({ left: "300px" }, 3000);
+
+    // Override animation after a delay
+    setTimeout(function() {
+      $image.stop().animate({ left: "0px" }, 1000); // Stops current animation and starts a new one
+    }, 1500);
+  });
+</script>
+
+</body>
+</html>
