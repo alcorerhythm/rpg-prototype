@@ -18,8 +18,8 @@ function replaceString(text, param, value){
 	return result;
 }
 
-let masterHolder = ['<!id>','<!value>','<!class>','<!onclick>', '<!currentValue>','<!minValue>','<!maxValue>','<!color>']
-let masterClass = ['skill-icon']
+let masterHolder = ['<!id>','<!value>','<!class>','<!onclick>', '<!currentValue>','<!minValue>','<!maxValue>','<!color>'];
+let masterClass = ['skill-icon'];
 
 
 let main_asset_path = "./assets/img/";
@@ -29,36 +29,40 @@ let user = {
 		"name":"",
 		"level":10
 	}
-}
+};
+
+//BattleFlow
+let chooseTarget = false
 
 
-//setting
+
+//Setting
 let skillConfig = {
 	"data":["skill_punch_impact"]
-}
-console.log(skillConfig["data"][0])
+};
+console.log(skillConfig["data"][0]);
 
 let monsterEnvironmet = {
 	"data":["monster_slime"]
-}
+};
 
 let monster_formation = [
 	{
 		"id":1,
 		"amount":1
 	},
-]
+];
 
 
 //Component
-let imgCompoment = "<img id='<!id>' class='<!class>' src='<!value>'>"
+let imgCompoment = "<img id='<!id>' class='<!class>' src='<!value>'>";
 let divComponent = {
 	"start":"<div id='<!id>' class='<!class>'>",	
 	"end":"</div>"
-}
-
-let nameMonsterComponent = '<div class="indicator-level justify-content-start half"><b><!value></b></div>'
-let levelMonsterComponent = '<div class="indicator-level float-end half"><span id="valueLevel" class="float-end"><b><!value></b></span><span class="float-end">Lv. </span></div>'
+};
+	
+let nameMonsterComponent = '<div class="indicator-level justify-content-start half"><b><!value></b></div>';
+let levelMonsterComponent = '<div class="indicator-level float-end half"><span id="valueLevel" class="float-end"><b><!value></b></span><span class="float-end">Lv. </span></div>';
 
 
 let progressBarLabelComponent = '<div class="progress-label"><b><!value></b></div>';
@@ -69,13 +73,15 @@ let progressBarBodyComponent = {
 let progressBarValueComponent = {
 	'start':'<div id="<!id>" class="progress-bar bg-<!color>" style="width: <!value>%">',	
 	'end':'</div>'
-}
-let progressBarValueViewerComponent = '<span class="<!class>"><!value></span>'
+};
+let progressBarValueViewerComponent = '<span class="<!class>"><!value></span>';
 
 let skillButtonComponent = {
 	"start":"<button class='btn btn-skill' id='<!id>' onclick='<!onclick>'>",	
 	"end":"</button>"
-}
+};
+
+let selectEnemyComponent ='<div class="select-arrow"><span class="fa-solid fa-angle-down"></span></div>';
 
 //monster
 let monster_slime = {
@@ -170,17 +176,29 @@ let skill_punch_impact = {
 	}
 
 	function activation(handle){
-		window.setTimeout(execute, 500, 1);
+		//window.setTimeout(execute, 500, 1);
+	}
+
+	let battleFieldEnemy = []
+
+
+	function callingEnemySelector(){
+		console.log(battleFieldEnemy)
+		let id = battleFieldEnemy[0]
+		$(id+" div.select-arrow").addClass("active")
+		$(id).addClass("active")
 	}
 
 	function initBattleField() {
 		let level = user['data']['level']
 		let enemyAmount = limitEnemy(level);
-		console.log(enemyAmount)
+		// console.log(enemyAmount)
 		for (var i = 1; i <= enemyAmount; i++) {
-			console.log(i)
+			// console.log(i)
 			constructEnemy(i, 'monster_slime')
 		}
+
+		callingEnemySelector()
 		
 	}
 
@@ -190,7 +208,7 @@ let skill_punch_impact = {
 
 
 	function limitEnemy(level) {
-		let min = 0;
+		let min = 1;
 		let max = 1;
 		if (level < 10) {
 			max = 2
@@ -209,6 +227,7 @@ let skill_punch_impact = {
 	function randomEnemy(min, max) {
 		return Math.floor(Math.random() * (max - min + 1) + min);
 	}
+
 
 
 
@@ -346,6 +365,7 @@ let skill_punch_impact = {
 		let start = replaceString(divComponent["start"], masterHolder[0], "enemy-"+id)
 		let divStart = replaceString(divComponent["start"], masterHolder[2], "monster-"+id)
 		let imgIdGenerate = "monster-"+id+"-idle-";
+		battleFieldEnemy.push(".monster-"+id)
 
 		let monster = eval(monsterName)
 		let monsterConstruct = ""
@@ -361,7 +381,7 @@ let skill_punch_impact = {
 			monsterAssetId[imgIdGenerate]=monsterAssetIdData
 			
 		}
-		$("#battleField").append(divStart+monsterStatus+monsterConstruct+divComponent["end"])
+		$("#battleField").append(divStart+selectEnemyComponent+monsterStatus+monsterConstruct+divComponent["end"])
 		for (var i = 0; i <= monsterAssetIdData.length; i++) {
 			$("#"+monsterAssetIdData[i]).hide()
 		}

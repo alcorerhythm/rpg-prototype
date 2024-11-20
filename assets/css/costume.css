@@ -38,8 +38,6 @@ html {
 	font-size: 30px;	
 }*/
 
-
-
 .monster-2, .monster-2 img {
     /* background-color: #aa21ff; */
     /* width: 300px; */
@@ -128,6 +126,29 @@ html {
 }
 .progress-bar{
 	display: inline!important
+}
+
+
+/*.select-arrow{
+    background: #bfbfbf;
+    text-align: center;
+    font-size: 1.5rem;
+}
+*/
+.select-arrow.active {
+    color: #fff;
+    background: #0d6efd;
+}
+.select-arrow{
+    color: transparent;
+    background: transparent;
+    text-align: center;
+    font-size: 1.5rem;
+    position: absolute;
+    width: 100%;
+    bottom: 12.5vw;
+    border-radius: 10px;
+    z-index: 1;
 }
 
 
