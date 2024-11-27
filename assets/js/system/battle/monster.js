@@ -1,43 +1,4 @@
-function callingEnemySelector(){
-    console.log(battleFieldEnemy)
-    let id = battleFieldEnemy[0]
-    $(id+" div.select-arrow").addClass("active")
-    $(id).addClass("active")
-}
 
-function initBattleField() {
-    let level = user['data']['level']
-    let enemyAmount = limitEnemy(level);
-    // console.log(enemyAmount)
-    for (var i = 1; i <= enemyAmount; i++) {
-        // console.log(i)
-        constructEnemy(i, 'monster_slime')
-    }
-
-    callingEnemySelector()
-    
-}
-
-function initFormation(amount){
-    // let draw = 
-}
-
-
-function limitEnemy(level) {
-    let min = 1;
-    let max = 1;
-    if (level < 10) {
-        max = 2
-    }else if (level < 20) {
-        max = 3
-    }else if (level < 35) {
-        max = 4
-    }else {
-        max = 5
-    }
-    let enemy = random(min, max);
-    return enemy;
-}
 
 
 
@@ -115,35 +76,94 @@ function limitEnemy(level) {
 
 
 
-function generateProgressBarValueViewer(name, id, value){
+function generateProgressBarValueViewer(name, id, value, type){
     let progressBarValueViewerClass = replaceString(progressBarValueViewerComponent, masterHolder[2], id+"-hp-value");
-    let progressBarValueViewer = replaceString(progressBarValueViewerClass, masterHolder[1], value); 
+    
+
+    let currentValue = 0
+    if(name == 'TP'){
+        currentValue = 0
+    }else{
+        currentValue = value
+    }
+    let progressBarValueViewer = replaceString(progressBarValueViewerClass, masterHolder[1], currentValue); 
 
     let color = ""
     if (name == 'HP') {
         color = 'danger'
     }else if(name == 'MP'){
         color = 'primary'
+    }else if(name == 'TP'){
+        color = 'warning'
     }else if(name == 'EXP'){
         color = 'success'
     }else{
         console.log("Err: color not found!")
     }
 
+
+
+
+    // let progressBox = "";
+    // if (type == masterType[0]) {
+    //     progressBox =replaceString(divComponent['start'], masterHolder[2], 'progress-indicator-box')
+    // }else if (type == masterType[0]) {
+    //     progressBox =replaceString(divComponent['start'], masterHolder[2], 'progress-indicator-box')
+    // }else{
+    //     console.log("Err: type not found!")
+    // }
+    
     let progressBox =replaceString(divComponent['start'], masterHolder[2], 'progress-indicator-box')
+    let progressBarValueClass = ""
+    if (type == masterType[0]) {
+        progressBarValueClass = replaceString(progressBarValueComponent['start'], masterHolder[2], "progress-bar-party-member")
+    }else if(type == masterType[1]){
+        progressBarValueClass = replaceString(progressBarValueComponent['start'], masterHolder[2], "")
 
-    let progressBarValueId = replaceString(progressBarValueComponent['start'], masterHolder[0], id+"-hp-bar")
+    }
+    let progressBarValueId = replaceString(progressBarValueClass, masterHolder[0], id+"-hp-bar")
     let progressBarValueColor = replaceString(progressBarValueId, masterHolder[7], color)
-    let progressBarValue = replaceString(progressBarValueColor, masterHolder[1], "100")
+    let progressBarValue = ""
+    if(name == 'TP'){
+        progressBarValue = replaceString(progressBarValueColor, masterHolder[1], "0")
+    }else{
+        progressBarValue = replaceString(progressBarValueColor, masterHolder[1], "100")
+    }
 
-    let progressBarBodyCurrentValue = replaceString(progressBarBodyComponent['start'], masterHolder[4], value)
+    // console.log(type)
+    let progressBarBodyCurrentClass = "";
+    if (type == masterType[0]) {
+        progressBarBodyCurrentClass = replaceString(progressBarBodyComponent['start'], masterHolder[2], 'progress-indicator-party-member');
+    }else if (type == masterType[1]) {
+        progressBarBodyCurrentClass = replaceString(progressBarBodyComponent['start'], masterHolder[2], 'progress-indicator');
+    }else{
+        console.log("Err: type not found!");
+    }
+    
+
+    // let progressBarBodyCurrentClass = replaceString(progressBarBodyComponent['start'], masterHolder[2], "progress-indicator")
+    let progressBarBodyCurrentValue = replaceString(progressBarBodyCurrentClass, masterHolder[4], value)
     let progressBarBodyMinValue = replaceString(progressBarBodyCurrentValue, masterHolder[5], "0")
     let progressBarBody= replaceString(progressBarBodyMinValue, masterHolder[6], value)
 
-    let progressBarLabelComponentValue = replaceString(progressBarLabelComponent, masterHolder[1], name)
+    let progressBarLabelTitleClass = ""
+    console.log(type)
+    if (type == masterType[0]) {
+        progressBarLabelTitleClass = replaceString(progressBarLabelComponent, masterHolder[2], 'party-member');
+    }else if (type == masterType[1]) {
+        progressBarLabelTitleClass = replaceString(progressBarLabelComponent, masterHolder[2], "");
+    }else{
+        console.log("Err: type not found!");
+    }
+
+    let progressBarLabelTitleValue = replaceString(progressBarLabelTitleClass, masterHolder[1], name)
+    let progressBarLabelValueClass = replaceString(progressBarLabelComponent, masterHolder[2], "right")
+    let progressBarLabelValue = replaceString(progressBarLabelValueClass, masterHolder[1], progressBarValueViewer+"/"+value)
 
 
-    let composeProgressBarValue = progressBox+progressBarLabelComponentValue+progressBarBody+progressBarValue+progressBarValueViewer+"/"+value+progressBarValueComponent['end']+progressBarBodyComponent['end']+divComponent['end'];
+    // console.log(progressBarValueViewer+"/"+value)
+
+    let composeProgressBarValue = progressBox+progressBarLabelTitleValue+progressBarBody+progressBarValue+progressBarValueComponent['end']+progressBarBodyComponent['end']+progressBarLabelValue+divComponent['end'];
 
     return composeProgressBarValue
 }
@@ -154,8 +174,8 @@ function generateMonsterStatus(){
 
 function composeProgressBarValueViewer(id, monsterName){
     let monster = eval(monsterName);
-    let hp = generateProgressBarValueViewer("HP", id, monster['hp']);
-    let mp = generateProgressBarValueViewer("MP", id, monster['mp']);
+    let hp = generateProgressBarValueViewer("HP", id, monster['hp'], masterType[1]);
+    let mp = generateProgressBarValueViewer("MP", id, monster['mp'], masterType[1]);
 
 
     let monsterStatus = replaceString(divComponent['start'], masterHolder[2],'container-fluid d-flex justify-content-end monster-status-title');
@@ -229,4 +249,35 @@ function runMonster(id,index){
         }		
 
     }, 360)
+}
+
+function initBattleField() {
+    let level = player['level']
+    let enemyAmount = limitEnemy(level);
+    // console.log(enemyAmount)
+    for (var i = 1; i <= enemyAmount; i++) {
+        // console.log(i)
+        constructEnemy(i, 'monster_slime')
+    }    
+}
+
+function initFormation(amount){
+    // let draw = 
+}
+
+
+function limitEnemy(level) {
+    let min = 1;
+    let max = 1;
+    if (level < 10) {
+        max = 2
+    }else if (level < 20) {
+        max = 3
+    }else if (level < 35) {
+        max = 4
+    }else {
+        max = 5
+    }
+    let enemy = random(min, max);
+    return enemy;
 }

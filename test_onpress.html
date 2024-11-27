@@ -1,0 +1,620 @@
+<style type="text/css">
+menu {
+  transition: all 0.25s ease-in-out;
+  transition-delay: 0.75s;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  /*background-color: #2e7bbd;*/
+  background-color: rgb(25 197 207 / 50%);
+  margin: -45px 0 0 -45px;
+  position: fixed;
+/*	width: 8vw;
+	height: 14.2vh;*/
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  cursor: pointer;
+  right: 2%;
+  bottom: 2%;
+  z-index: 101;
+}
+
+/*menu:before, menu:after {
+  content: "";
+  z-index: 2;
+  position: fixed;
+  width: 3px;
+  height: 22.5px;
+  cursor: pointer;
+  background-color: #fbfdff;
+  top: 50%;
+  left: 50%;
+}
+
+menu:before {
+  -webkit-transform: translate(-50%, -50%) rotate(-90deg);
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+menu:after {
+  -webkit-transform: translate(-50%, -50%) rotate(0deg);
+  transform: translate(-50%, -50%) rotate(0deg);
+}*/
+
+menu li {
+  transition: all 0.25s ease-in-out;
+  transition-delay: 0.75s;
+/*  width: 59.4px;
+  height: 59.4px;*/
+/*      width: 5vw;
+    height: 6.5vh;*/
+    width: 60px;
+    height: 60px;
+  /*margin: -29.7px 0 0 -29.7px;*/
+  margin: -20px 0 0 -20px;
+  opacity: 0;
+  text-align: center;
+  font-size: 18px;
+  font-family: Helvetica, sans-serif;
+  font-weight: 100;
+  line-height: 59.4px;
+  color: #fbfdff;
+  border-radius: 50%;
+  /*background-color: #428dce;*/
+  background-color: rgb(115 201 206 / 69%);
+  list-style-type: none;
+  position: fixed;
+  z-index: 100;
+  left: 50%;
+  top: 50%;
+}
+
+
+menu li a i{
+	padding: 20px;
+}
+
+menu li.attack {
+  margin: -20px 0 0 -24px;
+}
+menu li.item {
+  margin: 4px 0 0 -14px;
+}
+menu li.skill{
+      margin: -18px 0 0 -26px;
+}
+menu li.magic{
+	margin: -12px 0 0 -16px
+}
+menu li.defence{
+	margin: -16px 0 0 4px;
+}
+
+menu li::after{
+  transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+}
+
+menu li li:nth-of-type(1) {
+  -webkit-transform: rotate(0deg) translate(0, 0);
+  transform: rotate(0deg) translate(0, 0);
+}
+
+menu li li:nth-of-type(2) {
+  -webkit-transform: rotate(180deg) translate(0, 0);
+  transform: rotate(180deg) translate(0, 0);
+  animation-name: crazy;
+  animation-duration: 2s;
+  animation-delay: 1s;
+  animation-iteration-count: infinite;
+}
+
+menu li li:nth-of-type(3) {
+  -webkit-transform: rotate(0deg) translate(0, 0);
+  transform: rotate(0deg) translate(0, 0);
+}
+
+menu li li:nth-of-type(4) {
+  -webkit-transform: rotate(0deg) translate(0, 0);
+  transform: rotate(0deg) translate(0, 0);
+}
+
+menu li li:nth-of-type(5) {
+  -webkit-transform: rotate(0deg) translate(0, 0);
+  transform: rotate(0deg) translate(0, 0);
+}
+
+menu:hover {
+  -webkit-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+  transition-delay: 0s;
+}
+
+menu:hover li {
+  transition-delay: 0.1s;
+  opacity: 1;
+}
+
+menu:hover div.menu-light {
+  transition-delay: 0.1s;
+  opacity: 1;
+}
+
+
+menu:hover li:nth-of-type(1) {
+  -webkit-transform: rotate(60deg) translate(0, 90px);
+  transform: rotate(60deg) translate(0, 90px);
+}
+
+menu:hover li:nth-of-type(2) {
+  -webkit-transform: rotate(0deg) translate(0, 90px);
+  transform: rotate(0deg) translate(0, 90px);
+}
+
+menu:hover li:nth-of-type(3) {
+  -webkit-transform: rotate(310deg) translate(0, 90px);
+  transform: rotate(310deg) translate(0, 90px);
+}
+
+menu:hover li:nth-of-type(4) {
+  -webkit-transform: rotate(260deg) translate(0, 90px);
+  transform: rotate(260deg) translate(0, 90px);
+}
+
+menu:hover li:nth-of-type(5) {
+  -webkit-transform: rotate(210deg) translate(0, 90px);
+  transform: rotate(210deg) translate(0, 90px);
+}
+
+menu:hover div.menu-light {
+    transform: scaleX(0.5);
+    -webkit-transform: scaleX(0.5);
+}
+
+
+/*menu li.active {
+  -webkit-transform: rotate(60deg) translate(0, 90px);
+  transform: rotate(60deg) translate(0, 90px);
+}
+
+menu li.active {
+  -webkit-transform: rotate(0deg) translate(0, 90px);
+  transform: rotate(0deg) translate(0, 90px);
+}
+
+menu li.active {
+  -webkit-transform: rotate(310deg) translate(0, 90px);
+  transform: rotate(310deg) translate(0, 90px);
+}
+
+menu li.active {
+  -webkit-transform: rotate(260deg) translate(0, 90px);
+  transform: rotate(260deg) translate(0, 90px);
+}
+
+menu li.active {
+  -webkit-transform: rotate(210deg) translate(0, 90px);
+  transform: rotate(210deg) translate(0, 90px);
+}*/
+
+/*menu:hover li:nth-of-type(2) {
+  -webkit-transform: rotate(310deg) translate(0, 90px);
+  transform: rotate(310deg) translate(0, 90px);
+}
+
+menu:hover li:nth-of-type(3) {
+  -webkit-transform: rotate(260deg) translate(0, 90px);
+  transform: rotate(260deg) translate(0, 90px);
+}
+
+menu:hover li:nth-of-type(4) {
+  -webkit-transform: rotate(210deg) translate(0, 90px);
+  transform: rotate(210deg) translate(0, 90px);
+}
+
+menu:hover li:nth-of-type(5) {
+  -webkit-transform: rotate(160deg) translate(0, 90px);
+  transform: rotate(160deg) translate(0, 90px);
+}
+*/
+
+li a {
+  transform :rotate(180deg);
+  display:block;
+}
+
+.menu-action li.action{
+	/*margin: -18px 0 0 -14px;*/
+/*	-webkit-transform: rotate(260deg) translate(0, 90px);
+	transform: rotate(260deg) translate(0, 90px);*/
+/*	  transition: all 0.25s ease-in-out;
+  transition-delay: 0.75s;*/
+/*  width: 59.4px;
+  height: 59.4px;*/
+/*    transition: all 0.25s ease-in-out;
+    transition-delay: 0.75s;*/
+    width: 60px;
+    height: 60px;
+    /* margin: -29.7px 0 0 -29.7px; */
+    /*margin: -20px 0 0 -20px;*/
+    /*opacity: 0;*/
+    text-align: center;
+    font-size: 18px;
+    /*font-weight: 100;*/
+    /*line-height: 59.4px;*/
+    color: #fbfdff;
+    border-radius: 50%;
+    background-color: #d93737;
+    list-style-type: none;
+    position: fixed;
+    z-index: 100;
+/*    left: 50%;
+    top: 50%;*/
+}
+
+.menu-action div.action.active{
+    width: 60px;
+    height: 60px;
+    /* margin: -29.7px 0 0 -29.7px; */
+    /*margin: -20px 0 0 -20px;*/
+    /*opacity: 0;*/
+    text-align: center;
+    font-size: 18px;
+    /*font-weight: 100;*/
+    /*line-height: 59.4px;*/
+    color: #fbfdff;
+    border-radius: 50%;
+    /*background-color: #d93737;*/
+    background-color: rgb(115 201 206 / 69%);
+    list-style-type: none;
+    position: fixed;
+    z-index: 100;
+/*    left: 50%;
+    top: 50%;*/
+}
+
+.sheild-rotate{
+	transform:rotate(147deg)
+}
+
+div.action.active:hover{
+  background: rgb(166 182 183);
+}
+
+.menu-action{
+/*  transition: all 0.25s ease-in-out;
+  transition-delay: 0.75s;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);*/
+  background-color: #ccc;
+  margin: -45px 0 0 -45px;
+  position: fixed;
+/*  width: 8vw;
+  height: 14.2vh;*/
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  cursor: pointer;
+  right: 2%;
+  bottom: 2%;
+  z-index: 10;
+}
+
+div.action i{
+  padding: 20px;
+}
+.action{
+    opacity: 0;
+}
+
+.action.magic{
+  margin: 28px 0 0 -73px;
+}
+.action.defence{
+  margin: 94px 0 0 -49px;
+}
+.action.attack{
+    margin: -70px 0 0 24px;
+ }
+ .action.item{
+    margin: -49px 0 0 92px;
+ }
+ .action.skill{
+    margin: -40px 0 0 -43px;
+}
+/*.menu-cyrstal{
+    background-color: #b1b1b1;
+    margin: -45px 0 0 -45px;
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    cursor: pointer;
+    right: 3%;
+    bottom: 2%;
+    z-index: 10;
+}*/
+
+.menu-light-under{
+    background-color: #ffffff8a;
+    margin: -45px 0 0 -45px;
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    cursor: pointer;
+    right: 4%;
+    bottom: 4%;
+    z-index: 11;
+}
+.menu-light{
+    transition: all 0.25s ease-in-out;
+    transition-delay: 0.75s;
+    background-color: #ffffff8a;
+    margin: -45px 0 0 -45px;
+    position: fixed;
+    width: 50px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    right: 15px;
+    bottom: 78px;
+    z-index: 102;
+    /*transform: rotate(25deg);*/
+    transform: scaleX(1) rotate(25deg);
+}
+
+.menu-crystal {
+    background-color: #ffffff8c;
+    margin: -45px 0 0 -45px;
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    cursor: pointer;
+    right: 3%;
+    bottom: 2%;
+    z-index: 11;
+}
+
+div.menu-light.active {
+  transform: scaleX(0.5);
+  -webkit-transform: scaleX(0.5);
+}
+.action.active{
+  opacity: 1
+}
+
+menu li.hide{
+  display: none;
+}
+menu li:hover{
+  background: rgb(166 182 183);
+}
+
+
+.menu-button{
+    /*background-color: #ffffff8c;*/
+    margin: -45px 0 0 -45px;
+    position: fixed;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    cursor: pointer;
+    right: 3%;
+    bottom: 2%;
+    z-index: 103;
+}
+
+
+.party-1{
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 3vw;
+    /*transform: translate(-50%, -50%);*/
+    padding: 11px;
+    font-size: 10px;
+}
+
+
+.party-profile{
+    width: 50px;
+    margin: 6px 5px;
+}
+
+.party-status{
+    width: 18vh;
+}
+.party-box-status {
+    display: -webkit-inline-box;
+}
+/*
+menu div div.menu-light {
+  transition-delay: 0.1s;
+}*/
+
+/*menu div div.menu-light:nth-of-type(6)  {
+    transform: scaleX(0);
+    -webkit-transform: scaleX(0);
+}*/
+.progress-indicator-party-member{
+    margin-top: 3px;
+    width: 14vw;
+    height: 10px !important;
+}
+
+.progress-label-party-member {
+    padding: 0px 1vw;
+    width: 4vw;
+}
+.progress-bar-party-member{
+    width: 100%;
+    font-size: 8px;
+}
+
+
+
+</style>
+<script type="text/javascript" src="./assets/js/jquery-3.7.1.min.js"></script>
+<script type="text/javascript" src="./assets/js/jquery-3.7.1.min.js"></script>
+<link href="./assets/vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="./assets/css/costume.css" rel="stylesheet">
+<script type="text/javascript" src="./assets/js/system/helper.js"></script>
+<script type="text/javascript" src="./assets/js/system/data/component.js"></script>
+<script type="text/javascript" src="./assets/js/system/data/master.js"></script>
+<script type="text/javascript" src="./assets/js/system/data/user.js"></script>
+<script type="text/javascript" src="./assets/js/system/battle/monster.js"></script>
+<script type="text/javascript" src="./assets/js/system/battle/partyMember.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" rel="stylesheet">
+
+<menu >
+    <div class="menu-button" onclick="menu()"></div>
+    <li class="item"><a><i class="fa-solid fa-vial fa-rotate-270"></i></a></li>
+    <li class="attack"><a><i class="fa-solid fa-crosshairs"></i></a></li>
+    <li class="skill" onclick="loadSkill()"><a><i class="fa-regular fa-hand-back-fist"></i></a></li>
+    <li class="magic"><a><i class="fa-solid fa-hand-sparkles fa-rotate-90"></i></a></li>
+    <li class="defence"><a><i class="fa-solid fa-shield sheild-rotate"></i> </a></li>
+    <div class="menu-light"></div>
+</menu>
+<div class="menu-action">
+    <div class="action item"><i class="fa-solid fa-vial fa-rotate-270"></i></div>
+    <div class="action attack"><i class="fa-solid fa-crosshairs fa-rotate-90"></i></div>
+    <div class="action skill" onclick="loadSkill()"><i class="fa-regular fa-hand-back-fist"></i></div>
+    <div class="action magic"><i class="fa-solid fa-hand-sparkles fa-rotate-270"></i></div>
+    <div class="action defence"><i class="fa-solid fa-shield"></i></div>
+</div>
+<div class="menu-crystal"></div>
+<div class="menu-light-under"></div>
+
+<div id="party-member">
+  <div id="<!id>" class="party-1">
+    <div id="<!id>" class="party-box-status">
+      <img class="party-profile" src="./assets/img/character/profile/Rochart.png">
+      <div class="party-status">
+        <div id="<!id>" class="container-fluid d-flex justify-content-end monster-status-title">
+            <div class="indicator-level justify-content-start half">
+              <b>Slime</b>
+            </div>
+            <div class="indicator-level float-end half">
+              <span id="valueLevel" class="float-end"><b>1</b></span><span class="float-end">Lv. </span>
+            </div>
+        </div>
+
+        <div id="<!id>" class="progress-indicator-box">
+          <div class="progress-label-party-member"><b>HP</b></div>
+          <div class="progress progress-indicator-party-member" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="10">
+            <div id="enemy-1-hp-bar" class="progress-bar progress-bar-party-member bg-danger" style="width: 100%">
+              <span class="enemy-1-hp-value">10</span>/10
+            </div>
+          </div>
+        </div>
+        <div id="<!id>" class="progress-indicator-box">
+          <div class="progress-label-party-member"><b>MP</b></div>
+          <div class="progress progress-indicator-party-member" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="10">
+            <div id="enemy-1-hp-bar" class="progress-bar progress-bar-party-member bg-primary" style="width: 100%">
+              <span class="enemy-1-hp-value">10</span>/10
+            </div>
+          </div>
+        </div>
+        <div id="<!id>" class="progress-indicator-box">
+          <div class="progress-label-party-member"><b>TP</b></div>
+          <div class="progress progress-indicator-party-member" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="10">
+            <div id="enemy-1-hp-bar" class="progress-bar progress-bar-party-member bg-success" style="width: 100%">
+              <span class="enemy-1-hp-value">10</span>/10
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="select-arrow">
+        <span class="fa-solid fa-angle-down fa-bounce"></span>
+      </div>
+    </div>
+    <div class="buffStatus">
+    </div>
+  </div>
+  <div id="<!id>" class="party-0">
+    <div id="<!id>" class="party-box-status">
+      <img class="party-profile" src="./assets/img/character/profile/Rochart.png">
+      <div class="party-status">
+        <div id="<!id>" class="container-fluid d-flex justify-content-end monster-status-title">
+            <div class="indicator-level justify-content-start half">
+              <b>Slime</b>
+            </div>
+            <div class="indicator-level float-end half">
+              <span id="valueLevel" class="float-end"><b>1</b></span><span class="float-end">Lv. </span>
+            </div>
+        </div>
+
+        <div id="<!id>" class="progress-indicator-box">
+          <div class="progress-label-party-member"><b>HP</b></div>
+          <div class="progress progress-indicator-party-member" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="10">
+            <div id="enemy-1-hp-bar" class="progress-bar progress-bar-party-member bg-danger" style="width: 100%">
+              <span class="enemy-1-hp-value">10</span>/10
+            </div>
+          </div>
+        </div>
+        <div id="<!id>" class="progress-indicator-box">
+          <div class="progress-label-party-member"><b>MP</b></div>
+          <div class="progress progress-indicator-party-member" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="10">
+            <div id="enemy-1-hp-bar" class="progress-bar progress-bar-party-member bg-primary" style="width: 100%">
+              <span class="enemy-1-hp-value">10</span>/10
+            </div>
+          </div>
+        </div>
+        <div id="<!id>" class="progress-indicator-box">
+          <div class="progress-label-party-member"><b>TP</b></div>
+          <div class="progress progress-indicator-party-member" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="10">
+            <div id="enemy-1-hp-bar" class="progress-bar progress-bar-party-member bg-success" style="width: 100%">
+              <span class="enemy-1-hp-value">10</span>/10
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="select-arrow">
+        <span class="fa-solid fa-angle-down fa-bounce"></span>
+      </div>
+    </div>
+    <div class="buffStatus">
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  let menuStatus = false;
+
+
+
+  function loadPlayerFormation(){
+    // console.log("here!");
+    for (var i = 0; i < formationParty.length; i++) {
+      // console.log(formationParty[i]);
+      constructPartyMember(i, formationParty[i]) 
+
+    }
+  }
+
+  function menu() {
+    if (menuStatus == false) {
+      menuStatus = true
+      $(".menu-action div.action, div.menu-light").addClass('active');
+      $("menu li").addClass('hide');
+
+    }else if(menuStatus == true){
+      menuStatus = false
+      $(".menu-action div.action, div.menu-light").removeClass('active');
+      $("menu li").removeClass('hide');
+    }
+  }
+
+  function loadSkill() {
+    console.log("call Skill")
+  }
+
+
+$( document ).ready(function() {
+    console.log( "ready!" );
+    loadPlayerFormation();
+});
+</script>

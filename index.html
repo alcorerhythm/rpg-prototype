@@ -6,10 +6,15 @@
 
 
 	<link rel="favicon" type="image/x-icon" href="">
-
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script type="text/javascript" src="./assets/js/jquery-3.7.1.min.js"></script>
 	<link href="./assets/vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
 	<link href="./assets/css/costume.css" rel="stylesheet">
+	<link href="./assets/css/setting.css" rel="stylesheet">
+	<link href="./assets/css/BattleNotification.css" rel="stylesheet">
+	<link href="./assets/css/menu.css" rel="stylesheet">
+	<link href="./assets/css/statusParty.css" rel="stylesheet">
+	<link href="./assets/css/leftArrow.css" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" rel="stylesheet">
 	<script src="./assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="./assets/js/system/config.js"></script>
@@ -17,53 +22,195 @@
 	<script type="text/javascript" src="./assets/js/system/data/component.js"></script>
 	<script type="text/javascript" src="./assets/js/system/data/master.js"></script>
 	<script type="text/javascript" src="./assets/js/system/data/user.js"></script>
+	<script type="text/javascript" src="./assets/js/system/battle/menu.js"></script>
+	<script type="text/javascript" src="./assets/js/system/battle/monsterSwitch.js"></script>
 	<script type="text/javascript" src="./assets/js/system/battle/monster.js"></script>
+	<script type="text/javascript" src="./assets/js/system/battle/partyMember.js"></script>
 	<script type="text/javascript" src="./assets/js/system/battle/skill.js"></script>
 	<script type="text/javascript" src="./assets/js/main.js"></script>
 	
 </head>
 <body class="bg">
-	<div id="battleField"></div>
-	<p class=""><img id="attack-field" src="#"></p>
+	<div class="battle">
+		<div id="battleField"></div>
+		<div id="party-member">
+		</div>
 
-	<!-- <div class="monster-example"><img src=""></div> -->
+		<div id="settingBtn" class="btn-setting">
+			<span class="fa fa-cog"></span>
+		</div>
+		<p class=""><img id="attack-field" src="#"></p>
+
+		<!-- <div class="monster-example"><img src=""></div> -->
 
 
 
-<!-- 	<div id="enemy-formation" class="formation-1">
-		<div class="enemy-1"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
+	<!-- 	<div id="enemy-formation" class="formation-1">
+			<div class="enemy-1"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
+		</div>
+
+
+		<div id="enemy-formation" class="formation-2">
+			<div class="enemy-1"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
+			<div class="enemy-2"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
+		</div>
+
+		<div id="enemy-formation" class="formation-3">
+			<div class="enemy-1"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
+			<div class="enemy-2"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
+			<div class="enemy-3"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
+		</div>
+
+
+		<div id="enemy-formation" class="formation-4">
+			<div class="enemy-1"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
+			<div class="enemy-2"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
+			<div class="enemy-3"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
+			<div class="enemy-4"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
+		</div>
+
+		<div id="enemy-formation" class="formation-5">
+			<div class="enemy-1"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
+			<div class="enemy-2"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
+			<div class="enemy-3"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
+			<div class="enemy-4"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
+			<div class="enemy-5"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
+		</div> -->
+
+		<ul id="skill-box" class="skill-box">
+			
+		</ul>
+
+
+		<menu >
+		    <div class="menu-button" onclick="menu()"></div>
+		    <li class="item"><a><i class="fa-solid fa-vial fa-rotate-270"></i></a></li>
+		    <li class="attack"><a><i class="fa-solid fa-crosshairs"></i></a></li>
+		    <li class="skill" onclick="loadSkill()"><a><i class="fa-regular fa-hand-back-fist"></i></a></li>
+		    <li class="magic"><a><i class="fa-solid fa-hand-sparkles fa-rotate-90"></i></a></li>
+		    <li class="defence"><a><i class="fa-solid fa-shield sheild-rotate"></i> </a></li>
+		    <div class="menu-light"></div>
+		</menu>
+		<div class="menu-action">
+		    <div class="action item"><i class="fa-solid fa-vial fa-rotate-270"></i></div>
+		    <div class="action attack"><i class="fa-solid fa-crosshairs fa-rotate-90"></i></div>
+		    <div class="action skill" onclick="loadSkill()"><i class="fa-regular fa-hand-back-fist"></i></div>
+		    <div class="action magic"><i class="fa-solid fa-hand-sparkles fa-rotate-270"></i></div>
+		    <div class="action defence"><i class="fa-solid fa-shield"></i></div>
+		</div>
+		<div class="menu-crystal"></div>
+		<div class="menu-light-under"></div>
+	</div>
+	<div class="bg-panel setting-color"></div>
+	<div id="settingPanel" class="setting-panel">	
+		<h2> 
+			<span class="fa fa-cog slow-spin"></span> 
+			<b>SETTING</b> 
+			<button id="closeSetting" class="btn btn-sm btn-danger float-end"><span class="fa fa-times"></span></button>
+		</h2><br>
+
+		<h5> INPUT </h5>
+		<div class="form-group">
+			<input id="inputKeyboard" type="checkbox" name="keyboard"> Keyboard <br>
+			<input id="inputMouse" type="checkbox" name="mouse"> Mouse
+		</div>
+		<div >
+			<hr>
+			<button id="settingSaveBtn" class="btn btn-sm btn-success float-end"><span class="fa fa-save"></span> Save</button>
+		</div>
+	</div>
+	<div class="bg-panel dark"></div>
+	<div id="battleQuestionPanel" class="panel-bg-danger">	
+		<!-- <h4 class="d-flex justify-content-center">  -->
+			<!-- <span class="fa fa-"></span>  -->
+			
+			<!-- <button id="closeSetting" class="btn btn-sm btn-danger float-end"><span class="fa fa-times"></span></button> -->
+		<!-- </h4> -->
+		<!-- <div class="form-group"> -->
+		<div class="d-flex justify-content-center">
+			<div class="text-center">
+				<div class="danger-logo"><span class="fa-solid fa-circle-exclamation"></span></div>
+				<h6 class="p-1"><b>Enemy alert!</b> </h6>
+				<span class="text-alert">
+					You face out the enemy.<br> What will you do?
+				</span>				
+			</div>
+			<hr>
+		</div>
+		<!-- </div> -->
+		<div class="mt-3">
+			<div class="float-start option-button">
+				<div class="d-flex align-items-center justify-content-center">
+					<button id="approveBattle" class="btn btn-sm btn-danger ms-1 option-button-text"><span class="fa-solid fa-skull-crossbones btn-icon"></span><br> Defeat</button>
+				</div>
+			</div>
+			<div class="float-end option-button">
+				<div class="d-flex align-items-center justify-content-center">			
+					<button id="escapeBattle" class="btn btn-sm btn-success ms-1 option-button-text"><span class="fa-solid fa-person-running btn-icon"></span><br> Escape</button>				
+				</div>
+			</div>
+		</div>
 	</div>
 
 
-	<div id="enemy-formation" class="formation-2">
-		<div class="enemy-1"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
-		<div class="enemy-2"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
-	</div>
+	<script type="text/javascript">
 
-	<div id="enemy-formation" class="formation-3">
-		<div class="enemy-1"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
-		<div class="enemy-2"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
-		<div class="enemy-3"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
-	</div>
+		// $(function() {
+		  // function render() {
+		    // $('.bg').removeAttr('style').css({
+		      // width: $('body').width(),
+		      // height: $('body').height(),
+		      // marginLeft: -$('.box').offset().left - 11,
+		      // marginTop: -$('.box').offset().top - 11,
+		      // marginBottom: -$('body').height() + $('.box').offset().top + 11,
+		    // });
+		  // }
+		  // render();
+		  // When the window resizes, or the `.box` moves/resizes, recall the `render` function.
+		//   $(window).resize(render);
+		// });
 
 
-	<div id="enemy-formation" class="formation-4">
-		<div class="enemy-1"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
-		<div class="enemy-2"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
-		<div class="enemy-3"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
-		<div class="enemy-4"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
-	</div>
+		let inputKeyboard = false;
+		let inputMouse = false;
+		$("#settingPanel, .bg-panel.setting-color").hide();
+		$('#closeSetting').click(function(){
+		    $("#settingPanel, .bg-panel").hide();
+		    $("#settingBtn span").removeClass("slow-spin");
+		});
+		$('#settingBtn').click(function(){
+		    $("#settingPanel, .bg-panel").show();
+		    $("#settingBtn span").addClass("slow-spin");
+		    if (inputKeyboard == true) {
+		    	$("#inputKeyboard").prop( "selected", true );
+		    }else{
+		    	$("#inputKeyboard").prop( "selected", false );
+		    }
+		    if (inputMouse == true) {
+		    	$("#inputMouse").prop( "selected", true );
+		    }else{
+		    	$("#inputMouse").prop( "selected", false );
+		    }
+		});
 
-	<div id="enemy-formation" class="formation-5">
-		<div class="enemy-1"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
-		<div class="enemy-2"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
-		<div class="enemy-3"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
-		<div class="enemy-4"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
-		<div class="enemy-5"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
-	</div> -->
+		$('#settingSaveBtn').click(function(){
 
-	<div id="skill-box" class="skill-box">
-		
-	</div>
+			if ($('#inputKeyboard').is(':checked')) {
+				inputKeyboard = true;
+			}else{
+				inputKeyboard = false;
+			}
+
+			if ($('#inputMouse').is(':checked')) {
+				inputMouse = true;
+			}else{
+				inputMouse = false;
+			}
+
+			console.log(inputKeyboard);
+			console.log(inputMouse);
+		});
+
+	</script>
 </body>
 </html>

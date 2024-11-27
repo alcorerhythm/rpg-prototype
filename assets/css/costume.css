@@ -1,12 +1,18 @@
 html {
   height: 100%;
 }
+
+ul{
+    list-style: none;
+}
+
 .bg {
   background-image: url("../../assets/img/bg/landscape_green.jpg");
 /*  height: 100%;*/
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+      overflow: hidden;
 }
 
 .btn-skill{
@@ -30,6 +36,10 @@ html {
 }
 .skill-icon{
 	width: 8vh;
+}
+
+button.btn.btn-skill.active{
+    background: #a5a5a5;
 }
 
 /* body{
@@ -93,7 +103,7 @@ html {
 
 .progress-indicator-box{
 	display: inline-flex;
-	padding: 0.1vw 2vw
+	/*padding: 0.1vw 2vw;*/
 	border-radius: 3vw;
 }
 .progress-label {

@@ -1,0 +1,67 @@
+#party-member{
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 14%;
+    left: 0.5rem;
+    padding: 11px;
+    font-size: 10px;
+    display: grid;
+}
+
+.party-1{
+
+}
+
+
+.party-profile{
+    width: 50px;
+    margin: 6px 5px;
+}
+
+.party-status{
+    width: 18vh;
+}
+.party-box-status {
+    display: -webkit-inline-box;
+    margin-bottom: 10px;
+}
+/*
+menu div div.menu-light {
+  transition-delay: 0.1s;
+}*/
+
+/*menu div div.menu-light:nth-of-type(6)  {
+    transform: scaleX(0);
+    -webkit-transform: scaleX(0);
+}*/
+.progress-indicator-party-member{
+    margin-top: 3px;
+    width: 14vw;
+    height: 10px !important;
+}
+
+.progress-label-party-member {
+    padding: 0px 1vw;
+    width: 4vw;
+}
+.progress-bar-party-member{
+    width: 100%;
+    font-size: 8px;
+}
+
+.bgBoxImage{
+    background: rgb(239 239 239 / 15%);
+    display: -webkit-inline-box;
+    padding: 0.5vw 0.2vw;
+    border-radius: 1vw;
+    cursor: pointer;
+}
+
+.party-member-status-title{
+padding: 0 0.5rem !important;
+}
+.progress-label.party-member{
+    padding: 0px 0.5rem;
+    width: 2rem;
+}
