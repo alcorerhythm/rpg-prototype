@@ -26,22 +26,29 @@ function loadSkill() {
         let skillValue = ""
         
 
+        console.log(skillConfig["data"][i])
         let skillButtonComponentStartI= replaceString(skillButtonComponent['start'], masterHolder[0], skillConfig["data"][i])
         //masterHolder
         if (skillConfig["data"][i] == "skill_punch_impact") {
             skillValue = eval(skillConfig["data"][0])
+        }else if (skillConfig["data"][i] == "skill_punch_single") {
+            skillValue = eval(skillConfig["data"][1])
         }
 
-        let skillButtonComponentStart= replaceString(skillButtonComponentStartI, masterHolder[3], "activation(&#39;"+skillValue['name']+"&#39;)")
+        let skillButtonComponentStart= replaceString(skillButtonComponentStartI, masterHolder[3], "activation(&#39;"+skillValue['name']+"&#39;,&#39;"+skillConfig["data"][i]+"&#39;)")
         let skillIconClass= replaceString(imgCompoment, masterHolder[2], masterClass[0])		
 
         let skillIcon= replaceString(skillIconClass, masterHolder[1], main_asset_path+skillValue['icon'])
-        skillButton = skillButton+skillButtonComponentStart+skillIcon+skillValue['name']+skillButtonComponent['end']
+        skillButton = liComponent['start']+skillButton+skillButtonComponentStart+skillIcon+skillValue['name']+skillButtonComponent['end']+liComponent['end']
 
     }
     $('#skill-box').append(skillButton)
 }
 
-function activation(handle){
+function activation(handle, btnId){
+    chooseTarget = true;
+    console.log(btnId);
+    $("#"+btnId).addClass("active");
+    callingEnemySelector(0);
     //window.setTimeout(execute, 500, 1);
 }

@@ -2,9 +2,9 @@
 let main_asset_path = "./assets/img/";
 
 let skillConfig = {
-	"data":["skill_punch_impact"]
+	"data":["skill_punch_impact","skill_punch_single"]
 };
-console.log(skillConfig["data"][0]);
+// console.log(skillConfig["data"][0]);
 
 let monsterEnvironmet = {
 	"data":["monster_slime"]

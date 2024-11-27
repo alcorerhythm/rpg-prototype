@@ -1,4 +1,5 @@
 let masterHolder = ['<!id>','<!value>','<!class>','<!onclick>', '<!currentValue>','<!minValue>','<!maxValue>','<!color>'];
+let masterType = ['npc','monster'];
 let masterClass = ['skill-icon'];
 
 
@@ -41,6 +42,15 @@ let monster_slime = {
 // monster_slime["idle"]['length']
 
 //skill
+let skill_punch_single = {
+	"path":"skill/punch_single/sprite/",
+	"name":"Punch",
+	"name_file":"punch_",
+	"icon":"skill/punch_single/icon.svg",
+	"format":"svg",
+	"length":6,
+	"damage":5,
+};
 let skill_punch_impact = {
 	"path":"skill/punch_impact/sprite/",
 	"name":"Impact",
@@ -48,4 +58,5 @@ let skill_punch_impact = {
 	"icon":"skill/punch_impact/icon.svg",
 	"format":"svg",
 	"length":7,
+	"damage":20,
 };

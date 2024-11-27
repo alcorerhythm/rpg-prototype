@@ -1,0 +1,61 @@
+.btn-setting{
+    font-size: 50px;
+    padding: 2px 16px 4px;
+    background: #222;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    color: #fff;
+    border-radius: 20px;
+    margin: 10px;
+}
+.slow-spin {
+  -webkit-animation: fa-spin 6s infinite linear;
+  animation: fa-spin 6s infinite linear;
+}
+.bg-panel{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 104;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -ms-filter: blur(3px);
+    filter: blur(3px);
+    margin-top: -16px;
+    margin-right: -10px;
+    filter: progid: DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false);
+}
+.setting-panel {
+    background: #fff;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vh;
+    border-radius: 8px;
+    z-index: 105;
+}
+h5 {
+    display: flex;
+    flex-direction: row;
+}
+
+/*h1:before,*/
+h5:after {
+    content: "";
+    flex: 1 1;
+    border-bottom: 2px solid #000;
+    margin: auto;
+}
+
+.setting-color{
+    background: rgb(161 161 161 / 92%);
+}
