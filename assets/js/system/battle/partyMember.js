@@ -39,21 +39,21 @@ function composePartyMember(id, npcName){
 
     // console.log("NPC");
     // console.log(masterType[0]);
-    let hp = generateProgressBarValueViewer("HP", id, partyMember['hp'], masterType[0]);
-    let mp = generateProgressBarValueViewer("MP", id, partyMember['mp'], masterType[0]);
+    let hp = generateProgressBarValueViewer("HP", id, partyMember['data']['status_current']['hp'], masterType[0]);
+    let mp = generateProgressBarValueViewer("MP", id, partyMember['data']['status_current']['mp'], masterType[0]);
     let tp = generateProgressBarValueViewer("TP", id, 100, masterType[0]);
 
 
-    let monsterStatus = replaceString(divComponent['start'], masterHolder[2],'container-fluid d-flex justify-content-end party-member-status-title');
+    let partyMemberStatus = replaceString(divComponent['start'], masterHolder[2],'container-fluid d-flex justify-content-end party-member-status-title');
 
-    let nameMonster = replaceString(nameMonsterComponent, masterHolder[1], partyMember['name']);
-    let levelMonster = replaceString(levelMonsterComponent, masterHolder[1], partyMember['level']);
+    let namePartyMember = replaceString(nameMonsterComponent, masterHolder[1], partyMember['name']);
+    let levelPartyMember = replaceString(levelMonsterComponent, masterHolder[1], partyMember['level']);
     let partyBoxStatus = replaceString(divComponent['start'], masterHolder[2], 'party-status');
 
     let imgProfileClass = replaceString(imgCompoment, masterHolder[2], 'party-profile');
     let imgProfileValue = replaceString(imgProfileClass, masterHolder[1], main_asset_path+partyMember['img']);
 
-    let composeMosnterStatus = imgProfileValue+partyBoxStatus+monsterStatus+nameMonster+levelMonster+divComponent['end']+hp+mp+tp+divComponent['end'];
+    let composeMosnterStatus = imgProfileValue+partyBoxStatus+partyMemberStatus+namePartyMember+levelPartyMember+divComponent['end']+hp+mp+tp+divComponent['end'];
 
     return composeMosnterStatus;
 }
@@ -64,16 +64,17 @@ function composePartyMember(id, npcName){
 // let monsterAssetIdArr = []
 // let monsterAssetId = {}
 
-let battleFieldPartyMember = []
+let battleFieldPartyMember = ["#party-0"]
 function constructPartyMember(id, npcName) {
-    let partyStatus = composePartyMember("party-"+id, npcName);
+    let customeId = id+1
+    let partyStatus = composePartyMember("party-"+customeId, npcName);
     // let start = replaceString(divComponent["start"], masterHolder[0], "party-"+id);
 
-    let start = replaceString(divComponent["start"], masterHolder[0], "party-"+id);
+    let start = replaceString(divComponent["start"], masterHolder[0], "party-"+customeId);
     let divClass = replaceString(start, masterHolder[2], "party-box-status");
-    let divStart = replaceString(divClass, masterHolder[2], "party-"+id);
-    let imgIdGenerate = "monster-"+id+"-idle-";
-    battleFieldPartyMember.push(".monster-"+id);
+    let divStart = replaceString(divClass, masterHolder[2], "party-"+customeId);
+    let imgIdGenerate = "party-"+customeId+"-idle-";
+    battleFieldPartyMember.push("#party-"+customeId);
 
     let divColor = replaceString(divComponent["start"], masterHolder[2], "bgBoxImage");
 
@@ -91,7 +92,7 @@ function constructPartyMember(id, npcName) {
     //     monsterAssetId[imgIdGenerate]=monsterAssetIdData
         
     // }
-    let selectFighter = replaceString(selectFighterRightComponent, masterHolder[0], "party-member-pointer-"+id);
+    let selectFighter = replaceString(selectFighterRightComponent, masterHolder[0], "party-member-pointer-"+customeId);
     $("#party-member").append(divStart+divColor+partyStatus+divComponent["end"]+selectFighter+divComponent["end"]);
     // for (var i = 0; i <= monsterAssetIdData.length; i++) {
     //     $("#"+monsterAssetIdData[i]).hide()
@@ -106,4 +107,5 @@ function loadPlayerFormation(){
       constructPartyMember(i, formationParty[i]) 
 
     }
+    activationPartyMember()
 }

@@ -2,11 +2,24 @@ let masterHolder = ['<!id>','<!value>','<!class>','<!onclick>', '<!currentValue>
 let masterType = ['npc','monster'];
 let masterClass = ['skill-icon'];
 
+//area
+const area_1 ={
+	"name":"",
+	"limitLevelMax":1,
+	"limitLevelMin":8
+}
+
+const monster_attr ={
+	"growth_exp":0.2
+}
 
 //monster
-let monster_slime = {
+
+const monster_naming_index = ["A","B","C","D","E","F"]
+const monster_slime = {
 	"path":"monster/slime/",
 	"name":"Slime",
+	"id":"",
 	"idle":{
 		"path":"idle/",
 		"format":".svg",
@@ -14,9 +27,27 @@ let monster_slime = {
 	},
 	"width":420,
 	"height":360,
-	"level":1,
-	"hp":10,
-	"mp":10
+	"data":{
+		"current":{
+			"hp":10,
+			"mp":10,
+			"attack":8,
+			"defence":2,
+			"agility":3
+		},
+		"base":{
+			"level":1,
+			"exp":5,
+			"growth":2,
+			"extra":1,
+
+			"hp":10,
+			"mp":10,
+			"attack":8,
+			"defence":2,
+			"agility":3			
+		}
+	}
 };
 
 
@@ -40,6 +71,20 @@ let monster_slime = {
 
 // +monster_slime["idle"]['format']
 // monster_slime["idle"]['length']
+
+
+//basic_attack
+let attack_slash = {
+	"path":"attack/slash/sprite/",
+	"name":"Slash",
+	"name_file":"slash_",
+	// "icon":"skill/punch_single/icon.svg",
+	"format":"svg",
+	"length":9,
+	"damage":0,
+}
+
+
 
 //skill
 let skill_punch_single = {

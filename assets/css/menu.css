@@ -382,6 +382,10 @@ div.menu-light.active {
 .action.active{
   opacity: 1
 }
+.action.active.selected{
+    background: rgb(255 255 255 / 50%)!important;
+
+}
 
 menu li.hide{
   display: none;

@@ -19,8 +19,8 @@
     margin: 6px 5px;
 }
 
-.party-status{
-    width: 18vh;
+.party-status {
+    width: 12rem;
 }
 .party-box-status {
     display: -webkit-inline-box;
@@ -37,7 +37,8 @@ menu div div.menu-light {
 }*/
 .progress-indicator-party-member{
     margin-top: 3px;
-    width: 14vw;
+    /*width: 14vw;*/
+    width: 7.25rem;
     height: 10px !important;
 }
 
@@ -53,15 +54,38 @@ menu div div.menu-light {
 .bgBoxImage{
     background: rgb(239 239 239 / 15%);
     display: -webkit-inline-box;
-    padding: 0.5vw 0.2vw;
-    border-radius: 1vw;
+    padding: 0.25rem 0.5rem;
+    border-radius: .5rem;
     cursor: pointer;
 }
 
 .party-member-status-title{
-padding: 0 0.5rem !important;
+    padding: 0 0.5rem !important;
 }
 .progress-label.party-member{
     padding: 0px 0.5rem;
     width: 2rem;
+}
+
+.bgBoxImage.active {
+    background: rgb(239 239 239 / 54%);
+}
+
+.titleParty{
+    width: 12rem;
+    margin: 2px 5px;
+}
+.titlePartyBox{
+    width: 15.75rem;
+}
+div.titlePartyBoxButton{
+    background: rgb(239 239 239 / 15%);
+    padding: 0.25rem 0.25rem !important;
+    margin: 0rem 0.5rem;
+    border-radius: 2px;
+}
+
+.arrowTitleParty{
+    margin-top: 12px!important;
+    margin-left: 20px!important;
 }
