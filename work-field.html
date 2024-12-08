@@ -1,0 +1,53 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<title>Work Field</title>
+	<style type="text/css">
+		#gamePlay{
+			width: 1024px;
+			height: 768px;
+			background: #111;
+		}
+	</style>
+</head>
+<body>
+	<div id="gamePlay"></div>
+
+
+</body>
+</html> -->
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		How to run the code on keypress
+		event using jQuery ?
+	</title>
+	<script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+	</script>
+	<script>
+		$(document).ready(function () {
+			$("textarea").keypress(function () {
+				$("textarea").css({
+					background: "green",
+					color: "white",
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<center>
+		<h1 style="color: green">GeeksforGeeks</h1>
+		<h3>
+			How to run the code on keypress
+			event using jQuery ?
+		</h3>
+		<textarea rows="5" cols="30"></textarea>
+	</center>
+</body>
+
+</html>

@@ -21,3 +21,8 @@ function replaceString(text, param, value){
 function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+function getNumber(value){
+	value = value.replace(/\D/g,'');
+	return value
+}

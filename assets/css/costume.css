@@ -48,7 +48,16 @@ button.btn.btn-skill.active{
 	font-size: 30px;	
 }*/
 
-.monster-2, .monster-2 img {
+.monster-status-box{
+    position: absolute;
+    bottom: 10rem;
+}
+
+.monster-status.active{
+   background: rgb(239 239 239 / 54%);
+}
+
+.monster-1, .monster-1 img {
     /* background-color: #aa21ff; */
     /* width: 300px; */
     /* min-height: 300px; */
@@ -64,7 +73,7 @@ button.btn.btn-skill.active{
     /* height: 50vw; */
 }
 
-.monster-3, .monster-3 img {
+.monster-2, .monster-2 img {
     /* background-color: #aa21ff; */
     /* width: 300px; */
     /* min-height: 300px; */
@@ -85,7 +94,7 @@ button.btn.btn-skill.active{
 
 
 
-.monster-1, .monster-1 img{
+.monster-0, .monster-0 img{
 	/*background-color: #aa21ff;*/
 	/*width: 300px;*/
 	/*min-height: 300px;*/
@@ -120,7 +129,7 @@ button.btn.btn-skill.active{
     padding: 1vw;
     background: #efefef6e;
     border-radius: 1vw;
-    position: absolute;
+    /*position: absolute;*/
     bottom: 14vh;
 }
 .monster-status-title{
@@ -161,6 +170,36 @@ button.btn.btn-skill.active{
     z-index: 1;
 }
 
+.controller-position{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    margin: 10px 15px
+}
+
+
+.circle-sm{
+    background: #444;
+    border-radius: 10px;
+    width: 20px;
+    margin: 0 8px 0 0;
+    font-weight: bold;
+}
+.inline-text{
+    display: inline-flex;
+}
+
+#acceptBtn.hover {
+    color: var(--bs-btn-hover-color);
+    background-color: var(--bs-btn-hover-bg);
+    border-color: var(--bs-btn-hover-border-color);
+}
+
+#cancelBtn.hover {
+    color: var(--bs-btn-hover-color);
+    background-color: var(--bs-btn-hover-bg);
+    border-color: var(--bs-btn-hover-border-color);
+}
 
 @media screen and (max-width: 1000px){
 	span.buttonInfo{visibility: hidden}
@@ -173,4 +212,315 @@ button.btn.btn-skill.active{
 		width: 60vw;
 	}*/
 
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+
+
+/*copy from shink*/
+#photoprofile{
+        border-radius: 8px;
+            width: 50px;
+            background: rgb(255 255 255 / 50%);
+    border: solid 2px #ffffff;
+        }
+.bar-empty{}
+.bar-status{background-color: #f5c34b;
+        padding: 2px 3px 2px;
+        border-radius: 10px;
+        margin: 0 5px 2px;
+        line-height: unset;
+        display: grid;}
+
+.bar-life{background-color: #d9534f; width: 150px;border-radius: 10px; display: inline-flex;}
+.bar-mana{background-color: #5bc0de; width: 150px;border-radius: 10px; display: inline-flex;}
+.bar-stamina{background-color: #5cb85c; width: 100px;border-radius: 10px; display: inline-flex;}
+.bar-exp{background-color: #7b7bd6; width: 150px;border-radius: 10px; display: inline-flex;}
+.bar-class{background-color: #f5c34b; width: 150px;border-radius: 10px; display: inline-flex;}
+
+
+
+.name-player{position: absolute; left: 75px; top: 0px; width: 142px;}
+.photo-layout{}
+.status-layout{position: absolute; left: 65px; top: 22px;}
+.photo-layout { padding: 5px 10px; position: absolute;}
+
+.button-primary:active{
+    color: #fff;
+        background-color: #3071a9;
+        border-color: #285e8e;
+}
+.button-primary{
+    color: #fff;
+        background-color: #428bca;
+        border-color: #357ebd;
+}
+.button-xs{padding: 2px 3px!important;
+        font-size: 9px!important;
+        line-height: 1!important;
+        border-radius: 2px!important;}
+.button{        display: inline-block;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;}
+        .value-text{padding: 0px 5px;
+        color: #fff;
+        border-radius: 10px;
+        font-size: 8px;
+        font-weight: bold;
+        display: inline-flex;}
+#max-life{}
+#max-mana{}
+#max-stamina{}
+/*.progress {height: 12px; margin-bottom: 2px;}*/
+            .pointBar {
+    text-align: left !important;
+    font-weight: bold !important;
+    color: #fff;
+    width: 17.4rem;
+    height: 10px !important;
+            }
+            .userInfo{font-size: 7px; padding: 0px 5px 0px 10px;}
+            .userLevel{}
+            .userClass{}
+            .nameUser{border-bottom: solid 2px #ffffff;
+    color: #444;
+    padding: 0 10px;
+    margin-left: 6px;}
+            .nameUser b {font-size: 11px;
+                    background: #ffffff;
+                    border-radius: 10px 0px 0px 10px;
+                    text-align: left;
+                    padding: 0px 0px 0 5px;
+            }
+            .photo-layout, .info-layout{display: inline-block;}
+            .info-layout {  margin-left: 52.5px;}
+            .navi-layout{ background: #c3c3c3;  border-radius: 15px; border: solid 1px #eaeaea;}
+
+.btn.responseModal span.fa {
+        padding: 1px 0px;
+        border: solid 2.5px #fff;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        font-size: 28px;
+}
+.btn.responseModal {
+        border-radius: 50%;
+        padding: 1px;
+
+}
+.itemUsage-square{
+    width: 25px;height: 25px; border:solid #444 1px;
+}
+     .menu-left-layout, .menu-right-layout{/*width: 20%;*/}
+     .item-square{  display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: solid #444 1px;
+    position: relative;}
+     .item-amount{background: #444;
+    font-size: 5px;
+    color: #fff;
+    padding: 0.5px 3px;
+    bottom:  1px;
+    right: 1px;
+    position: absolute;}
+    #itemData{padding: 10px}
+    #itemArmor, #itemCoat, #itemGlove, #itemWeapon, #itemHead, #itemShoes{display: inline-block;}
+    .itemUsage-info {
+        font-size: 5px;
+        bottom: 19px;
+        right: 27px;
+        position: relative;
+    }
+    .infoBar {
+padding: 1px;
+    font-size: 11px;
+    background: #ffffff;
+    border-radius: 2px;
+    /* border: 0.7px #b7b7b7 solid; */
+    margin-bottom: 2px;
+    color: #222;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 6px;
+}
+
+/*.infoDetail span.infoBar, .infoDetail div.progress {
+    display: inline-block;
+
+}*/
+/*.infoDetail div.progress{height: 7px;width: 85%;margin-bottom: 0px;}*/
+.infoDetail {
+    height: 22px;
+}
+.menu-left-layout{
+    position: relative;
+    left: 4rem;
+    margin-bottom: 20px;
+    width:19rem;
+}
+
+
+.menu-right-layout {
+    border: solid 1px #222;
+    text-align: center;
+    padding: 10px;
+}
+.level-size{font-size: 11px}
+.infoStatus{padding: 1px;
+    font-size: 10px;
+    color: #222;
+    background: #ffffff;
+    border: 0.7px rgb(255 255 255 / 50%) solid;
+    margin-bottom: 2px;
+    text-align: center;
+    border-radius: 5px;}
+
+.infoStatusRL{/*padding: 0px 0px 0px 10px; */   margin-bottom: 10px;}
+.infoDetailStatus {margin: 0px 0 -5px;}
+
+            #partyMemberDetailPage{
+                background: #ffffff75;
+                z-index: 106;
+                position: relative;
+                margin: 5rem;
+                border-radius: 1rem;
+            }
+            .party-member-single{
+                background: rgb(255 255 255 / 75%);
+                padding: 1.5rem;
+                margin: 5.5rem 1.5rem;
+                border-radius: 1rem;
+                height: 32rem;
+            }
+            .valueExpBarMain{
+                margin-top: -11px !important;
+                width: 6.45rem !important;
+            }
+            .valueBarMain{
+                font-size: 10px;
+                margin-top: 1px;
+                text-align: right;
+                width: 6rem;
+            }
+            .valueBar{
+                font-size: 10px;
+                margin-top: 0px;
+                text-align: right;
+                width: 13rem;
+            }
+            .progress-indicator-detail-box{
+                    /*display: flex;*/
+                    display: inline-flex;
+            }
+            .infoDetail div.progress{
+
+            }
+            .infoDetail div div div.progress.pointBar{
+                height: 7px;
+                /*width: 85%;*/
+                margin-bottom: 0px;
+                    margin: 5px 6px;
+            }
+            .pointSubBar{
+            /*font-size: 5px !important;*/
+                text-align: left !important;
+                font-weight: bold !important;
+                color: #fff;
+                width: 13rem;
+                height: 10px !important;
+                margin-bottom: 10px;
+                position: relative;
+                top: -10px;
+            }
+            .expBar{
+                width: 19rem;
+                height: 10px !important;
+                position: relative;
+                bottom: 8px;
+            }
+
+            .progress-indicator-sub-detail-box{
+                    /*display: flex;*/
+                    /*display: inline-flex;*/
+            }
+
+            .progress-lebel.status{
+                    padding: 0px 1.5rem!important;
+            }
+
+            .detail-party-member-buff-title{
+                background: #ffffff;
+                font-size: 12px;
+                padding: 5px 15px;
+                border-radius: 10px;
+            }
+
+            .buffList{
+                    height: 8rem;
+    background: rgb(255 255 255 / 75%);
+    border-radius: 10px;
+    overflow: auto;
+            }
+
+
+.party-member-controller{
+    display: inline-flex;
+    padding: 20.5rem 1.5rem;
+    font-size: 2rem;
+    color: #fff
+}
+.right-arrow{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.right-arrow:hover{
+    background: rgb(255 255 255 / 50%);
+    color: #555;
+    border-radius: 0 15px 15px 0;
+}
+
+
+.left-arrow:hover{
+    background: rgb(255 255 255 / 50%);
+    color: #555;
+    border-radius: 15px 0 0 15px;
 }

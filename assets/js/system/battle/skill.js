@@ -26,7 +26,7 @@ function loadSkill() {
         let skillValue = ""
         
 
-        console.log(skillConfig["data"][i])
+        // console.log(skillConfig["data"][i])
         let skillButtonComponentStartI= replaceString(skillButtonComponent['start'], masterHolder[0], skillConfig["data"][i])
         //masterHolder
         if (skillConfig["data"][i] == "skill_punch_impact") {
@@ -43,12 +43,4 @@ function loadSkill() {
 
     }
     $('#skill-box').append(skillButton)
-}
-
-function activation(handle, btnId){
-    chooseTarget = true;
-    console.log(btnId);
-    $("#"+btnId).addClass("active");
-    callingEnemySelector(0);
-    //window.setTimeout(execute, 500, 1);
 }

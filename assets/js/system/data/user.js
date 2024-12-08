@@ -3,11 +3,54 @@ let player = {
 	"name":"Ren",
 	"img":"character/profile/Ren.png",
 	"level":10,
-	"hp":30,
-	"mp":10,
 	"exp":100,
 	"data":{
+		// "attack":10,
+		// "defence":8,
+		// "agility":8,
+		"base":{ //Buffless & Equipment less
+			"hp":30,
+			"mp":10,
+			"strength" : 10,
+			"agility" : 6,
+			"vitality" : 5,
+			"intelegent" : 4,
+			"dexterity" : 5,
+			"luck"  : 3
+		},
+		"status_build_base":{ //Buff || Equipment
+			"hp":30,
+			"mp":10,
+			"strength" : 10,
+			"agility" : 6,
+			"vitality" : 5,
+			"intelegent" : 4,
+			"dexterity" : 5,
+			"luck"  : 3
+		},
+		"status_current":{ //mirror of status_build_base
+			"hp":30,
+			"mp":10,
+			"strength" : 10,
+			"agility" : 6,
+			"vitality" : 5,
+			"intelegent" : 4,
+			"dexterity" : 5,
+			"luck"  : 3,
+			"tp":0,
+		},
+		"equipment":{
+			"head":"",
+			"hand-left":"",
+			"hand-left":"",
+			"cloth":"",
+			"armor":"",
+			"glove":"",
+			"shoes":""
+		},
+		"buff":{
 
+		}
 	}
 };
 
@@ -56,4 +99,4 @@ let npc_emilly =
 }
 
 
-let formationParty = [player, npc_rochart, npc_emilly];
+let formationParty = [player]; //, npc_rochart, npc_emilly
