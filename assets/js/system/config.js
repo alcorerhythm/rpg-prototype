@@ -17,3 +17,22 @@ let monster_formation = [
 	},
 ];
 
+
+//Systems
+// let interfaceLogListScroll = {
+// 	length:10,
+// 	current:0,
+// };
+
+// let interfaceLogDevListScroll = {
+// 	length:10,
+// 	current:0,
+// };
+
+
+// function handleScroll(id, data, message){
+// 	data.current= data.current+ data.length
+
+// 	$("#"+id).append('<li>'+message+'</li>')
+// 	$("#"+id).scrollTop(data.current);
+// }

@@ -11,9 +11,9 @@ function activationPartyMember(){
     //window.setTimeout(execute, 500, 1);
 }
 
-function disactivatePartyMember(){
+function hideSelectorPartyMember(id){
     // console.log(battleFieldPartyMember[0])
-    $(battleFieldPartyMember[0]+" div div.arrow").addClass("hide");
+    $(battleFieldPartyMember[id]+" div div.arrow").addClass("hide");
     // $(battleFieldPartyMember[selectedPartyMember]+" div.bgBoxImage").removeClass("active");
 }
 
@@ -60,13 +60,11 @@ $(document).on('keydown', function(e) {
 $(document).on('keydown', function(e) {
     switch (e.keyCode) {
     case 90:
-        console.log("accept")
         accept()
         $("#acceptBtn").addClass("hover");
         
     break;
     case 88:
-        console.log("cancel")
         cancel()
         $("#cancelBtn").addClass("hover");
     break;

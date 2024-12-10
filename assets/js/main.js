@@ -2,6 +2,37 @@
 // let chooseTarget = false
 // let battleFieldEnemy = []
 
+let partyMemberDetail = false; 
+function loadPartyMemberDetail(){
+	if (partyMemberDetail == true) {
+		$("#partyMemberDetailPage").show();
+	}else{
+		$("#partyMemberDetailPage").hide();
+	}
+
+}
+		
+
+
+function turnCounter() {
+	let turn = $("#turnIndicator").text();
+	let turnMax = $("#turnIndicatorMax").text();
+	turn = parseInt(turn)+1; 
+	$("#turnIndicator").text("");
+
+	if (turn <= turnMax) {
+		if (turn <10) {
+			$("#turnIndicator").text("0"+turn);
+		}else{
+			$("#turnIndicator").text(turn);
+		}
+		
+		
+	}else if (turn > turnMax) {
+		turn = 0; 
+	}
+
+}
 
 
 
@@ -10,6 +41,7 @@ function initBattle(){
 }
 
 $( document ).ready(function() {
+	turnCounter();
 	loadSetting();
 	loadPartyMemberDetail();
 	$("#battleQuestionPanel, .bg-panel.dark").hide();

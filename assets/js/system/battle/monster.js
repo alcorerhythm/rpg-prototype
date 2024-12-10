@@ -182,7 +182,7 @@ function generateMonsterStatus(name, area, id){
         let expGrowth = monster.data.base.exp*monster_attr["growth_exp"]
         let exp = Math.round(expGrowth+(monster.data.base.exp*enemyLevel))
         let attack = monster.data.base.attack+(monster.data.base.extra*enemyLevel)
-        let defence = monster.data.base.defence+(monster.data.baseextra*enemyLevel)
+        let defence = monster.data.base.defence+(monster.data.base.extra*enemyLevel)
         let hp = monster.data.base.hp+((monster.data.base.growth+monster.data.base.extra)*enemyLevel)
         let mp = monster.data.base.mp+((monster.data.base.growth-monster.data.base.extra)*enemyLevel)
 
@@ -308,19 +308,18 @@ function runMonster(id,index){
 function initBattleField() {
     let level = player['level'];
     let area = area_1;
-    let enemyAmount = limitEnemy(level);
+    let enemyAmount = 2
+    // let enemyAmount = limitEnemy(level);
     // console.log(enemyAmount)
 
             
     let monsterName = "monster_slime"
-    console.log(monster_slime)
     for (var i = 0; i <= enemyAmount; i++) {
         let monster = JSON.parse(JSON.stringify(eval(monsterName)))
         // console.log(i)
         monsterBattle.push(monster)
         generateMonsterStatus('monster_slime', area,i)
         constructEnemy(i,'monster_slime',area)
-        // console.log(monster_slime)
     }    
 }
 
@@ -330,18 +329,19 @@ function initFormation(amount){
 
 
 function limitEnemy(level) {
-    let min = 1;
-    let max = 1;
+    let min = 0;
+    let max = 0;
     if (level < 10) {
-        max = 2
+        max = 1
     }else if (level < 20) {
-        max = 3
+        max = 2
     }else if (level < 35) {
-        max = 4
+        max = 3
     }else {
-        max = 5
+        max = 4
     }
     let enemy = random(min, max);
+    console.log("enemy amount : "+enemy)
     return enemy;
 }
 
@@ -373,7 +373,7 @@ function initLevel(level, limitMaxArea, limitMinArea) {
             enemyLevel = limitMinArea
         }
     }
-    // console.log("Lv. "+enemyLevel);
+    console.log("Lv. "+enemyLevel);
     return enemyLevel;
 }
 

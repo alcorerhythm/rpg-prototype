@@ -39,11 +39,14 @@ let menuDataList = ['item', 'attack', 'skill', 'magic', 'defence'];
 function menuSwitch(value) {
   let idCurrent = menuDataList[selectedAction];
   let id = menuDataList[value];  
-  console.log(id);
   $("div.action."+idCurrent+".active").removeClass('selected');
   $("div.action."+id+".active").addClass('selected');
   selectedAction = value
   
+}
+
+function menuSwitchLeave(value) {
+  $("div.action."+value+".active.selected").removeClass('selected');  
 }
 
 // function menuActionSelector(value){
