@@ -154,21 +154,6 @@ button.btn.btn-skill.active{
     font-size: 1.5rem;
 }
 */
-.select-arrow.active {
-    color: #fff;
-    background: #0d6efd;
-}
-.select-arrow{
-    color: transparent;
-    background: transparent;
-    text-align: center;
-    font-size: 1.5rem;
-    position: absolute;
-    width: 100%;
-    bottom: 12.5vw;
-    border-radius: 10px;
-    z-index: 1;
-}
 
 .controller-position{
     position: absolute;
@@ -199,6 +184,10 @@ button.btn.btn-skill.active{
     color: var(--bs-btn-hover-color);
     background-color: var(--bs-btn-hover-bg);
     border-color: var(--bs-btn-hover-border-color);
+}
+
+.hide{
+    display: none;
 }
 
 @media screen and (max-width: 1000px){
@@ -418,8 +407,8 @@ padding: 1px;
 
             #partyMemberDetailPage{
                 background: #ffffff75;
-                z-index: 106;
-                position: relative;
+                z-index: 108;
+                position: absolute;
                 margin: 5rem;
                 border-radius: 1rem;
             }

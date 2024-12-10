@@ -2,7 +2,7 @@ let player = {
 	"id":"R3N",
 	"name":"Ren",
 	"img":"character/profile/Ren.png",
-	"level":10,
+	"level":1,
 	"exp":100,
 	"data":{
 		// "attack":10,
@@ -100,3 +100,5 @@ let npc_emilly =
 
 
 let formationParty = [player]; //, npc_rochart, npc_emilly
+let formationPartyCurrentConfig = ["player"]; //, npc_rochart, npc_emilly
+let npcRecruitableList = ["npc_rochart", "npc_emilly"];

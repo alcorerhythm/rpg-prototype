@@ -2,11 +2,17 @@ let masterHolder = ['<!id>','<!value>','<!class>','<!onclick>', '<!currentValue>
 let masterType = ['npc','monster'];
 let masterClass = ['skill-icon'];
 
+
+//default
+let battleFieldDefault = "terminate"
+
+
 //area
 const area_1 ={
 	"name":"",
-	"limitLevelMax":1,
-	"limitLevelMin":8
+	"limitLevelMin":1,
+	"limitLevelMax":8
+
 }
 
 const monster_attr ={
@@ -82,6 +88,7 @@ let attack_slash = {
 	"format":"svg",
 	"length":9,
 	"damage":0,
+	"duration":100
 }
 
 
