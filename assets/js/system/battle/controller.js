@@ -39,7 +39,6 @@ function accept(){
 		menuSwitch(1);
 	}else if(menuActionAccess == true){
 		menuActionAccess = false;
-		chooseTargetEnemy = true
 		let id = $("div.action.active.selected").attr("id");
 		let idValue = replaceString(id, "party-", "")
 		let idInt = parseInt(idValue)
@@ -93,6 +92,14 @@ function cancel() {
 		// let id = $("div.action.active.selected").attr("id");
 
 
+	}else if(chooseInvenotyItem == true){
+		chooseInvenotyItem = false
+		menuActionAccess = true;
+		menuSwitch(selectedAction);
+		$("#inventoryPanel").hide();
+		// let id = $("div.action.active.selected").attr("id");
+
+
 	}
 
 
@@ -105,10 +112,13 @@ function cancel() {
 function accessMenu(id){
 	// console.log(id);
 	if (id == 0) {
+		chooseInvenotyItem = true
 		pushLog("action", "item")
+		loadInventory()
 	}else if (id == 1) {
-		 pushLog("action", "attack")
-		 callingEnemySelector(0);
+		chooseTargetEnemy = true
+		pushLog("action", "attack")
+		callingEnemySelector(0);
 	}else if (id == 2) {
 		pushLog("action", "skill")
 	}else if (id == 3) {
