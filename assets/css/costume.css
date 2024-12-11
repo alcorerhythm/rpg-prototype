@@ -513,3 +513,12 @@ padding: 1px;
     color: #555;
     border-radius: 15px 0 0 15px;
 }
+
+
+/* font-awesome costume */
+.fa-rotate-210{
+        transform: rotate(210deg);
+}
+.fa-rotate-320{
+    transform: rotate(320deg);
+}

@@ -12,12 +12,14 @@
 	<link href="./assets/vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
 	<link href="./assets/css/costume.css" rel="stylesheet">
 	<link href="./assets/css/setting.css" rel="stylesheet">
+	<link href="./assets/css/inventory.css" rel="stylesheet">
 	<link href="./assets/css/BattleNotification.css" rel="stylesheet">
 	<link href="./assets/css/menu.css" rel="stylesheet">
 	<link href="./assets/css/statusParty.css" rel="stylesheet">
 	<link href="./assets/css/arrowSelect.css" rel="stylesheet">
 	<link href="./assets/css/alert.css" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="./assets/vendor/rpg-awesome/css/rpg-awesome.css">
 	<script src="./assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="./assets/js/system/setting.js"></script>
 	<script type="text/javascript" src="./assets/js/system/config.js"></script>
@@ -31,7 +33,8 @@
 	<script type="text/javascript" src="./assets/js/system/battle/monster.js"></script>
 	<script type="text/javascript" src="./assets/js/system/battle/partyMember.js"></script>
 	<script type="text/javascript" src="./assets/js/system/battle/partySwitch.js"></script>
-	<script type="text/javascript" src="./assets/js/system/battle/skill.js"></script>	
+	<script type="text/javascript" src="./assets/js/system/battle/skill.js"></script>
+	<script type="text/javascript" src="./assets/js/system/battle/inventory.js"></script>
 	<script type="text/javascript" src="./assets/js/system/battle/controller.js"></script>	
 	<script type="text/javascript" src="./assets/js/main.js"></script>
 </head>
@@ -204,24 +207,71 @@
 				<span></span>
 			</div>
 		    <div class="menu-button" onclick="menu()"></div>
-		    <li class="item"><a><i class="fa-solid fa-vial fa-rotate-270"></i></a></li>
-		    <li class="attack"><a><i class="fa-solid fa-crosshairs"></i></a></li>
-		    <li class="skill" onclick="loadSkill()"><a><i class="fa-regular fa-hand-back-fist"></i></a></li>
-		    <li class="magic"><a><i class="fa-solid fa-hand-sparkles fa-rotate-90"></i></a></li>
+		    <li class="item"><a><i class="fa-solid fa-vial fa-rotate-210"></i></a></li>
+		    <li class="attack"><a><i class="fa ra ra-sword fa-rotate-270"></i></a></li>
+		    <li class="skill" onclick="loadSkill()"><a><i class="fa-regular fa-hand-back-fist "></i></a></li>
+		    <li class="magic"><a><i class="fa-solid fa-wand-sparkles"></i></a></li>
 		    <li class="defence"><a><i class="fa-solid fa-shield sheild-rotate"></i> </a></li>
 		    <div class="menu-light"></div>
 		</menu>
 		<div class="menu-action">
 		    <div id="0" class="action item"><i class="fa-solid fa-vial fa-rotate-270"></i></div>
-		    <div id="1" class="action attack"><i class="fa-solid fa-crosshairs fa-rotate-90"></i></div>
-		    <div id="2" class="action skill" onclick="loadSkill()"><i class="fa-regular fa-hand-back-fist"></i></div>
-		    <div id="3" class="action magic"><i class="fa-solid fa-hand-sparkles fa-rotate-270"></i></div>
+		    <div id="1" class="action attack"><i class="fa ra ra-sword fa-rotate-270"></i></div>
+		    <div id="2" class="action skill" onclick="loadSkill()"><i class="fa-regular fa-hand-back-fist fa-rotate-320"></i></div>
+		    <div id="3" class="action magic"><i class="fa-solid  fa-wand-sparkles fa-rotate-270"></i></div>
 		    <div id="4" class="action defence"><i class="fa-solid fa-shield"></i></div>
 		</div>
 		<div class="menu-crystal"></div>
 		<div class="menu-light-under"></div>
 	</div>
 	<div class="bg-panel setting-color"></div>
+	<div id="inventoryPanel"  class="col-12">
+		<div class="inventory-panel col-8">
+			<div class="row">
+				<div class="col col-12">
+					<h2 class="title-component"><span class="fa-solid fa-vial fa-rotate-270"></span> INVENTORY</h2>
+				</div>
+				<div class="col col-8">
+					<div class="item-list panel-style">
+						
+						<div class="item">
+							<div class="item-row">
+								
+								<div class="item-img-preview-row float-start">
+									<i class="fa-solid fa-leaf img-font-item-preview-row"></i>
+								</div> 
+
+								<span id="name_item" class="item-position">Herp</span>
+								<div id="item_id" class="item-position float-end">10</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col col-4">
+					<div class="item-detail panel-style">
+						<h5 class="item-title-preview">Herp</h5>
+						<div class="detail "></div>
+						<div class="item-img-preview">
+							<i class="fa-solid fa-leaf img-font-item"></i>
+						</div>
+						<div class="item-detail-text">
+							<i><b>Info</b></i>
+							<p>
+								Herp can be growth in the a lush land or forest.Example: <i>&lt;<b>Area-1</b>&gt;</i>.<br>
+								Herp also highly droped by Grass type Enemy. 
+							</p>
+							
+							<i><b>Effect</b></i>
+							<ul>
+								<li>HP : + 10 point</li>
+							</ul>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div id="settingPanel" class="setting-panel">	
 		<h2> 
 			<span class="fa fa-cog slow-spin"></span> 
