@@ -17,6 +17,7 @@ function accept(){
 			
 			chooseTargetPartyMember = false;
 			let idInt = parseInt(idValue)-1
+			formationPartyCurrentConfigAvailable[idValue] = battleFieldUsedDefault
 			pushLog("partyMember", idInt)
 			if (menuStatus == false) {
 				$(".arrow.arrow-menu").show();
@@ -48,7 +49,6 @@ function accept(){
 		chooseTargetEnemy =false;
 
 		let id = $("div.monster-status-box div.monster-status.active").parent().parent().attr('id');
-		console.log("monster ID : "+id)
 		let idValue= getNumber(id);
 		hideSelectorEnemy(idValue);
 		let idInt = parseInt(idValue)
@@ -83,15 +83,25 @@ function cancel() {
 		// }
 		
 	}else if(menuBattleAccess == true){
+
 		// menu();
 		// $(".arrow.arrow-menu").hide();
 		// menuBattleAccess = false;
 		// menuActionAccess = true;
 		// menuSwitch(1);
 	}else if(menuActionAccess == true){
-		// let id = $("div.action.active.selected").attr("id");
-
-
+		
+		//$(battleFieldPartyMember[mappingActionRow['partyMember']]+" div div.arrow").removeClass("hide");
+		chooseTargetPartyMember = true
+		menuActionAccess = false
+		formationPartyCurrentConfigAvailable[selectedPartyMember] = battleFieldPartyMember[selectedPartyMember]
+		callingPartySelector("init",selectedPartyMember)
+				// let id = $("div.action.active.selected").attr("id");
+	}else if(chooseTargetEnemy == true){
+		chooseTargetEnemy = false
+		menuActionAccess = true;
+		hideSelectorEnemy(selectedEnemy)
+		menuSwitch(selectedAction);
 	}else if(chooseInvenotyItem == true){
 		chooseInvenotyItem = false
 		menuActionAccess = true;
@@ -118,7 +128,7 @@ function accessMenu(id){
 	}else if (id == 1) {
 		chooseTargetEnemy = true
 		pushLog("action", "attack")
-		callingEnemySelector(0);
+		callingEnemySelector("init",0);
 	}else if (id == 2) {
 		pushLog("action", "skill")
 	}else if (id == 3) {
@@ -142,6 +152,7 @@ let devTool = true;
 
 
 function pushLogRow(){
+	// console.log(mappingActionRow)
 	let row = JSON.parse(JSON.stringify(eval(mappingActionRow)))
 	mappingAction.push(row)
 	let partyAmount = countAliveFellow("party")
@@ -155,12 +166,18 @@ function pushLogRow(){
 	// console.log("monsterBattle : "+monsterBattle.length)
 	// console.log("mappingAction : "+mappingAction.length)
 	// console.log(" objectBattleField : "+ objectBattleField)
-	if (mappingAction.length == formationParty.length) {
+	if (mappingAction.length < formationParty.length) {
+		activationPartyMember()
+		// console.log("formationPartyCurrentConfig :"+formationPartyCurrentConfig)
+		// console.log("formationPartyCurrentConfigAvailable :"+formationPartyCurrentConfigAvailable)
+	}else if (mappingAction.length == formationParty.length) {
 		mappingEnemyAttack()
+		// console.log(battleFieldEnemy)
+		// console.log(monsterBattle)
+		console.log(mappingAction)
 	}else if(mappingAction.length == objectBattleField){
 		mappingActionLoop()
 		mappingAction = mappingAction.sort(( first, second ) => second.speed - first.speed );
-
 	}
 	mappingActionRow={}
 
@@ -182,11 +199,19 @@ function pushLogRow(){
 	// }
 }
 
+let logDict ={}
 function pushLog(type, value){
 	if (devTool == true) {
+		// let logDict ={}
+		logDict[type] = value;
 		let html = '<li>'+type+' : '+value+'</li>';
 		$('#logListDevTool').append(html);
 		$('#logListDevTool').scrollTop($(document).height());
+
+		if (type == 'push' && value == 'execute') {
+			log.push(logDict)
+			logDict ={}
+		}
 	}
 
 	if (type == 'enemy') {
@@ -206,7 +231,7 @@ function pushLog(type, value){
 		mappingActionRow['speed'] = value;	
 		// pushLogRow(value)
 	}else if(type == 'push' && value == 'execute'){
-		
+		mappingActionRow['isExecute'] = false;
 		pushLogRow()
 	}
 
@@ -244,6 +269,33 @@ function damageCounter(){
 
 }
 
+function damageRecounter(){
+	// console.log(mappingActionRow['partyMember'])
+	let fighterGet = formationParty[mappingActionRow['partyMember']];
+	let fighter = eval(fighterGet)
+	let fighterAttack = fighter["data"]["status_current"]["strength"]
+	let fighterSpeed = fighter["data"]["status_current"]["agility"]
+
+	let enemyGet = monsterBattle[mappingActionRow['enemy']]
+	let enemyDefence = enemyGet.data.current.defence
+	// console.log(enemyDefence)
+	// pushLog("attack", fighterAttack)
+
+	let damage = fighterAttack-enemyDefence
+	// console.log("damage : "+damage)
+	if (damage <= 0 ) {
+		damage = 0
+	}
+	mappingActionRow={}
+	return damage
+	// pushLog("type", "attack")
+	// pushLog("speed", fighterSpeed)
+	// pushLog("damage", damage)
+	// pushLog("push", "execute")
+	
+
+}
+
 
 
 function mappingEnemyAttack(){
@@ -262,7 +314,6 @@ function mappingEnemyAttack(){
 			let fighterDefence = fighter["data"]["status_current"]['vitality']
 
 			let damage = enemyAttack-fighterDefence
-			console.log("damage : "+damage)
 			if (damage <= 0 ) {
 				damage = 0
 			}
@@ -323,19 +374,33 @@ let expTemp = 0;
 function mappingActionLoop() {
   setTimeout(function() {
   	let i = mappingActionIndex;
-    // console.log(mappingAction)
+    console.log("============")
+    console.log("TURN"+i)
 
-	let enemyRow = monsterBattle[mappingAction[i].enemy]
+	
 	let fighterRow = formationParty[mappingAction[i].partyMember]//JSON.parse(JSON.stringify())
 	// console.log("fighterRow.data.status_current.hp T: "+fighterRow.data.status_current.hp)
 
+	let enemyRow = monsterBattle[mappingAction[i].enemy]
+	let enemyIndex = mappingAction[i].enemy
 
 	let composeLog = ""
 	if (mappingAction[i].type == "attack") {
+		console.log("battleFieldEnemy[mappingAction[i].enemy] :"+battleFieldEnemy[mappingAction[i].enemy])
+		if (battleFieldEnemy[mappingAction[i].enemy] != battleFieldDefault) {
+			enemyIndex =  getFirstEnemy("init", mappingAction[i].enemy)
+			enemyRow = monsterBattle[enemyIndex]
+		}else{
+			enemyRow = monsterBattle[mappingAction[i].enemy]
+		}
+
+		console.log(enemyRow)
+		console.log(enemyRow.id)
+
 		let skill = "attack_slash"
 
 		if (mappingAction[i].action == "attack") {
-			callAnimation("monster-"+mappingAction[i].enemy, skill, 1)
+			callAnimation("monster-"+enemyIndex, skill, 1)
 			// callAnimation("monster-1","attack_slash", 1)
 		}
 		// console.log("mappingAction[i].damage : "+mappingAction[i].damage)
@@ -345,8 +410,11 @@ function mappingActionLoop() {
 		// console.log("enemyRow.data.base.hp : "+enemyRow.data.base.hp)
 		// console.log(hpWidth)
 		// console.log(enemyRow.id)
+		console.log("partyMember TURN : "+mappingAction[i].partyMember)
+		mappingAction[i].isExecute = true
 		let hpPercent = Math.round(hpWidth)
 		if (enemyRow.data.current.hp <= 0) {
+			console.log(">>>> KILLED!")
 			enemyRow.data.current.hp = 0
 			hpWidth = 0
 			let slash = eval(skill)
@@ -355,19 +423,52 @@ function mappingActionLoop() {
 			// $(battleFieldEnemy[mappingAction[i].enemy]).addClass('hide')
 			expTemp = expTemp+enemyRow.data.base.exp
 			let typeParam = mappingAction[i].type
-			let enemyParam = mappingAction[i].enemy
-			mappingAction = mappingAction.filter(function(elem) {
-			  return !(elem.type == typeParam &&  elem.enemy == enemyParam)
+			let enemyParam = enemyIndex
+			let enemyId = JSON.parse(JSON.stringify(battleFieldEnemy[enemyParam]));
+			battleFieldEnemy[enemyParam] = battleFieldDefault
+			console.log("typeParam : "+typeParam)
+			console.log("enemyParam : "+enemyParam)
+			let enemyIndexUpdate =  getFirstEnemy("init", enemyParam)
+			// mappingAction.filter(elem => elem.enemy == enemyParam && elem.type == "attack").forEach(elem => elem.enemy = enemyIndexUpdate)
+
+			let mappingActionIndexUpdate = mappingAction.findIndex(function(elem) {
+			  return elem.enemy == enemyParam && elem.type == "attack" && elem.isExecute == false
 			});
+			console.log("mappingActionIndexUpdate : "+mappingActionIndexUpdate)
+
+			if(mappingActionIndexUpdate >= 0){
+				// console.log("hello update")
+				// console.log(mappingAction)
+				// console.log("mappingActionIndexUpdate : "+mappingActionIndexUpdate)
+				
+				mappingActionRow['partyMember'] = mappingAction[mappingActionIndexUpdate].partyMember
+				mappingActionRow['enemy'] = enemyIndexUpdate
+				mappingActionRow['action'] = enemyIndexUpdate
+				console.log(mappingActionRow)
+				let damageUpdate = damageRecounter()
+				console.log(damageUpdate)
+				mappingAction.filter(elem => elem.enemy == enemyParam && elem.type == "attack"  && elem.isExecute == false).forEach(elem => elem.enemy = enemyIndexUpdate, elem => elem.damage = damageUpdate)
+				
+			}
+
+
+			mappingAction = mappingAction.filter(function(elem) {
+			  return !(elem.type == "defence" &&  elem.enemy == enemyParam && elem.isExecute == false)
+			});
+			console.log(mappingActionRow)
+			console.log("mappingAction dec :")
+			console.log(mappingAction)
 
 			setTimeout(function() {
-				$(battleFieldEnemy[enemyParam]).fadeOut(500);
-				battleFieldEnemy[enemyParam] = battleFieldDefault
+				$(enemyId).fadeOut(500);
+				
 			}, animateDuration);
 		}
 
 		$("#"+enemyRow.id+"-hp-bar").attr("style","width:"+hpPercent+"%")
 		$("."+enemyRow.id+"-hp-value").text(enemyRow.data.current.hp)
+		console.log("mappingAction :")
+		console.log(mappingAction)
 
 		composeLog = enemyRow.name+" got "+mappingAction[i].damage+" damage by <b>"+fighterRow['name']+"</b> "
 	}else if(mappingAction[i].type == "defence"){
@@ -413,13 +514,15 @@ function mappingActionLoop() {
 		// handleScroll("logList",interfaceLogListScroll, composeLog)
 		$("#logList").append('<li>'+composeLog+'</li>')
 		$("#logList").scrollTop($(document).height());
+		console.log("============")
     mappingActionIndex++;
     if (mappingActionIndex < mappingAction.length) {
     	mappingActionLoop() 
     }else if(mappingActionIndex == mappingAction.length){
+		resetFormationPartyCurrent()
     	turnCounter();
     	chooseTargetPartyMember =true
-    	callingPartySelector(1);
+    	callingPartySelector("init",1);
     	mappingAction = []
     	mappingActionIndex = 0
     }
@@ -479,7 +582,7 @@ function countAliveFellow(type){
 		let formationPartyAvailable = 0
 
 		for (var i = 0; i < formationPartyCurrentConfig.length; i++) {
-			if (formationPartyCurrentConfig[i] != battleFieldDefault) {
+			if (formationPartyCurrentConfig[i] != battleFieldDefault || formationPartyCurrentConfig[value] != battleFieldUsedDefault) {
 				formationPartyAvailable=formationPartyAvailable+1
 			}
 		}

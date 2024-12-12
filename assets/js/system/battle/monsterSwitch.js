@@ -17,34 +17,91 @@ function activation(handle, btnId){
     chooseTargetEnemy = true;
     // console.log(btnId);
     $("#"+btnId).addClass("active");
-    callingEnemySelector(0);
+    callingEnemySelector("init",0);
     //window.setTimeout(execute, 500, 1);
 }
 
 
-function getFirstAliveFellow(type) {
-    if (type == "enemy") {
+function getFirstEnemy(param, value) {
+    if (param == "switch") {
+        let i = 0;
+        while (i < formationPartyCurrentConfigAvailable.length) { 
+
+            if (selectedEnemy > value) {
+                value = value-1
+            }else if (selectedEnemy < value) {
+                value = value+1
+            }
+            // console.log("formationPartyCurrentConfigAvailable[value] : "+formationPartyCurrentConfigAvailable[value])
+            // console.log("value"+value)
+            
+            if (battleFieldEnemy[value] != battleFieldDefault) {
+                return value
+            }
+
+            i++;
+        }
+    }else if(param == "init"){
         for (var i = 0; i < battleFieldEnemy.length; i++) {
             if (battleFieldEnemy[i] != battleFieldDefault) {
                 return i
             }
         }
-    }else if(type == "party"){
-        for (var i = 0; i < formationPartyCurrentConfig.length; i++) {
-            if (formationPartyCurrentConfig[i] != battleFieldDefault) {
-                return i
-            }
-        }
     }
 
-    return result;
+
+
+    // if (type == "enemy") {
+    //     for (var i = 0; i < battleFieldEnemy.length; i++) {
+    //         if (battleFieldEnemy[i] != battleFieldDefault) {
+    //             return i
+    //         }
+    //     }
+    // }else if(type == "party"){
+    //     if (option == "min") {
+    //         for (var i = formationPartyCurrentConfigAvailable.length; i > 0 ; i--) {
+    //             console.log(formationPartyCurrentConfigAvailable[i])
+    //             console.log(formationPartyCurrentConfigAvailable[selectedPartyMember])
+    //             return i
+    //         }
+    //         // if (formationPartyCurrentConfigAvailable[i] != battleFieldDefault && formationPartyCurrentConfigAvailable[i] != battleFieldUsedDefault) {
+    
+    //         // }
+    //     }else  if (option == "max") {
+    //         for (var i = 0; i < formationPartyCurrentConfigAvailable.length; i++) {
+    //             console.log(formationPartyCurrentConfigAvailable[i])
+    //             console.log(formationPartyCurrentConfigAvailable[selectedPartyMember])
+    //             return i
+    //         }
+    //     }else{
+    //         for (var i = 0; i < formationPartyCurrentConfigAvailable.length; i++) {
+    //             console.log(formationPartyCurrentConfigAvailable[i])
+    //             console.log(formationPartyCurrentConfigAvailable[selectedPartyMember])
+                
+
+    //             if (formationPartyCurrentConfigAvailable[i] != battleFieldDefault && formationPartyCurrentConfigAvailable[i] != battleFieldUsedDefault && i != 0) {
+    //                 return i
+    //             }
+    //         }
+    //     }
+        // }else{
+        //     if (formationPartyCurrentConfigAvailable[i] != battleFieldDefault && formationPartyCurrentConfigAvailable[i] != battleFieldUsedDefault && i != 0) {
+                
+        //     }
+        // }
+
+
+
+    // }
+
+    // return result;
 }
 
-function callingEnemySelector(value){
+function callingEnemySelector(option, value){
     
     let valueCostume = 0
     if (battleFieldEnemy[value] == battleFieldDefault) {
-        valueCostume = getFirstAliveFellow("enemy");
+        valueCostume = getFirstEnemy(option, value);
     }else{
         valueCostume = value
     }
@@ -78,7 +135,7 @@ $(document).on('keydown', function(e) {
         	if (value < 0) {
         		value = maxEnemy;
         	}
-            callingEnemySelector(value)
+            callingEnemySelector("switch",value)
             break;
         // case 38:
         //     console.log('Up Key pressed!');
@@ -88,7 +145,7 @@ $(document).on('keydown', function(e) {
         	if (value > maxEnemy) {
         		value = 0;
         	}
-            callingEnemySelector(value)
+            callingEnemySelector("switch",value)
             break;
         // case 40:
         //     console.log('Down Key pressed!');

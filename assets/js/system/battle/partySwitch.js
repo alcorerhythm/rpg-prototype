@@ -7,7 +7,7 @@ function activationPartyMember(){
     chooseTargetPartyMember = true;
     // console.log(btnId);
     // $("#"+btnId).addClass("active");
-    callingPartySelector(1);
+    callingPartySelector("init",1);
     //window.setTimeout(execute, 500, 1);
 }
 
@@ -18,12 +18,63 @@ function hideSelectorPartyMember(id){
 }
 
 
-function callingPartySelector(value){
+function callingPartySelector(option, value){
+    // console.log("option :"+option)
+
+    let valueCostume = 0
+    if (formationPartyCurrentConfigAvailable[value] == battleFieldDefault || formationPartyCurrentConfigAvailable[value] == battleFieldUsedDefault) {
+        // console.log("selectedPartyMember :"+selectedPartyMember)
+        // console.log("value :"+value)
+        
+        valueCostume = getPlayedPartyMember(option, value);
+    }else{
+        valueCostume = value
+    }
+
+    console.log("valueCostume : "+valueCostume)
     $(battleFieldPartyMember[selectedPartyMember]+" div div.arrow").addClass("hide");
-    $(battleFieldPartyMember[value]+" div div.arrow").removeClass("hide");
+    $(battleFieldPartyMember[valueCostume]+" div div.arrow").removeClass("hide");
     $(battleFieldPartyMember[selectedPartyMember]+" div.bgBoxImage").removeClass("active");
-    $(battleFieldPartyMember[value]+" div.bgBoxImage").addClass("active");
-    selectedPartyMember = value;
+    $(battleFieldPartyMember[valueCostume]+" div.bgBoxImage").addClass("active");
+    selectedPartyMember = valueCostume;
+}
+
+function resetFormationPartyCurrent(){
+    formationPartyCurrentConfigAvailable = []
+    for (var i = 0; i < battleFieldPartyMember.length; i++) {
+        formationPartyCurrentConfigAvailable.push(battleFieldPartyMember[i])
+    }
+}
+
+
+function getPlayedPartyMember(param, value) {
+    if (param == "switch") {
+        let i = 0;
+        while (i < formationPartyCurrentConfigAvailable.length) { 
+
+            if (selectedPartyMember > value) {
+                value = value-1
+            }else if (selectedPartyMember < value) {
+                value = value+1
+            }
+            // console.log("formationPartyCurrentConfigAvailable[value] : "+formationPartyCurrentConfigAvailable[value])
+            // console.log("value"+value)
+            
+            if (formationPartyCurrentConfigAvailable[value] != battleFieldDefault && formationPartyCurrentConfigAvailable[value] != battleFieldUsedDefault) {
+                return value
+            }
+
+            i++;
+        }
+    }else if(param == "init"){
+        for (var i = 0; i < formationPartyCurrentConfigAvailable.length; i++) {
+            // console.log(formationPartyCurrentConfigAvailable[i])
+            // console.log(formationPartyCurrentConfigAvailable[selectedPartyMember])
+            if (formationPartyCurrentConfigAvailable[i] != battleFieldDefault && formationPartyCurrentConfigAvailable[i] != battleFieldUsedDefault && i != 0) {
+               return i
+            }
+        }
+    }
 }
 
 
@@ -38,7 +89,7 @@ $(document).on('keydown', function(e) {
         	if (value < 0) {
         		value = maxPartyMember;
         	}
-            callingPartySelector(value)
+            callingPartySelector("switch",value)
             break;
         // case 38:
         //     console.log('Up Key pressed!');
@@ -48,7 +99,7 @@ $(document).on('keydown', function(e) {
         	if (value > maxPartyMember) {
         		value = 0;
         	}
-            callingPartySelector(value)
+            callingPartySelector("switch",value)
             break;
         // case 40:
         //     console.log('Down Key pressed!');
