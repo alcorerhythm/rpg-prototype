@@ -5,6 +5,7 @@ let masterClass = ['skill-icon'];
 
 //default
 let battleFieldDefault = "terminate"
+let battleFieldUsedDefault = "mapped"
 
 
 //area

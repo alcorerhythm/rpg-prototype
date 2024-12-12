@@ -50,65 +50,107 @@ button.btn.btn-skill.active{
 
 .monster-status-box{
     position: absolute;
-    bottom: 10rem;
+    /*bottom: 10rem;*/
 }
 
 .monster-status.active{
    background: rgb(239 239 239 / 54%);
 }
 
-.monster-1, .monster-1 img {
+/*.monster-1 img */
+/*.monster-1 {*/
     /* background-color: #aa21ff; */
     /* width: 300px; */
     /* min-height: 300px; */
     /* padding: 5px; */
     /* display: flex; */
-    justify-content: center;
+        /* height: 50vw; */
+/*    justify-content: center;
     align-items: center;
     position: absolute;
     top: 30%;
     left: 25%;
     transform: translate(-25%, -25%);
     width: 50vh;
-    /* height: 50vw; */
+    z-index: 63;
+}*/
+.monster-1 {
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 15rem;
+    left: 22rem;
+    transform: translate(0rem, 0rem);
+    width: 32rem;
+    z-index: 63;
 }
-
-.monster-2, .monster-2 img {
+/*.monster-2 img*/
+/*.monster-2  {*/
     /* background-color: #aa21ff; */
     /* width: 300px; */
     /* min-height: 300px; */
     /* padding: 5px; */
     /* display: flex; */
-    justify-content: center;
+        /* height: 50vw; */
+/*    justify-content: center;
     align-items: center;
     position: absolute;
     top: 30%;
     left: 75%;
     transform: translate(-75%, -25%);
     width: 50vh;
-    /* height: 50vw; */
+}*/
+
+.monster-2 {
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 12rem;
+    right: 20rem;
+    transform: translate(0rem, 0rem);
+    width: 32rem;
+    z-index: 64;
 }
 
 
 
-
-
-
-.monster-0, .monster-0 img{
+/*.monster-0 img*/
+/*.monster-0 {*/
 	/*background-color: #aa21ff;*/
 	/*width: 300px;*/
 	/*min-height: 300px;*/
 	/*padding: 5px;*/
 	/*display: flex;*/
-	justify-content: center;
+    /*height: 50vw;*/
+/*	justify-content: center;
 	align-items: center;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 50vh;
-	/*height: 50vw;*/
 }
+*/
+.monster-0 {
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 18rem;
+    left: 50rem;
+    transform: translate(0rem, 0rem);
+    width: 32rem;
+    z-index: 66;
+}
+.monster-1 img, .monster-2 img, .monster-0 img{
+    width: 32rem;
+}
+
+
+.monster-1.attack-field, .monster-2.attack-field, .monster-0.attack-field{
+    left: -5rem!important;
+    top: -5rem!important;
+}
+
 
 .progress-indicator-box{
 	display: inline-flex;
@@ -121,7 +163,8 @@ button.btn.btn-skill.active{
 }
 .progress-indicator {
 	margin-top: 5px;
-	width: 20vw;
+	/*width: 20vw;*/
+    width: 21rem;
 }
 
 
