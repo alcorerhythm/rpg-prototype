@@ -87,6 +87,10 @@ menu li.magic{
 menu li.defence{
 	margin: -16px 0 0 4px;
 }
+menu li.menuQuit
+{
+    margin: -51px 0px 0px -1px;
+}
 
 menu li::after{
   transform: rotate(0deg);
@@ -320,6 +324,24 @@ div.action i{
  .action.skill{
     margin: -40px 0 0 -43px;
 }
+
+.action.menuQuit{
+    /*margin: 50px 0 0 14px;*/
+    margin: 69px 0 0 19px;
+}
+.menuQuit{
+    width: 42px!important;
+    height: 42px!important;
+    background: rgb(255 255 255) !important;
+    color: rgb(135 135 135) !important;
+/*    background: rgb(255 255 255 / 75%);
+    color: rgb(0 0 0 / 50%);*/
+    line-height: 42px!important;
+}
+
+li.menuQuit a i, .action.menuQuit i {
+  padding: 12px!important;
+}
 /*.menu-cyrstal{
     background-color: #b1b1b1;
     margin: -45px 0 0 -45px;
@@ -386,6 +408,12 @@ div.menu-light.active {
     background: rgb(255 255 255 / 50%)!important;
 
 }
+
+.action.menuQuit.active.selected {
+    background: rgb(113 113 113) !important;
+    color: #fff !important;
+}
+
 
 menu li.hide{
   display: none;

@@ -34,7 +34,7 @@ function loadSkill() {
 //   // body...
 // }
 
-let menuDataList = ['item', 'attack', 'skill', 'magic', 'defence'];
+let menuDataList = ['item', 'attack', 'skill', 'magic', 'defence', 'menuQuit'];
 
 function menuSwitch(value) {
   let idCurrent = menuDataList[selectedAction];

@@ -63,6 +63,7 @@ function accept(){
 }
 
 function cancel() {
+	console.log("Test")
 	if (partyMemberDetail == true) {
 		partyMemberDetail = false;
 		loadPartyMemberDetail()
@@ -83,7 +84,12 @@ function cancel() {
 		// }
 		
 	}else if(menuBattleAccess == true){
-
+		console.log("HERE!")
+		chooseTargetPartyMember = true
+		menuBattleAccess = false
+		formationPartyCurrentConfigAvailable[selectedPartyMember] = battleFieldPartyMember[selectedPartyMember]
+		callingPartySelector("init",selectedPartyMember)
+		$(".arrow.arrow-menu").hide();
 		// menu();
 		// $(".arrow.arrow-menu").hide();
 		// menuBattleAccess = false;
@@ -136,6 +142,12 @@ function accessMenu(id){
 	}else if (id == 4) {
 		pushLog("action", "defense")
 
+	}else if (id == 5) {
+		menuBattleAccess = true
+		// menuStatus = false;
+		menu()
+		$(".arrow.arrow-menu").show();
+		pushLog("action", "menuQuit")
 	}
 }
 
@@ -426,27 +438,25 @@ function mappingActionLoop() {
 			let enemyParam = enemyIndex
 			let enemyId = JSON.parse(JSON.stringify(battleFieldEnemy[enemyParam]));
 			battleFieldEnemy[enemyParam] = battleFieldDefault
-			console.log("typeParam : "+typeParam)
-			console.log("enemyParam : "+enemyParam)
+			// console.log("typeParam : "+typeParam)
+			// console.log("enemyParam : "+enemyParam)
+			let countEnmeyFellow =  countAliveFellow("enemy")
 			let enemyIndexUpdate =  getFirstEnemy("init", enemyParam)
 			// mappingAction.filter(elem => elem.enemy == enemyParam && elem.type == "attack").forEach(elem => elem.enemy = enemyIndexUpdate)
 
 			let mappingActionIndexUpdate = mappingAction.findIndex(function(elem) {
 			  return elem.enemy == enemyParam && elem.type == "attack" && elem.isExecute == false
 			});
-			console.log("mappingActionIndexUpdate : "+mappingActionIndexUpdate)
+			// console.log("mappingActionIndexUpdate : "+mappingActionIndexUpdate)
+			// console.log("enemyIndexUpdate : "+enemyIndexUpdate)
 
-			if(mappingActionIndexUpdate >= 0){
-				// console.log("hello update")
-				// console.log(mappingAction)
-				// console.log("mappingActionIndexUpdate : "+mappingActionIndexUpdate)
+			if(mappingActionIndexUpdate >= 0 && countEnmeyFellow != 0){
 				
 				mappingActionRow['partyMember'] = mappingAction[mappingActionIndexUpdate].partyMember
 				mappingActionRow['enemy'] = enemyIndexUpdate
-				mappingActionRow['action'] = enemyIndexUpdate
-				console.log(mappingActionRow)
+				// console.log(mappingActionRow)
 				let damageUpdate = damageRecounter()
-				console.log(damageUpdate)
+				// console.log(damageUpdate)
 				mappingAction.filter(elem => elem.enemy == enemyParam && elem.type == "attack"  && elem.isExecute == false).forEach(elem => elem.enemy = enemyIndexUpdate, elem => elem.damage = damageUpdate)
 				
 			}
@@ -455,9 +465,9 @@ function mappingActionLoop() {
 			mappingAction = mappingAction.filter(function(elem) {
 			  return !(elem.type == "defence" &&  elem.enemy == enemyParam && elem.isExecute == false)
 			});
-			console.log(mappingActionRow)
-			console.log("mappingAction dec :")
-			console.log(mappingAction)
+			// console.log(mappingActionRow)
+			// console.log("mappingAction dec :")
+			// console.log(mappingAction)
 
 			setTimeout(function() {
 				$(enemyId).fadeOut(500);
