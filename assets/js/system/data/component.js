@@ -5,9 +5,9 @@ let divComponent = {
 	"start":"<div id='<!id>' class='<!class>'>",	
 	"end":"</div>"
 };
-let spanComponent = '<span class="<!class>"><!value></span>';
+let spanComponent = '<span id="<!id>" class="<!class>"><!value></span>';
 let ulComponent = {'start':'<ul>','end':'</ul>'};
-let liComponent = {'start':'<li>','end':'</li>'};
+let liComponent = {'start':'<li id="<!id>" class="<!class>">','end':'</li>'};
 
 let alertComponent = 
 		`<div class="toast align-items-center text-white bg-<!color> border-0 " role="alert" aria-live="assertive" aria-atomic="true">

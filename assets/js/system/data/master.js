@@ -21,7 +21,6 @@ const monster_attr ={
 }
 
 //monster
-
 const monster_naming_index = ["A","B","C","D","E","F"]
 const monster_slime = {
 	"path":"monster/slime/",
@@ -113,3 +112,117 @@ let skill_punch_impact = {
 	"length":7,
 	"damage":20,
 };
+
+//item
+let item_herb={
+	"id":"item_herb",
+	"name":"Herbs",
+	"icon":{
+		"type":"fa",
+		"logo":"fa-solid fa-leaf fa-rotate-45",
+		"color":"#88bb88",
+	},
+	"amount":0,
+	"price":{
+		"base":10,
+	},
+	"effect_":{
+		"target_status":"hp",
+		"point":15,
+		"target":"fellow",
+		"type":"heal",
+	}
+}
+let item_potion={
+	"id":"item_potion",
+	"name":"Potion",
+	"icon":{
+		"type":"fa",
+		"logo":"fa-solid fa-vial",
+		"color":"#FF4545",
+	},
+	"amount":0,
+	"price":{
+		"base":10,
+	},
+	"effect_":{
+		"target_status":"hp",
+		"value":150,
+		"denomination":"point",
+		"target":"fellow",
+		"type":"heal",
+	}
+}
+let item_high_potion = {
+	"id":"item_high_potion",
+	"name":"High Potion",
+	"icon_type":"fa",
+	"icon_logo":"fa-solid fa-leaf",
+	"icon_color":"#FF4545",
+	"amount":0,
+	"price":{
+		"base":10,
+	},
+	"effect_":{
+		"target_status":"hp",
+		"value":150,
+		"denomination":"point",
+		"target":"fellow",
+		"type":"heal",
+		"used":""
+	}
+}
+
+let item_full_potion = {
+	"id":"item_full_potion",
+	"name":"Full Potion",
+	"icon_type":"fa",
+	"icon_logo":"fa-solid fa-leaf",
+	"icon_color":"#FF4545",
+	"amount":0,
+	"price":{
+		"base":10,
+	},
+	"effect_":{
+		"target_status":"hp",
+		"value":100,
+		"denomination":"%",
+		"target":"fellow",
+		"type":"heal",
+		"used":""
+	}
+}
+let item_potion_mana={
+	"id":"item_potion_mana",
+	"name":"Magic Potion",
+	"icon_type":"fa",
+	"icon_logo":"fa-solid fa-leaf",
+	"icon_color":"#4F75FF",
+	"amount":0,
+	"base_price":10,
+	"effect_":{
+		"target_status":"hp",
+		"point":40,
+		"target":"fellow",
+		"type":"heal",
+		"used":""
+	}
+}
+let item_water_pure = {
+	"id":"item_water_pure",
+	"name":"Pure Water",
+	"icon_type":"ra",
+	"icon_logo":"fa ra ra-round-bottom-flask",
+	"icon_color":"#BBE9FF",
+	"amount":0,
+	"base_price":10,
+	"effect_":{
+		"target_status":"sp",
+		"value":15,
+		"denomination":"point",
+		"target":"fellow",
+		"type":"heal",
+		"used":""
+	}
+}
+
