@@ -69,3 +69,11 @@
     vertical-align: -webkit-baseline-middle;
     padding: 10px;
 }
+ul.item {
+    padding: 0;
+}
+
+.item-row.active {
+    background: #e1e1e1;
+    border-radius: 10px;
+}

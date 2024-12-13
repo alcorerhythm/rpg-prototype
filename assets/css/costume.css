@@ -565,3 +565,6 @@ padding: 1px;
 .fa-rotate-320{
     transform: rotate(320deg);
 }
+.fa-rotate-45{
+    transform: rotate(45deg);
+}

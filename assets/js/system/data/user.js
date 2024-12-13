@@ -198,3 +198,9 @@ let formationParty = [player, npc_emilly, npc_rochart]; //, npc_rochart, npc_emi
 let formationPartyCurrentConfig = ["player",  "npc_emilly", "npc_rochart"]; //, npc_rochart, npc_emilly
 let formationPartyCurrentConfigAvailable = ["#party-0", "player",  "npc_emilly", "npc_rochart"]; //, npc_rochart, npc_emilly
 let npcRecruitableList = ["npc_rochart", "npc_emilly"];
+
+
+item_herb["amount"]=5
+item_potion["amount"]=2
+let playerInventoryTest = [item_herb, item_potion];
+let playerInventory = JSON.parse(JSON.stringify(playerInventoryTest));
