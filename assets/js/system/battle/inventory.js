@@ -22,7 +22,7 @@ function callInventoryList(){
         }
         let itemImgBox = itemImgBoxComponent+itemImg+divComponent['end']
 
-        switchItem
+
         let itemAmountComponentStart = replaceString(divComponent['start'], masterHolder[0], playerInventory[i].id+'_amount');
         let itemAmountComponent = replaceString(itemAmountComponentStart, masterHolder[2], 'item-position float-end');
         let itemAmount = itemAmountComponent+playerInventory[i].amount+divComponent['end'];
@@ -42,16 +42,107 @@ function callInventoryList(){
         }
         
         let itemRow = itemRowComponent+itemImgBox+itemName+itemAmount+liComponent['end'];
-        item = item+itemRow
+        item = item+itemRow;
         
     }
-    $("#item-list").html(item)
+    $("#item-list").html(item);
 }
+
+function generateDetail(id){
+
+    let inventoryIndex = playerInventory.findIndex(function(elem) {
+        return elem.id == id
+    });
+    let data = playerInventory[inventoryIndex]
+
+
+    let itemDetailBoxComponentStart = replaceString(divComponent['start'], masterHolder[2], 'detail item-detail panel-style');
+    let itemTitle = replaceString(h5Component['start'], masterHolder[2], 'item-title-preview')+data.name+h5Component['end'];
+
+    
+    
+    let itemDetailImgBoxComponent = replaceString(divComponent['start'], masterHolder[2], 'item-img-preview');
+    let itemImg = ""
+    if(data.icon.type == "fa" || data.icon.type == "ra"){
+        itemImgComponent = replaceString(spanComponent, masterHolder[1], '');
+        itemImg = replaceString(itemImgComponent, masterHolder[2], data.icon.logo+' img-font-item" style="color:'+data.icon.color+'"');
+    }else{
+        itemImg = '<span class="fa-solid fa-ban img-font-item"></span>';
+    }
+    let itemImgBox = itemDetailImgBoxComponent+itemImg+divComponent['end'];
+
+
+    let itemDetailDescribeBoxComponentStart = replaceString(divComponent['start'], masterHolder[2], 'item-detail-text');
+    // let itemDetailDescribeBoxComponentStart = replaceString(divComponent['start'], masterHolder[2], 'item-detail-text');
+    
+    
+    let itemDetailTextComponentStart = replaceString(textComponent[2], masterHolder[1], textComponent[1]);
+    let subTitleInfo = replaceString(itemDetailTextComponentStart, masterHolder[1], "Info");
+    let subTitleEffect = replaceString(itemDetailTextComponentStart, masterHolder[1], "Effect");
+    let describeInfo = replaceString(textComponent[0], masterHolder[1], data.describe);
+
+    data.effect.target_status
+    let effectInfo = liComponent['start']+data.effect.target_status+" : "+data.effect.value+data.effect.denomination+" ("+data.effect.type+" "+data.effect.target+")"+liComponent['end'];
+    let detailText = itemDetailDescribeBoxComponentStart+subTitleInfo+describeInfo+subTitleEffect+ulComponent['start']+effectInfo+ulComponent['end']+divComponent['start'];
+    
+    
+    let detailInfo = itemDetailBoxComponentStart+itemTitle+itemImgBox+detailText+divComponent['start'];
+
+
+
+// {/* <div class="">
+//     <h5 class="item-title-preview">Herp</h5>
+//     <div class="detail "></div>
+//     <div class="item-img-preview">
+//         <i class="fa-solid fa-leaf img-font-item"></i>
+//     </div>
+//     <div class="item-detail-text">
+//         <i><b>Info</b></i>
+//         <p>
+//             Herp can be growth in the a lush land or forest.Example: <i>&lt;<b>Area-1</b>&gt;</i>.<br>
+//             Herp also highly droped by Grass type Enemy. 
+//         </p>
+        
+//         <i><b>Effect</b></i>
+//         <ul>
+//             <li>HP : + 10 point</li>
+//         </ul>
+        
+//     </div>
+// </div> */}
+
+// {/* <div id="<!id>" class="detail item-detail panel-style">
+//     <h5 class="item-title-preview">
+//         <div id="<!id>" class="item-img-preview">
+//             <span id="<!id>" class="fa-solid fa-leaf fa-rotate-45 img-font-item" style="color:#88bb88" "=""></span>
+//             </div>
+//             <div id="<!id>" class="item-detail-text">
+//                 <b><i>Info</i></b>
+//                 <p>Herp can be growth in the a lush land or forest.Example: <i>&lt;<b>Area-1</b>&gt;</i>.<br>Herp also highly droped by Grass type Enemy. </p>
+//                 <b><i>Effect</i></b>
+//                 <ul>
+//                     <li id="<!id>" class="<!class>">hp : 15(heal fellows)</li>
+//                     </ul><div id="<!id>" class="<!class>"></div></div></h5>
+//                     </div> */}
+
+    $("#itemDetail").html();
+    $("#itemDetail").html(detailInfo);
+
+}
+
 
 function switchItem(id){
     $("li#"+selectedItem).removeClass('active');
     $("li#"+id).addClass('active');
+    generateDetail(id)
     selectedItem = id    
+}
+
+function useItem(){
+    let id = $(".item-row.active").attr('id');
+    let inventoryIndex = playerInventory.findIndex(function(elem) {
+        return elem.id == id
+    });
 }
 
 
