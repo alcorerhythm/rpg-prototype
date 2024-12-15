@@ -117,6 +117,7 @@ let skill_punch_impact = {
 let item_herb={
 	"id":"item_herb",
 	"name":"Herbs",
+	"describe":"Herp can be growth in the a lush land or forest.Example: <i>&lt;<b>Area-1</b>&gt;</i>.<br>Herp also highly droped by Grass type Enemy. ",
 	"icon":{
 		"type":"fa",
 		"logo":"fa-solid fa-leaf fa-rotate-45",
@@ -126,16 +127,42 @@ let item_herb={
 	"price":{
 		"base":10,
 	},
-	"effect_":{
+	"effect":{
 		"target_status":"hp",
-		"point":15,
+		"value":15,
+		"denomination":"point",
 		"target":"fellow",
 		"type":"heal",
 	}
 }
+
+let item_posion_low={
+	"id":"posion",
+	"name":"Potion",
+	"describe":"a liquid with toxic damage for emeny.",
+	"icon":{
+		"type":"ra",
+		"logo":"fa ra ra-flask",
+		"color":"#88bb88",
+	},
+	"amount":0,
+	"price":{
+		"base":50,
+	},
+	"effect":{
+		"target_status":"hp",
+		"value":10,
+		"denomination":"point",
+		"target":"enemy",
+		"type":"toxic",
+	}
+}
+
+
 let item_potion={
 	"id":"item_potion",
 	"name":"Potion",
+	"describe":"a liquid with healing properties.",
 	"icon":{
 		"type":"fa",
 		"logo":"fa-solid fa-vial",
@@ -143,11 +170,11 @@ let item_potion={
 	},
 	"amount":0,
 	"price":{
-		"base":10,
+		"base":50,
 	},
-	"effect_":{
+	"effect":{
 		"target_status":"hp",
-		"value":150,
+		"value":100,
 		"denomination":"point",
 		"target":"fellow",
 		"type":"heal",
@@ -163,7 +190,7 @@ let item_high_potion = {
 	"price":{
 		"base":10,
 	},
-	"effect_":{
+	"effect":{
 		"target_status":"hp",
 		"value":150,
 		"denomination":"point",
@@ -183,7 +210,7 @@ let item_full_potion = {
 	"price":{
 		"base":10,
 	},
-	"effect_":{
+	"effect":{
 		"target_status":"hp",
 		"value":100,
 		"denomination":"%",
@@ -200,7 +227,7 @@ let item_potion_mana={
 	"icon_color":"#4F75FF",
 	"amount":0,
 	"base_price":10,
-	"effect_":{
+	"effect":{
 		"target_status":"hp",
 		"point":40,
 		"target":"fellow",
@@ -216,7 +243,7 @@ let item_water_pure = {
 	"icon_color":"#BBE9FF",
 	"amount":0,
 	"base_price":10,
-	"effect_":{
+	"effect":{
 		"target_status":"sp",
 		"value":15,
 		"denomination":"point",

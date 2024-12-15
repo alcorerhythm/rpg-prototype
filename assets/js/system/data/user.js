@@ -202,5 +202,6 @@ let npcRecruitableList = ["npc_rochart", "npc_emilly"];
 
 item_herb["amount"]=5
 item_potion["amount"]=2
-let playerInventoryTest = [item_herb, item_potion];
+item_posion_low["amount"]=2
+let playerInventoryTest = [item_herb, item_potion, item_posion_low];
 let playerInventory = JSON.parse(JSON.stringify(playerInventoryTest));
