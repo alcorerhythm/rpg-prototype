@@ -53,7 +53,27 @@ function composePartyMember(id, npcName){
     let imgProfileClass = replaceString(imgCompoment, masterHolder[2], 'party-profile');
     let imgProfileValue = replaceString(imgProfileClass, masterHolder[1], main_asset_path+partyMember['img']);
 
-    let composeMosnterStatus = imgProfileValue+partyBoxStatus+partyMemberStatus+namePartyMember+levelPartyMember+divComponent['end']+hp+mp+tp+divComponent['end'];
+    let buffStatusComponent = replaceString(divComponent['start'], masterHolder[0], 'buff-status-'+id);
+    let buffStatus = replaceString(buffStatusComponent, masterHolder[2], 'buff-status-list');
+    
+
+
+//     let test = `<div class="buff-icon"><span class="fa fa-shield"></span></div>
+// <div class="buff-icon"><span class="fa fa-shield"></span></div>
+// <div class="buff-icon"><span class="fa fa-shield"></span></div>
+// <div class="buff-icon"><span class="fa fa-shield"></span></div>
+// <div class="buff-icon"><span class="fa fa-shield"></span></div>
+// <div class="buff-icon"><span class="fa fa-shield"></span></div>
+// <div class="buff-icon"><span class="fa fa-shield"></span></div>
+// <div class="buff-icon"><span class="fa fa-shield"></span></div>
+// <div class="buff-icon"><span class="fa fa-shield"></span></div>
+// <div class="buff-icon"><span class="fa fa-shield"></span></div>
+// <div class="buff-icon"><span class="fa fa-shield"></span></div>
+//     `;
+
+    let buff = buffStatus+divComponent['end'];
+    // progress-indicator-party-member
+    let composeMosnterStatus = imgProfileValue+partyBoxStatus+partyMemberStatus+namePartyMember+levelPartyMember+divComponent['end']+hp+mp+tp+buff+divComponent['end'];
 
     return composeMosnterStatus;
 }

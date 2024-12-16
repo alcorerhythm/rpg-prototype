@@ -89,3 +89,30 @@ div.titlePartyBoxButton{
     margin-top: 12px!important;
     margin-left: 20px!important;
 }
+
+/* Party List */
+
+
+.buff-status-list {
+    background: rgb(255 255 255 / 25%);
+    border-radius: 5px;
+    display: -webkit-inline-box;
+    margin: 5px;
+}
+
+.buff-status-list span {
+    background: #fff;
+    border: solid 1px rgb(204 204 204 / 75%);
+    padding: 1px;
+    color: #fb7b2e;
+    font-size: 12px;
+    border-radius: 4px;
+}
+
+.buff-icon {
+    padding: 1px;
+    background: #fff;
+    border-radius: 4px;
+    margin: 2px 4px;
+    display: inline-flex;
+}

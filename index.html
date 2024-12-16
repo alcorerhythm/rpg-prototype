@@ -99,6 +99,23 @@
 	position: absolute;
     margin: 4px ;
 }
+
+.menu-costum {
+    transition: all 0.25s ease-in-out;
+    transition-delay: 0.75s;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+     background-color: transparent!important; 
+    margin: -45px 0 0 -45px;
+    position: fixed;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    cursor: pointer;
+    right: 2%;
+    bottom: 2%;
+    z-index: 101;
+}
 </style>
 <body class="bg">
 			<p class=""><img id="attack-field" src="#"></p>
@@ -199,13 +216,14 @@
 			
 		</ul>
 
-
+		<menu id="menuCostum1" class="menu-costum slow-spin-4s hide"></menu>
+		<menu id="menuCostum2" class="menu-costum hide"></menu>
 		<menu class="box-body">
-			<div class="arrow arrow-menu">
+			<!--<div class="arrow arrow-menu">
 				<span></span>
 				<span></span>
 				<span></span>
-			</div>
+			</div>-->
 		    <div class="menu-button" onclick="menu()"></div>
 		    <li class="item"><a><i class="fa-solid fa-vial fa-rotate-210"></i></a></li>
 		    <li class="attack"><a><i class="fa ra ra-sword fa-rotate-270"></i></a></li>

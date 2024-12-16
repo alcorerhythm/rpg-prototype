@@ -20,7 +20,9 @@ function accept(){
 			formationPartyCurrentConfigAvailable[idValue] = battleFieldUsedDefault
 			pushLog("partyMember", idInt)
 			if (menuStatus == false) {
-				$(".arrow.arrow-menu").show();
+				$("menu.box-body").addClass('hover');
+				$("#menuCostum1").removeClass('hide');
+				$("#menuCostum2").removeClass('hide');
 				menuBattleAccess = true;
 			}else if(menuStatus == true){
 				// menuBattleAccess = false;
@@ -34,7 +36,10 @@ function accept(){
 		
 	}else if(menuBattleAccess == true){
 		menu();
-		$(".arrow.arrow-menu").hide();
+		// $(".arrow.arrow-menu").hide();
+		$("menu.box-body").removeClass('hover');
+		$("#menuCostum1").addClass('hide');
+		$("#menuCostum2").addClass('hide');
 		menuBattleAccess = false;
 		menuActionAccess = true;
 		menuSwitch(1);
@@ -84,12 +89,14 @@ function cancel() {
 		// }
 		
 	}else if(menuBattleAccess == true){
-		console.log("HERE!")
 		chooseTargetPartyMember = true
 		menuBattleAccess = false
 		formationPartyCurrentConfigAvailable[selectedPartyMember] = battleFieldPartyMember[selectedPartyMember]
 		callingPartySelector("init",selectedPartyMember)
-		$(".arrow.arrow-menu").hide();
+		$("menu.box-body").removeClass('hover');
+		$("#menuCostum1").addClass('hide');
+		$("#menuCostum2").addClass('hide');
+		// $(".arrow.arrow-menu").hide();
 		// menu();
 		// $(".arrow.arrow-menu").hide();
 		// menuBattleAccess = false;
@@ -141,12 +148,13 @@ function accessMenu(id){
 		pushLog("action", "magic")
 	}else if (id == 4) {
 		pushLog("action", "defense")
-
+		buildDefence()
 	}else if (id == 5) {
 		menuBattleAccess = true
-		// menuStatus = false;
 		menu()
-		$(".arrow.arrow-menu").show();
+		$("menu.box-body").addClass('hover');
+		$("#menuCostum1").removeClass('hide');
+		$("#menuCostum2").removeClass('hide');
 		pushLog("action", "menuQuit")
 	}
 }
@@ -164,6 +172,7 @@ let devTool = true;
 
 
 function pushLogRow(){
+	console.log("Hallo!");
 	// console.log(mappingActionRow)
 	let row = JSON.parse(JSON.stringify(eval(mappingActionRow)))
 	mappingAction.push(row)
@@ -171,7 +180,7 @@ function pushLogRow(){
 	let enemyAmounth = countAliveFellow("enemy")
 	let objectBattleField = partyAmount+enemyAmounth
 
-	// console.log("objectBattleField : "+objectBattleField)
+	console.log("objectBattleField : "+objectBattleField)
 
 	
 	// console.log("formationParty : "+formationParty.length)
@@ -228,26 +237,38 @@ function pushLog(type, value){
 
 	if (type == 'enemy') {
 		mappingActionRow['enemy'] = value;
-		
+	}else if(type == 'action'){
+		if(value == 'buff' || value == 'skill'){
+			mappingActionRow['isDispel'] = false;
+		}else if(value == 'magic'){
+			mappingActionRow['isDischarge'] = false;
+		}
+		mappingActionRow['action'] = value;
+	}else if(type == 'buff'){
+		mappingActionRow['buff'] = value;	
 	}else if(type == 'skill'){
 		mappingActionRow['skill'] = value;
-	}else if(type == 'action'){
-		mappingActionRow['action'] = value;
+	}else if(type == 'magic'){
+		mappingActionRow['magic'] = value;		
 	}else if(type == 'partyMember'){
 		mappingActionRow['partyMember'] = value;	
 	}else if(type == 'damage'){
-		mappingActionRow['damage'] = value;		
+		mappingActionRow['damage'] = value;
 	}else if(type == 'type'){
 		mappingActionRow['type'] = value;
 	}else if(type == 'speed'){
-		mappingActionRow['speed'] = value;	
-		// pushLogRow(value)
+		mappingActionRow['speed'] = value;		
 	}else if(type == 'push' && value == 'execute'){
 		mappingActionRow['isExecute'] = false;
 		pushLogRow()
 	}
+}
 
 
+function getPartyMemberFromFormationParty(id){
+	let fighterGet = formationParty[id];
+	let fighter = eval(fighterGet);
+	return fighter;
 }
 
 function writeLog(){
@@ -255,6 +276,26 @@ function writeLog(){
 	$("#logList").append()
 }
 
+
+function chargeTechniquePoint(figherIndex, value){
+	let fighterRow = formationParty[mappingAction[figherIndex].partyMember];
+	let partyIdValue = mappingAction[figherIndex].partyMember+1;
+	fighterRow['data']['status_current']['tp'] = fighterRow['data']['status_current']['tp']+ value;
+	$("#party-"+partyIdValue+"-tp-bar").attr("style","width:"+fighterRow['data']['status_current']['tp']+"%");
+	$(".party-"+partyIdValue+"-tp-value").text(fighterRow['data']['status_current']['tp']);
+}
+
+function buildDefence(){
+	// let dataBuff = eval(defence_default)
+	let data = JSON.parse(JSON.stringify(buff_defence_default));
+	let fighter = getPartyMemberFromFormationParty(mappingActionRow['partyMember']);
+	let fighterSpeed = fighter["data"]["status_current"]["agility"];
+	pushLog("action", 'buff');
+	pushLog("buff", 'buff_defence_default');
+	pushLog("speed", fighterSpeed+data.effect.speed);
+	pushLog("push", "execute");
+	$(".action.defence.active.selected").removeClass('selected');
+}
 
 function damageCounter(){
 	// console.log(mappingActionRow['partyMember'])
@@ -308,6 +349,29 @@ function damageRecounter(){
 
 }
 
+function initBuff(id,buff){
+	// id: 'party-1'
+	// buff: 'default_defence'
+	let dataBuff = eval(buff)
+	let data = JSON.parse(JSON.stringify(dataBuff))
+
+    let buffStatusRowComponentStart = replaceString(divComponent['start'], masterHolder[0], 'buff-status-'+id);
+    let buffStatusRowComponent = replaceString(buffStatusRowComponentStart, masterHolder[2], 'buff-icon');
+
+
+    let buffImg = ""
+    let buffImgBoxComponent = ""
+    if(data.icon.type == "fa" || data.icon.type == "ra"){
+        buffImgComponent = replaceString(spanComponent, masterHolder[1], '');
+        buffImg = replaceString(buffImgComponent, masterHolder[2], data.icon.logo+'" style="color:'+data.icon.color+';background:'+data.icon.background+'" title="'+data.name+'"');
+    }else{
+        buffImg = '<span class="fa-solid fa-ban"></span>';
+    }
+    let buffImgBox = buffStatusRowComponent+buffImgBoxComponent+buffImg+divComponent['end']+divComponent['end'];
+
+    $('#buff-status-'+id).append(buffImgBox);
+
+}
 
 
 function mappingEnemyAttack(){
@@ -398,16 +462,16 @@ function mappingActionLoop() {
 
 	let composeLog = ""
 	if (mappingAction[i].type == "attack") {
-		console.log("battleFieldEnemy[mappingAction[i].enemy] :"+battleFieldEnemy[mappingAction[i].enemy])
-		if (battleFieldEnemy[mappingAction[i].enemy] != battleFieldDefault) {
-			enemyIndex =  getFirstEnemy("init", mappingAction[i].enemy)
-			enemyRow = monsterBattle[enemyIndex]
-		}else{
-			enemyRow = monsterBattle[mappingAction[i].enemy]
-		}
+		// console.log("battleFieldEnemy[mappingAction[i].enemy] :"+battleFieldEnemy[mappingAction[i].enemy])
+		// if (battleFieldEnemy[mappingAction[i].enemy] != battleFieldDefault) {
+		// 	enemyIndex =  getFirstEnemy("init", mappingAction[i].enemy)
+		// 	enemyRow = monsterBattle[enemyIndex]
+		// }else{
+		// 	enemyRow = monsterBattle[mappingAction[i].enemy]
+		// }
 
-		console.log(enemyRow)
-		console.log(enemyRow.id)
+		// console.log(enemyRow)
+		// console.log(enemyRow.id)
 
 		let skill = "attack_slash"
 
@@ -477,45 +541,63 @@ function mappingActionLoop() {
 
 		$("#"+enemyRow.id+"-hp-bar").attr("style","width:"+hpPercent+"%")
 		$("."+enemyRow.id+"-hp-value").text(enemyRow.data.current.hp)
-		console.log("mappingAction :")
-		console.log(mappingAction)
+		chargeTechniquePoint(mappingAction[i].partyMember,10);
+		// console.log("mappingAction :")
+		// console.log(mappingAction)
 
-		composeLog = enemyRow.name+" got "+mappingAction[i].damage+" damage by <b>"+fighterRow['name']+"</b> "
+		composeLog = enemyRow.name+" got "+mappingAction[i].damage+" damage by <b>"+fighterRow['name']+"</b> ";
 	}else if(mappingAction[i].type == "defence"){
 
 
-		let partyIdValue = mappingAction[i].partyMember+1
+		let partyIdValue = mappingAction[i].partyMember+1;
 		// console.log("fighterRow.data.status_current.hp B: "+fighterRow['data']['status_current']['hp'])
-		fighterRow['data']['status_current']['hp'] = fighterRow['data']['status_current']['hp'] - mappingAction[i].damage
-		let hpWidth = (fighterRow['data']['status_current']['hp'] /fighterRow['data']['status_build_base']['hp'])*100 
+		fighterRow['data']['status_current']['hp'] = fighterRow['data']['status_current']['hp'] - mappingAction[i].damage;
+		let hpWidth = (fighterRow['data']['status_current']['hp'] /fighterRow['data']['status_build_base']['hp'])*100 ;
 		if (fighterRow['data']['status_current']['hp'] <= 0) {
-			fighterRow['data']['status_current']['hp'] = 0
-			hpWidth = 0
+			fighterRow['data']['status_current']['hp'] = 0;
+			hpWidth = 0;
 		}
 
 
 		// party-1-mp-bar
 		// party-1-hp-value
-		let hpPercent = Math.round(hpWidth)
+		let hpPercent = Math.round(hpWidth);
 		// console.log("fighterRow.data.status_current.hp A: "+fighterRow['data']['status_current']['hp'])
 
-		let tpWidth =(mappingAction[i].damage/fighterRow['data']['status_build_base']['hp'])*100 
-		let tpPercentAdditional = Math.round(tpWidth)
+		let tpWidth =(mappingAction[i].damage/fighterRow['data']['status_build_base']['hp'])*100;
+		let tpPercentAdditional = Math.round(tpWidth);
 		fighterRow['data']['status_current']['tp'] = fighterRow['data']['status_current']['tp']+ tpPercentAdditional;
 
 		// console.log("hpPercent : "+hpPercent)
 		// console.log("tpPercent : "+tpPercentAdditional)
 
-		$("#party-"+partyIdValue+"-hp-bar").attr("style","width:"+hpPercent+"%")
-		$(".party-"+partyIdValue+"-hp-value").text(fighterRow['data']['status_current']['hp'])
-		$("#party-"+partyIdValue+"-tp-bar").attr("style","width:"+fighterRow['data']['status_current']['tp']+"%")
-		$(".party-"+partyIdValue+"-tp-value").text(fighterRow['data']['status_current']['tp'])
+		$("#party-"+partyIdValue+"-hp-bar").attr("style","width:"+hpPercent+"%");
+		$(".party-"+partyIdValue+"-hp-value").text(fighterRow['data']['status_current']['hp']);
+		$("#party-"+partyIdValue+"-tp-bar").attr("style","width:"+fighterRow['data']['status_current']['tp']+"%");
+		$(".party-"+partyIdValue+"-tp-value").text(fighterRow['data']['status_current']['tp']);
 
-		composeLog = fighterRow['name']+" got "+mappingAction[i].damage+" damage by <b>"+enemyRow.name+"</b> "
+		composeLog = fighterRow['name']+" got "+mappingAction[i].damage+" damage by <b>"+enemyRow.name+"</b> ";
 		$(".bgBoxImage.active").removeClass("active");
 		$(".monster-status.active").removeClass("active");
 
+	}else{
 
+		
+
+		//check not terminate
+		if (mappingAction[i].action == "buff") {
+			if(mappingAction[i].isDispel == false){
+
+
+				let partyIdValue = mappingAction[i].partyMember+1;
+				
+				chargeTechniquePoint(mappingAction[i].partyMember, 20);
+				initBuff('party-'+partyIdValue,mappingAction[i].buff);
+				chargeTechniquePoint(partyIdValue, 20);
+				// callAnimation("monster-"+enemyIndex, skill, 1)
+				// callAnimation("monster-1","attack_slash", 1)
+			}
+		}
 	}
 	// let enemyDefence = enemyGet.data.hp-mappingAction
 
@@ -538,7 +620,6 @@ function mappingActionLoop() {
     }
   }, 1500)
 }
- 
 // function attack(){
 // 	$("#"++"-hp-bar").text()
 // 	$("#"++"-hp-value").text()
@@ -558,20 +639,20 @@ function monsterRemove(){
 
 let actionIndex = 0
 function callAnimation(target, asset, j) {
-	let data = eval(asset)
+	let data = eval(asset);
 
     $("."+target+".attack-field").show()
     if (++j <= data['length']) window.setTimeout(callAnimation, data['duration'], target, asset, j);
-    actionIndex = actionIndex+1
+    actionIndex = actionIndex+1;
 
     let setIndex = setStringIndex(actionIndex)
     let full_path = main_asset_path+data['path']+data['name_file']+setIndex+"."+data['format'];
-    $("."+target+".attack-field").html(imgCompoment)
-    $("."+target+".attack-field img").attr('src',full_path)
+    $("."+target+".attack-field").html(imgCompoment);
+    $("."+target+".attack-field img").attr('src',full_path);
 
     if (actionIndex == data['length']) {
-        actionIndex = 0
-        $("."+target+".attack-field").hide()
+        actionIndex = 0;
+        $("."+target+".attack-field").hide();
     }
 }
 
@@ -579,25 +660,25 @@ function callAnimation(target, asset, j) {
 function countAliveFellow(type){
 	let result = 0
 	if (type == "enemy") {
-		let enemyAvailable = 0
+		let enemyAvailable = 0;
 
 		for (var i = 0; i < battleFieldEnemy.length; i++) {
 			if (battleFieldEnemy[i] != battleFieldDefault) {
-				enemyAvailable=enemyAvailable+1
+				enemyAvailable=enemyAvailable+1;
 			}
 		}
 
-		result = enemyAvailable
+		result = enemyAvailable;
 	}else if(type == "party"){
-		let formationPartyAvailable = 0
+		let formationPartyAvailable = 0;
 
 		for (var i = 0; i < formationPartyCurrentConfig.length; i++) {
 			if (formationPartyCurrentConfig[i] != battleFieldDefault || formationPartyCurrentConfig[value] != battleFieldUsedDefault) {
-				formationPartyAvailable=formationPartyAvailable+1
+				formationPartyAvailable=formationPartyAvailable+1;
 			}
 		}
 
-		result = formationPartyAvailable
+		result = formationPartyAvailable;
 	}
 
 	return result;

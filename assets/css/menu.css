@@ -59,7 +59,7 @@ menu li {
   color: #fbfdff;
   border-radius: 50%;
   /*background-color: #428dce;*/
-  background-color: rgb(115 201 206 / 69%);
+  /*background-color: rgb(115 201 206 / 69%);*/
   list-style-type: none;
   position: fixed;
   z-index: 100;
@@ -332,7 +332,7 @@ div.action i{
 .menuQuit{
     width: 42px!important;
     height: 42px!important;
-    background: rgb(255 255 255) !important;
+    background: rgb(255 255 255 / 35%) !important;    
     color: rgb(135 135 135) !important;
 /*    background: rgb(255 255 255 / 75%);
     color: rgb(0 0 0 / 50%);*/
@@ -406,12 +406,39 @@ div.menu-light.active {
 }
 .action.active.selected{
     background: rgb(255 255 255 / 50%)!important;
-
+    animation: zoom-in-zoom-out-a 3s ease infinite;
+    padding: 4px;
+}
+.action.active.selected i{
+  border: 2px solid rgb(255 255 255 / 35%);
+  border-radius: 50%;
+  padding: 15px 
 }
 
+.action.menuQuit.active.selected i{
+  border: none !important;
+}
 .action.menuQuit.active.selected {
     background: rgb(113 113 113) !important;
     color: #fff !important;
+    padding: 0px;
+}
+
+/*.action.active i{
+  border: 2px solid rgb(255 255 255 / 35%);
+  border-radius: 50%;
+  padding: 15px 
+}*/
+.action.active:hover i {
+    border: solid 2px rgb(255 255 255 / 35%);
+    border-radius: 50%;
+    padding: 15px;
+}
+
+.action.active:hover {
+    background: rgb(255 255 255 / 50%) !important;
+    animation: zoom-in-zoom-out-a 3s ease infinite;
+    padding: 4px;
 }
 
 
@@ -422,6 +449,18 @@ menu li:hover{
   background: rgb(166 182 183);
 }
 
+menu li:hover a i {
+    background: rgb(166 182 183);
+    padding: 15px;
+    border: solid 2px;
+    border-radius: 50%;
+    
+    /* margin: 0px; */
+}
+
+menu li.attack:hover a i {
+  padding: 12px 12px 16px 16px!important;
+}
 
 .menu-button{
     /*background-color: #ffffff8c;*/
@@ -434,4 +473,27 @@ menu li:hover{
     right: 3%;
     bottom: 2%;
     z-index: 103;
+}
+
+
+#menuCostum1{
+    box-shadow: 10px 12px 10px 4px rgb(150 252 255 / 16%);
+}
+#menuCostum2{
+    box-shadow: 2px 2px 15px 15px rgb(255 255 255 / 22%);
+    animation: zoom-in-zoom-out-b 5s ease infinite;
+}
+
+menu.box-body.hover{
+    /*box-shadow: 2px 2px 15px 15px rgb(203 203 203 / 42%);*/
+}
+
+menu li a {
+    background-color: rgb(115 201 206 / 69%);
+    border-radius: 50%;
+    /*animation: zoom-in-zoom-out-a 3s ease infinite;*/
+}
+
+menu li a:hover {
+    background: rgb(166 182 183);
 }

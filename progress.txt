@@ -1,0 +1,45 @@
+fixing select arrow postition
+init indicator Turn
+fixing select menu (on the other turn)
+fixing random level enemy
+fixing random amount enemy 
+limit hp decrease turn into 0 only.
+----
+
+
+- cancel button: roll back choose menu to choose party member
+- cancel button: roll back choose enemy to choose menu 
+- fixing switch enemy
+- fixing switch partyMember
+- fixing monster, monster-attack position
+- handle auto switch enemy attack & recalcuation damage
+
+menu choose : inventory open, list item, detail item
+-cancel button: inventory exit to choose menu 
+
+menu choose : skill open 
+cancel button: skill exit
+
+menu choose : magic open 
+cancel button: magic exit
+
+
+
+Setting:
+hide quest
+hide log
+
+convert party member detail to javasript
+
+
+
+
+
+16/12/2023
+- fixing hover menu (input:keyboard & mouse)
+- increase tp point while use basic attack (10 point):normal condition
+
+- fixing attak enemy target
+- menu choose : defence (charge tp 20%(done), block damage 50%(unwork))
+- mapping action defence : BuildDefence()
+- show buff budge on party list: initBuff()
