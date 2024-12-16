@@ -16,6 +16,14 @@
   -webkit-animation: fa-spin 6s infinite linear;
   animation: fa-spin 6s infinite linear;
 }
+.slow-spin-4s {
+  -webkit-animation: fa-spin 4.5s infinite linear;
+  animation: fa-spin 4.5s infinite linear;
+}
+.slow-spin-1s {
+  -webkit-animation: fa-spin 1.5s infinite linear;
+  animation: fa-spin 1.5s infinite linear;
+}
 .bg-panel{
     background-position: center;
     background-repeat: no-repeat;

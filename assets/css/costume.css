@@ -106,7 +106,7 @@ button.btn.btn-skill.active{
     align-items: center;
     position: absolute;
     top: 12rem;
-    right: 20rem;
+    left: 64rem;
     transform: translate(0rem, 0rem);
     width: 32rem;
     z-index: 64;
@@ -136,7 +136,7 @@ button.btn.btn-skill.active{
     align-items: center;
     position: absolute;
     top: 18rem;
-    left: 50rem;
+    left: 44rem;
     transform: translate(0rem, 0rem);
     width: 32rem;
     z-index: 66;
@@ -560,11 +560,25 @@ padding: 1px;
 
 /* font-awesome costume */
 .fa-rotate-210{
-        transform: rotate(210deg);
+    transform: rotate(210deg);
 }
 .fa-rotate-320{
     transform: rotate(320deg);
 }
 .fa-rotate-45{
     transform: rotate(45deg);
+}
+
+
+/* animate */
+@keyframes zoom-in-zoom-out-a{
+    0%{transform:scale(1,1);}
+    50%{transform:scale(1.2,1.2);}
+    0%{transform:scale(1,1);}
+}
+
+@keyframes zoom-in-zoom-out-b{
+    0%{transform:scale(1,1);}
+    50%{transform:scale(0.8,0.8);}
+    0%{transform:scale(1,1);}
 }
