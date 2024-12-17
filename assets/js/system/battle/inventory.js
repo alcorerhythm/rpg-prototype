@@ -1,19 +1,21 @@
-let chooseInvenotyItem = false;
-let selectedItem = ""
+let chooseInvenotyBattleItem = false;
+let selectedItem = "";
+let userItemTimeSpeedDefault = 100;
+
 function loadInventory(){
-    chooseInvenotyItem = true
+    chooseInvenotyBattleItem = true;
     $("#inventoryPanel").show();
     callInventoryList();
 }
 
 function callInventoryList(){
-    console.log("openInventory!")
-    let item = ""
+    console.log("openInventory!");
+    let item = "";
 
     for (var i = 0; i < playerInventory.length; i++){
         let itemImgBoxComponent = replaceString(divComponent['start'], masterHolder[2], 'item-img-preview-row float-start');
 
-        let itemImg = ""
+        let itemImg = "";
         if(playerInventory[i].icon.type == "fa" || playerInventory[i].icon.type == "ra"){
             itemImgComponent = replaceString(spanComponent, masterHolder[1], '');
             itemImg = replaceString(itemImgComponent, masterHolder[2], playerInventory[i].icon.logo+' img-font-item-preview-row" style="color:'+playerInventory[i].icon.color+'"');
@@ -33,7 +35,6 @@ function callInventoryList(){
         
         let itemRowComponentStart = replaceString(liComponent['start'], masterHolder[0], playerInventory[i].id);
         let itemRowComponent = "";
-        console.log(i)
         if(i == 0){
             selectedItem = playerInventory[i].id
             itemRowComponent = replaceString(itemRowComponentStart, masterHolder[2], 'item-row active');
@@ -138,11 +139,47 @@ function switchItem(id){
     selectedItem = id    
 }
 
-function useItem(){
-    let id = $(".item-row.active").attr('id');
+function useItem(fighter, row){
+    let itemData = eval(mappingAction[row].item);
+    let idTarget = mappingAction[row].target+1;
+    mappingAction[row].isExecute = true
+
+    console.log("idTarget : "+idTarget )
+    console.log("HP before : "+fighter['data']['status_current']['hp'] )
+
+
+    if(itemData.effect.target_status == 'hp'){
+        if(itemData.effect.type == 'heal'){
+
+            if(itemData.effect.denomination == 'point'){
+                fighter['data']['status_current']['hp'] = fighter['data']['status_current']['hp']+itemData.effect.value;
+            }else if(itemData.effect.denomination == '%'){
+                let hpPercentHeal = Math.round((itemData.effect.value/100)*fighter['data']['status_build_base']['hp']);
+                fighter['data']['status_current']['hp'] = fighter['data']['status_current']['hp']+hpPercentHeal;
+            }
+
+            let hpWidth = (fighter['data']['status_current']['hp']/fighter['data']['status_build_base']['hp'])*100 ;
+            if (fighter['data']['status_current']['hp'] >= fighter['data']['status_build_base']['hp']) {
+                fighter['data']['status_current']['hp'] = fighter['data']['status_build_base']['hp'];
+                hpWidth = 100;
+            }
+            let hpPercent = Math.round(hpWidth);
+            $("#party-"+idTarget+"-hp-bar").attr("style","width:"+hpPercent+"%");
+            $(".party-"+idTarget+"-hp-value").text(fighter['data']['status_current']['hp']);
+
+        }else{
+            console.log("Error: type not found!");
+        }
+    }
+    console.log("HP after : "+fighter['data']['status_current']['hp'] )
+    
+
+    // let id = $(".item-row.active").attr('id');
     let inventoryIndex = playerInventory.findIndex(function(elem) {
-        return elem.id == id
+        return elem.id == mappingAction[row].item
     });
+    
+    playerInventory[inventoryIndex].amount =  playerInventory[inventoryIndex].amount-1;
 }
 
 
@@ -153,7 +190,7 @@ $(document).on('keydown', function(e) {
     });
 
 	let index = 0;
-	if (chooseInvenotyItem == true) {
+	if (chooseInvenotyBattleItem == true) {
         
 		switch (e.keyCode) {
         case 38:
@@ -173,3 +210,4 @@ $(document).on('keydown', function(e) {
     	}
 	}
 });
+

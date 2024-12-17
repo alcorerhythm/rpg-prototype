@@ -78,7 +78,7 @@ let monsterAssetId = {}
 
 
 
-function generateProgressBarValueViewer(name, id, value, type){
+function generateProgressBarValueViewer(name, id, value, valueBase, type){
     let color = ""
     let idType = ""
     if (name == 'HP') {
@@ -115,21 +115,30 @@ function generateProgressBarValueViewer(name, id, value, type){
     //     console.log("Err: type not found!")
     // }
     
-    let progressBox =replaceString(divComponent['start'], masterHolder[2], 'progress-indicator-box')
+    let progressBox =replaceString(divComponent['start'], masterHolder[2], 'progress-indicator-box');
     let progressBarValueClass = ""
     if (type == masterType[0]) {
-        progressBarValueClass = replaceString(progressBarValueComponent['start'], masterHolder[2], "progress-bar-party-member")
+        progressBarValueClass = replaceString(progressBarValueComponent['start'], masterHolder[2], "progress-bar-party-member");
     }else if(type == masterType[1]){
-        progressBarValueClass = replaceString(progressBarValueComponent['start'], masterHolder[2], "")
+        progressBarValueClass = replaceString(progressBarValueComponent['start'], masterHolder[2], "");
 
     }
-    let progressBarValueId = replaceString(progressBarValueClass, masterHolder[0], id+idType+"-bar")
-    let progressBarValueColor = replaceString(progressBarValueId, masterHolder[7], color)
+    let progressBarValueId = replaceString(progressBarValueClass, masterHolder[0], id+idType+"-bar");
+    let progressBarValueColor = replaceString(progressBarValueId, masterHolder[7], color);
     let progressBarValue = ""
     if(name == 'TP'){
-        progressBarValue = replaceString(progressBarValueColor, masterHolder[1], "0")
+        progressBarValue = replaceString(progressBarValueColor, masterHolder[1], "0");
     }else{
-        progressBarValue = replaceString(progressBarValueColor, masterHolder[1], "100")
+        // progressBarValue = replaceString(progressBarValueColor, masterHolder[1], "100");
+        console.log("value : "+value);
+        console.log("valueBase : "+valueBase);
+        let currrent = Math.round((value/valueBase)*100);
+        console.log("currrent : "+currrent)
+        if(type == masterType[0] && value < valueBase){
+            progressBarValue = replaceString(progressBarValueColor, masterHolder[1], currrent);
+        }else{
+            progressBarValue = replaceString(progressBarValueColor, masterHolder[1], "100");
+        }
     }
 
     // console.log(type)
@@ -144,11 +153,11 @@ function generateProgressBarValueViewer(name, id, value, type){
     
 
     // let progressBarBodyCurrentClass = replaceString(progressBarBodyComponent['start'], masterHolder[2], "progress-indicator")
-    let progressBarBodyCurrentValue = replaceString(progressBarBodyCurrentClass, masterHolder[4], value)
-    let progressBarBodyMinValue = replaceString(progressBarBodyCurrentValue, masterHolder[5], "0")
-    let progressBarBody= replaceString(progressBarBodyMinValue, masterHolder[6], value)
+    let progressBarBodyCurrentValue = replaceString(progressBarBodyCurrentClass, masterHolder[4], value);
+    let progressBarBodyMinValue = replaceString(progressBarBodyCurrentValue, masterHolder[5], "0");
+    let progressBarBody= replaceString(progressBarBodyMinValue, masterHolder[6], valueBase);
 
-    let progressBarLabelTitleClass = ""
+    let progressBarLabelTitleClass = "";
     // console.log(type)
     if (type == masterType[0]) {
         progressBarLabelTitleClass = replaceString(progressBarLabelComponent, masterHolder[2], 'party-member');
@@ -160,7 +169,7 @@ function generateProgressBarValueViewer(name, id, value, type){
     let progressBarLabelTitleValue = replaceString(progressBarLabelTitleClass, masterHolder[1], name)
 
     let progressBarLabelValueClass = replaceString(progressBarLabelComponent, masterHolder[2], "party-member right")
-    let progressBarLabelValue = replaceString(progressBarLabelValueClass, masterHolder[1], progressBarValueViewer+"/"+value)
+    let progressBarLabelValue = replaceString(progressBarLabelValueClass, masterHolder[1], progressBarValueViewer+"/"+valueBase)
 
 
     // console.log(progressBarValueViewer+"/"+value)
@@ -218,8 +227,8 @@ function composeProgressBarValueViewer(monsterName, id){
     let monster = monsterBattle[id];
     // console.log("Monster ID : "+id);
     // console.log(monsterBattle[id]["data"]["level"]);
-    let hp = generateProgressBarValueViewer("HP", monsterId, monster.data.current.hp, masterType[1]);
-    let mp = generateProgressBarValueViewer("MP", monsterId, monster.data.current.mp, masterType[1]);
+    let hp = generateProgressBarValueViewer("HP", monsterId, monster.data.current.hp, monster.data.current.hp, masterType[1]);
+    let mp = generateProgressBarValueViewer("MP", monsterId, monster.data.current.mp, monster.data.current.mp, masterType[1]);
 
 
     let monsterStatus = replaceString(divComponent['start'], masterHolder[2],'container-fluid d-flex justify-content-end monster-status-title');

@@ -29,7 +29,7 @@ let player = {
 			"luck"  : 3
 		},
 		"status_current":{ //mirror of status_build_base
-			"hp":30,
+			"hp":10,
 			"mp":10,
 			"strength" : 10,
 			"agility" : 6,
@@ -108,7 +108,7 @@ let npc_rochart = {
 			"luck"  : 3
 		},
 		"status_current":{ //mirror of status_build_base
-			"hp":30,
+			"hp":10,
 			"mp":10,
 			"strength" : 10,
 			"agility" : 6,
@@ -162,7 +162,7 @@ let npc_emilly = {
 			"luck"  : 3
 		},
 		"status_current":{ //mirror of status_build_base
-			"hp":30,
+			"hp":12,
 			"mp":10,
 			"strength" : 10,
 			"agility" : 6,

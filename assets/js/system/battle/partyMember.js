@@ -39,9 +39,9 @@ function composePartyMember(id, npcName){
 
     // console.log("NPC");
     // console.log(masterType[0]);
-    let hp = generateProgressBarValueViewer("HP", id, partyMember['data']['status_current']['hp'], masterType[0]);
-    let mp = generateProgressBarValueViewer("MP", id, partyMember['data']['status_current']['mp'], masterType[0]);
-    let tp = generateProgressBarValueViewer("TP", id, 100, masterType[0]);
+    let hp = generateProgressBarValueViewer("HP", id, partyMember['data']['status_current']['hp'],partyMember['data']['status_build_base']['hp'], masterType[0]);
+    let mp = generateProgressBarValueViewer("MP", id, partyMember['data']['status_current']['mp'],partyMember['data']['status_build_base']['mp'], masterType[0]);
+    let tp = generateProgressBarValueViewer("TP", id, 100, 100, masterType[0]);
 
 
     let partyMemberStatus = replaceString(divComponent['start'], masterHolder[2],'container-fluid d-flex justify-content-end party-member-status-title');
