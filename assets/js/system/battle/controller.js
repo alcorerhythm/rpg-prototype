@@ -172,7 +172,6 @@ let devTool = true;
 
 
 function pushLogRow(){
-	console.log("Hallo!");
 	// console.log(mappingActionRow)
 	let row = JSON.parse(JSON.stringify(eval(mappingActionRow)))
 	mappingAction.push(row)
@@ -180,7 +179,7 @@ function pushLogRow(){
 	let enemyAmounth = countAliveFellow("enemy")
 	let objectBattleField = partyAmount+enemyAmounth
 
-	console.log("objectBattleField : "+objectBattleField)
+	// console.log("objectBattleField : "+objectBattleField)
 
 	
 	// console.log("formationParty : "+formationParty.length)
@@ -292,7 +291,7 @@ function buildDefence(){
 	let fighterSpeed = fighter["data"]["status_current"]["agility"];
 	pushLog("action", 'buff');
 	pushLog("buff", 'buff_defence_default');
-	pushLog("speed", fighterSpeed+data.effect.speed);
+	pushLog("speed", fighterSpeed+data.speed);
 	pushLog("push", "execute");
 	$(".action.defence.active.selected").removeClass('selected');
 }
@@ -355,7 +354,7 @@ function initBuff(id,buff){
 	let dataBuff = eval(buff)
 	let data = JSON.parse(JSON.stringify(dataBuff))
 
-    let buffStatusRowComponentStart = replaceString(divComponent['start'], masterHolder[0], 'buff-status-'+id);
+    let buffStatusRowComponentStart = replaceString(divComponent['start'], masterHolder[0], data.id+'-'+id);
     let buffStatusRowComponent = replaceString(buffStatusRowComponentStart, masterHolder[2], 'buff-icon');
 
 
@@ -404,6 +403,63 @@ function mappingEnemyAttack(){
 		}		
 
 	}
+}
+
+function buffCounter(data, type, trigger, status){
+	let result = []; 
+	for (let i = 0; i < data.length; i++) {
+		if(data[i]["type"] == type){
+			result.push(buffEffectDetailCounter(data[i]['effect'], trigger, status))
+		}
+	}
+	return result;
+}
+
+function buffEffectDetailCounter(data, trigger, status){
+	let result =[]; 
+	for (let i = 0; i < data.length; i++) {
+		if(data[i]["status"] == status && data[i]["trigger"] == trigger){
+			result['value'] = data[i]["value"]
+			result['denomination'] = data[i]["denomination"]
+		}
+	}
+	return result;
+}
+
+function buffReset(){
+	console.log(formationParty)
+	let index = 0;
+
+	for (let i = 0; i < formationParty.length; i++) {
+		index = i+1;
+		let id = "-party-"+index;
+
+		let data = formationParty[i]['data']['buff'];
+		for (let j = 0; j < data.length; j++) {
+			console.log(data[j]['turn']);
+			data[j]["turn"] = data[j]["turn"]-1;
+
+			if(data[j]["turn"] == 0){
+				id = data[j]["id"]+"-party-"+index;
+				$("#"+id).remove();
+			}
+		}
+		data = data.filter(function(elem) {
+			return !(elem.turn == 0)
+		});
+	}
+}
+
+function buffRecounter(buff, value){
+	let result = 0
+	for (let i = 0; i < buff.length; i++) {
+		if(buff[i]['denomination'] == '%'){
+			let percent = Math.round((buff[i]['value']/100)*value);
+			result = value-percent;
+		}
+	}
+
+	return result;
 }
 
 // function attackExcute(){
@@ -550,24 +606,39 @@ function mappingActionLoop() {
 
 
 		let partyIdValue = mappingAction[i].partyMember+1;
+		let valueBuff = buffCounter(fighterRow['data']['buff'], "buff", "active", "damage resistance");
+		console.log("damage current : ")
+		console.log(mappingAction[i].damage);
+		if(valueBuff.length > 0){
+			let damage = buffRecounter(valueBuff, mappingAction[i].damage);
+			fighterRow['data']['status_current']['hp'] = fighterRow['data']['status_current']['hp'] - damage;
+			console.log("damage : ")
+			console.log(damage);
+		}else{
+			fighterRow['data']['status_current']['hp'] = fighterRow['data']['status_current']['hp'] - mappingAction[i].damage;
+			console.log("damage : ")
+			console.log(mappingAction[i].damage);
+		}
 		// console.log("fighterRow.data.status_current.hp B: "+fighterRow['data']['status_current']['hp'])
-		fighterRow['data']['status_current']['hp'] = fighterRow['data']['status_current']['hp'] - mappingAction[i].damage;
+		
 		let hpWidth = (fighterRow['data']['status_current']['hp'] /fighterRow['data']['status_build_base']['hp'])*100 ;
 		if (fighterRow['data']['status_current']['hp'] <= 0) {
 			fighterRow['data']['status_current']['hp'] = 0;
 			hpWidth = 0;
 		}
 
-
+		
+		// fighterRow['data']['buff']
 		// party-1-mp-bar
 		// party-1-hp-value
 		let hpPercent = Math.round(hpWidth);
 		// console.log("fighterRow.data.status_current.hp A: "+fighterRow['data']['status_current']['hp'])
 
 		let tpWidth =(mappingAction[i].damage/fighterRow['data']['status_build_base']['hp'])*100;
+		console.log("tpWidth : "+tpWidth)
 		let tpPercentAdditional = Math.round(tpWidth);
 		fighterRow['data']['status_current']['tp'] = fighterRow['data']['status_current']['tp']+ tpPercentAdditional;
-
+		
 		// console.log("hpPercent : "+hpPercent)
 		// console.log("tpPercent : "+tpPercentAdditional)
 
@@ -587,15 +658,18 @@ function mappingActionLoop() {
 		//check not terminate
 		if (mappingAction[i].action == "buff") {
 			if(mappingAction[i].isDispel == false){
+				let buffData = JSON.parse(JSON.stringify(eval(mappingAction[i].buff)));
 
-
+				fighterRow['data']['buff'].push(buffData);
 				let partyIdValue = mappingAction[i].partyMember+1;
 				
-				chargeTechniquePoint(mappingAction[i].partyMember, 20);
 				initBuff('party-'+partyIdValue,mappingAction[i].buff);
-				chargeTechniquePoint(partyIdValue, 20);
+				let valueBuff = buffCounter(fighterRow['data']['buff'], "buff", "passive", "technique point");
+				
+				chargeTechniquePoint(mappingAction[i].partyMember, valueBuff[0]['value']);
 				// callAnimation("monster-"+enemyIndex, skill, 1)
 				// callAnimation("monster-1","attack_slash", 1)
+				composeLog = "<b>"+fighterRow['name']+"</b>'s defensive stance is activated.";
 			}
 		}
 	}
@@ -611,12 +685,13 @@ function mappingActionLoop() {
     if (mappingActionIndex < mappingAction.length) {
     	mappingActionLoop() 
     }else if(mappingActionIndex == mappingAction.length){
-		resetFormationPartyCurrent()
+		resetFormationPartyCurrent();
     	turnCounter();
-    	chooseTargetPartyMember =true
+		buffReset();
+    	chooseTargetPartyMember =true;
     	callingPartySelector("init",1);
-    	mappingAction = []
-    	mappingActionIndex = 0
+    	mappingAction = [];
+    	mappingActionIndex = 0;
     }
   }, 1500)
 }

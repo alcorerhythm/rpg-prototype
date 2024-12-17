@@ -38,7 +38,8 @@ menu div div.menu-light {
 .progress-indicator-party-member{
     margin-top: 3px;
     /*width: 14vw;*/
-    width: 7.25rem;
+    /* width: 7.25rem; */
+    width: 6.5rem;
     height: 10px !important;
 }
 
@@ -66,7 +67,11 @@ menu div div.menu-light {
     padding: 0px 0.5rem;
     width: 2rem;
 }
-
+.progress-label.party-member.right {
+    padding: 0px 0.5rem;
+    width: 3.5rem;
+    text-align: right;
+}
 .bgBoxImage.active {
     background: rgb(239 239 239 / 54%);
 }
@@ -98,6 +103,7 @@ div.titlePartyBoxButton{
     border-radius: 5px;
     display: -webkit-inline-box;
     margin: 5px;
+    width: 11rem;
 }
 
 .buff-status-list span {

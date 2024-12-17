@@ -49,9 +49,7 @@ let player = {
 			"shoes":""
 		},
 		"equipment_extend":[],
-		"buff":{
-
-		}
+		"buff":[],
 	}
 };
 
@@ -130,13 +128,10 @@ let npc_rochart = {
 			"shoes":""
 		},
 		"equipment_extend":[],
-		"buff":{
-
-		}
+		"buff":[]
 	}
 }
-let npc_emilly =
-{
+let npc_emilly = {
 	"id":"2312838",
 	"name":"Emilly",
 	"img":"character/profile/Emi.png",
@@ -187,9 +182,7 @@ let npc_emilly =
 			"shoes":""
 		},
 		"equipment_extend":[],
-		"buff":{
-
-		}
+		"buff":[],
 	}
 }
 

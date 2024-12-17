@@ -259,19 +259,29 @@ let item_water_pure = {
 let buff_defence_default = {
 	"id":"buff_defence_default",
 	"name":"defence",
+	"type":"buff",
+	"turn":1,
+	"speed":120,
 	"icon":{
 		"type":"fa",
 		"logo":"fa-solid fa-shield",
 		"color":"#fff",
 		"background":"#fb7b2e",
 	},
-	"effect":{
-		"target_status":"sp",
-		"value":50,
-		"denomination":"%",
-		"target":"self",
-		"type":"defence",
-		"turn":1,
-		"speed":120
-	}
+	"effect":[
+		{
+			"status":"technique point",
+			"target":"self",
+			"value":20,
+			"denomination":"%",
+			"trigger":"passive"
+		},
+		{
+			"status":"damage resistance",
+			"target":"self",
+			"value":50,
+			"denomination":"%",			
+			"trigger":"active"
+		}
+	]
 }
