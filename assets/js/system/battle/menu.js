@@ -5,9 +5,7 @@ let selectedAction = 0;
 
 
 function loadPlayerFormation(){
-  // console.log("here!");
   for (var i = 0; i < formationParty.length; i++) {
-    // console.log(formationParty[i]);
     constructPartyMember(i, formationParty[i]) 
 
   }
@@ -30,9 +28,6 @@ function loadSkill() {
   console.log("call Skill")
 }
 
-// function call(argument) {
-//   // body...
-// }
 
 let menuDataList = ['item', 'attack', 'skill', 'magic', 'defence', 'menuQuit'];
 

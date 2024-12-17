@@ -40,9 +40,9 @@ function callingPartySelector(option, value){
 }
 
 function resetFormationPartyCurrent(){
-    formationPartyCurrentConfigAvailable = []
-    for (var i = 0; i < battleFieldPartyMember.length; i++) {
-        formationPartyCurrentConfigAvailable.push(battleFieldPartyMember[i])
+    formationPartyCurrentConfigAvailable = ["#party-0"]
+    for (var i = 0; i < formationPartyCurrentConfig.length; i++) {
+        formationPartyCurrentConfigAvailable.push(formationPartyCurrentConfig[i])
     }
 }
 
