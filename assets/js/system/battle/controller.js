@@ -60,6 +60,31 @@ function accept(){
 		pushLog("enemy", idInt)
 		damageCounter()
 
+	}else if(chooseInvenotyBattleItem == true){
+		chooseInvenotyBattleItem = false;
+		chooseTargetPartyMemberItemBattle = true;
+		let id = $('li.item-row.active').attr('id');
+		pushLog("item", id)
+		$("#inventoryPanel").hide();
+		activationPartyMemberItemBattle()
+	}else if(chooseTargetPartyMemberItemBattle == true){
+		chooseTargetPartyMemberItemBattle = false;
+		let id = $("div.bgBoxImage.active").parent().attr('id');
+		let idValue = replaceString(id, "party-", "")
+		// hideSelectorPartyMember(idValue);
+
+
+		// let id = $("div.bgBoxImage.active").parent().attr('id');
+		// let idValue = replaceString(id, "party-", "")
+		// hideSelectorPartyMember(idValue);
+		
+		let idInt = parseInt(idValue)-1
+		pushLog("target", idInt)
+		hideSelectorPartyMember(idInt)
+		let fighter = getPartyMemberFromFormationParty(mappingActionRow['partyMember']);
+		let fighterSpeed = fighter["data"]["status_current"]["agility"];
+		pushLog("speed", fighterSpeed+userItemTimeSpeedDefault);
+		pushLog("push", "execute");
 	}
 
 
@@ -115,8 +140,8 @@ function cancel() {
 		menuActionAccess = true;
 		hideSelectorEnemy(selectedEnemy)
 		menuSwitch(selectedAction);
-	}else if(chooseInvenotyItem == true){
-		chooseInvenotyItem = false
+	}else if(chooseInvenotyBattleItem == true){
+		chooseInvenotyBattleItem = false
 		menuActionAccess = true;
 		menuSwitch(selectedAction);
 		$("#inventoryPanel").hide();
@@ -135,7 +160,7 @@ function cancel() {
 function accessMenu(id){
 	// console.log(id);
 	if (id == 0) {
-		chooseInvenotyItem = true
+		chooseInvenotyBattleItem = true
 		pushLog("action", "item")
 		loadInventory()
 	}else if (id == 1) {
@@ -179,7 +204,7 @@ function pushLogRow(){
 	let enemyAmounth = countAliveFellow("enemy")
 	let objectBattleField = partyAmount+enemyAmounth
 
-	// console.log("objectBattleField : "+objectBattleField)
+	console.log("objectBattleField : "+objectBattleField)
 
 	
 	// console.log("formationParty : "+formationParty.length)
@@ -253,6 +278,10 @@ function pushLog(type, value){
 		mappingActionRow['partyMember'] = value;	
 	}else if(type == 'damage'){
 		mappingActionRow['damage'] = value;
+	}else if(type == 'item'){
+		mappingActionRow['item'] = value;
+	}else if(type == 'target'){
+		mappingActionRow['target'] = value;	
 	}else if(type == 'type'){
 		mappingActionRow['type'] = value;
 	}else if(type == 'speed'){
@@ -620,7 +649,7 @@ function mappingActionLoop() {
 			console.log(mappingAction[i].damage);
 		}
 		// console.log("fighterRow.data.status_current.hp B: "+fighterRow['data']['status_current']['hp'])
-		
+		mappingAction[i].isExecute = true
 		let hpWidth = (fighterRow['data']['status_current']['hp'] /fighterRow['data']['status_build_base']['hp'])*100 ;
 		if (fighterRow['data']['status_current']['hp'] <= 0) {
 			fighterRow['data']['status_current']['hp'] = 0;
@@ -670,7 +699,11 @@ function mappingActionLoop() {
 				// callAnimation("monster-"+enemyIndex, skill, 1)
 				// callAnimation("monster-1","attack_slash", 1)
 				composeLog = "<b>"+fighterRow['name']+"</b>'s defensive stance is activated.";
+			}else{
+				composeLog = "<b>"+fighterRow['name']+"</b>'s defensive stance is failed to activate.";
 			}
+		}else if (mappingAction[i].action == "item") {
+			useItem(fighterRow, i)
 		}
 	}
 	// let enemyDefence = enemyGet.data.hp-mappingAction

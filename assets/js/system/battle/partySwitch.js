@@ -1,14 +1,13 @@
 //BattleFlow
 let selectedPartyMember = 1
+let selectedPartyMemberItemBattle = 1
 let chooseTargetPartyMember = false
+let chooseTargetPartyMemberItemBattle = false
 
 
 function activationPartyMember(){
     chooseTargetPartyMember = true;
-    // console.log(btnId);
-    // $("#"+btnId).addClass("active");
     callingPartySelector("init",1);
-    //window.setTimeout(execute, 500, 1);
 }
 
 function hideSelectorPartyMember(id){
@@ -16,6 +15,25 @@ function hideSelectorPartyMember(id){
     $(battleFieldPartyMember[id]+" div div.arrow").addClass("hide");
     // $(battleFieldPartyMember[selectedPartyMember]+" div.bgBoxImage").removeClass("active");
 }
+
+function activationPartyMemberItemBattle(){
+    console.log("chooseTargetPartyMemberItemBattle :"+chooseTargetPartyMemberItemBattle)
+    let value = mappingActionRow['partyMember']+1;
+    // console.log("valueCostume : "+valueCostume)
+    $(battleFieldPartyMember[value]+" div div.arrow").removeClass("hide");
+    $(battleFieldPartyMember[value]+" div.bgBoxImage").addClass("active");
+    selectedPartyMemberItemBattle = value;
+}
+
+function callingPartyMemberItemBattleSelector(value){
+    $(battleFieldPartyMember[selectedPartyMemberItemBattle]+" div div.arrow").addClass("hide");
+    $(battleFieldPartyMember[selectedPartyMemberItemBattle]+" div.bgBoxImage").removeClass("active");
+
+    $(battleFieldPartyMember[value]+" div div.arrow").removeClass("hide");
+    $(battleFieldPartyMember[value]+" div.bgBoxImage").addClass("active");
+    selectedPartyMemberItemBattle = value;
+}
+
 
 
 function callingPartySelector(option, value){
@@ -31,7 +49,7 @@ function callingPartySelector(option, value){
         valueCostume = value
     }
 
-    console.log("valueCostume : "+valueCostume)
+    // console.log("valueCostume : "+valueCostume)
     $(battleFieldPartyMember[selectedPartyMember]+" div div.arrow").addClass("hide");
     $(battleFieldPartyMember[valueCostume]+" div div.arrow").removeClass("hide");
     $(battleFieldPartyMember[selectedPartyMember]+" div.bgBoxImage").removeClass("active");
@@ -91,9 +109,6 @@ $(document).on('keydown', function(e) {
         	}
             callingPartySelector("switch",value)
             break;
-        // case 38:
-        //     console.log('Up Key pressed!');
-        //     break;
         case 40:
             value = selectedPartyMember+1;
         	if (value > maxPartyMember) {
@@ -101,9 +116,23 @@ $(document).on('keydown', function(e) {
         	}
             callingPartySelector("switch",value)
             break;
-        // case 40:
-        //     console.log('Down Key pressed!');
-        //     break;
+    	}
+	}else if (chooseTargetPartyMemberItemBattle == true) {
+		switch (e.keyCode) {
+        case 38:
+        	value = selectedPartyMemberItemBattle-1;
+        	if (value < 1) {
+        		value = maxPartyMember;
+        	}
+            callingPartyMemberItemBattleSelector(value)
+            break;
+        case 40:
+            value = selectedPartyMemberItemBattle+1;
+        	if (value > maxPartyMember) {
+        		value = 1;
+        	}
+            callingPartyMemberItemBattleSelector(value)
+            break;
     	}
 	}
 });

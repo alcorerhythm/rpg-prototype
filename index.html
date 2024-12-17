@@ -38,85 +38,6 @@
 	<script type="text/javascript" src="./assets/js/system/battle/controller.js"></script>	
 	<script type="text/javascript" src="./assets/js/main.js"></script>
 </head>
-
-<style type="text/css">
-.log-detail{
-	width: 17rem;
-    background: rgb(255 255 255 / 25%);
-    height: 7rem;
-    position: absolute;
-    left: 1rem;
-    padding: 10px;
-    border-radius: 10px;
-    z-index: 108;
-}
-.question-view{
-	width: 20rem;
-    background: #fff;
-    height: 6rem;
-    position: absolute;
-    right: 6.5rem;
-    padding: 10px;
-    border-radius: 10px;
-}
-
-.log-detail-dev-tool{
-	width: 17rem;
-    background: rgb(255 255 255 / 25%);
-    height: 7rem;
-    position: absolute;
-    left: 19rem;
-    padding: 10px;
-    border-radius: 10px;
-    z-index: 108;
-    bottom: 1rem;
-}
-#logListDevTool{
-    padding: 0px;
-    font-size: 10px;
-    overflow: auto;
-    height: 4rem;
-}
-
-#logList{
-    padding: 0px;
-    font-size: 10px;
-    overflow: auto;
-    height: 4rem;
-}
-.turn-indicator{
-	width: 5.5rem;
-    background: rgb(255 255 255 / 25%);
-    height: 2.5rem;
-    position: absolute;
-    left: 19rem;
-    padding: 5px 10px;
-    border-radius: 10px;
-    font-size: 1.25rem;
-    font-weight: bold;
-}
-.badge-turn{
-	position: absolute;
-    margin: 4px ;
-}
-
-.menu-costum {
-    transition: all 0.25s ease-in-out;
-    transition-delay: 0.75s;
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-     background-color: transparent!important; 
-    margin: -45px 0 0 -45px;
-    position: fixed;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    cursor: pointer;
-    right: 2%;
-    bottom: 2%;
-    z-index: 101;
-}
-</style>
 <body class="bg">
 			<p class=""><img id="attack-field" src="#"></p>
 	<!-- <div id="attack-field"></div> -->
@@ -216,6 +137,22 @@
 			
 		</ul>
 
+
+
+
+		<style>
+			#item-temporary-1{
+				margin: -132px 0 0 92px;
+			}
+			.action.item.temporary{
+				background: #ffffff6b!important;
+			}
+			    
+				
+		</style>
+		<div id="itemUsageTemporary" class="menu-action">
+			<div id="item-temporary-1" class="action item temporary"><i class="fa-solid fa-vial fa-rotate-270"></i></div>
+		</div>
 		<menu id="menuCostum1" class="menu-costum slow-spin-4s hide"></menu>
 		<menu id="menuCostum2" class="menu-costum hide"></menu>
 		<menu class="box-body">
