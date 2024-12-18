@@ -81,6 +81,7 @@ const monster_slime = {
 
 //basic_attack
 let attack_slash = {
+	"id":"attack_slash",
 	"path":"attack/slash/sprite/",
 	"name":"Slash",
 	"name_file":"slash_",
@@ -95,22 +96,47 @@ let attack_slash = {
 
 //skill
 let skill_punch_single = {
-	"path":"skill/punch_single/sprite/",
+	"id":"skill_punch_single",
 	"name":"Punch",
-	"name_file":"punch_",
-	"icon":"skill/punch_single/icon.svg",
-	"format":"svg",
-	"length":6,
-	"damage":5,
+	"type":"martial_art",
+	"animate":{
+		"length":6,
+		"duration":100
+	},
+	"assets":{
+		"path":"skill/punch_single/sprite/",
+		"name_file":"punch_",
+		"icon":"skill/punch_single/icon.svg",
+		"format":"svg",
+	},
+	"effect":[
+		{
+			"damage":5,
+			"target":"enemy"
+		}
+		
+	]
 };
 let skill_punch_impact = {
-	"path":"skill/punch_impact/sprite/",
+	"id":"skill_punch_impact",
 	"name":"Impact",
-	"name_file":"punch_",
-	"icon":"skill/punch_impact/icon.svg",
-	"format":"svg",
-	"length":7,
-	"damage":20,
+	"type":"martial_art",
+	"animate":{
+		"length":7,
+		"duration":100
+	},
+	"assets":{
+		"path":"skill/punch_impact/sprite/",
+		"name_file":"punch_",
+		"icon":"skill/punch_impact/icon.svg",
+		"format":"svg",
+	},
+	"effect":[
+		{
+			"damage":20,
+			"target":"enemy"
+		}
+	]
 };
 
 //item

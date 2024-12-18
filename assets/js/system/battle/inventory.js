@@ -47,6 +47,7 @@ function callInventoryList(){
         
     }
     $("#item-list").html(item);
+    generateDetail(selectedItem)
 }
 
 function generateDetail(id){
@@ -184,13 +185,13 @@ function useItem(fighter, row){
 
 
 $(document).on('keydown', function(e) {
-    let id = $(".item-row.active").attr('id');
-    let inventoryIndex = playerInventory.findIndex(function(elem) {
-        return elem.id == id
-    });
 
 	let index = 0;
 	if (chooseInvenotyBattleItem == true) {
+        let id = $(".item-row.active").attr('id');
+        let inventoryIndex = playerInventory.findIndex(function(elem) {
+            return elem.id == id
+        });
         
 		switch (e.keyCode) {
         case 38:

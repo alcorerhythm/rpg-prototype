@@ -28,6 +28,7 @@
 	<script type="text/javascript" src="./assets/js/system/data/master.js"></script>
 	<script type="text/javascript" src="./assets/js/system/data/user.js"></script>
 	<script type="text/javascript" src="./assets/js/system/view/alert.js"></script>
+	<script type="text/javascript" src="./assets/js/system/battle/log.js"></script>
 	<script type="text/javascript" src="./assets/js/system/battle/menu.js"></script>
 	<script type="text/javascript" src="./assets/js/system/battle/monsterSwitch.js"></script>
 	<script type="text/javascript" src="./assets/js/system/battle/monster.js"></script>
@@ -39,7 +40,7 @@
 	<script type="text/javascript" src="./assets/js/main.js"></script>
 </head>
 <body class="bg">
-			<p class=""><img id="attack-field" src="#"></p>
+	<!-- <p class=""><img id="attack-field" src="#"></p> -->
 	<!-- <div id="attack-field"></div> -->
 	<div id="alert" class="position-absolute top-15 start-50 translate-middle p-3">
 	</div>
@@ -133,9 +134,12 @@
 			<div class="enemy-5"><img id="monster-point" src="./assets/img/monster/slime/slime.png"></div>
 		</div> -->
 
-		<ul id="skill-box" class="skill-box">
-			
-		</ul>
+		<div id="skillPanelBattle" class="skill-box">
+			<h5><span class="fa-solid fa-hand-back-fist fa-rotate-320 p-2x"></span> <span style="padding-left:10px">SKILL</span> </h5>
+			<ul  id="skillList" class="skill-list">
+
+			</ul>
+		</div>
 
 
 
@@ -150,9 +154,9 @@
 			    
 				
 		</style>
-		<div id="itemUsageTemporary" class="menu-action">
+		<!-- <div id="itemUsageTemporary" class="menu-action">
 			<div id="item-temporary-1" class="action item temporary"><i class="fa-solid fa-vial fa-rotate-270"></i></div>
-		</div>
+		</div> -->
 		<menu id="menuCostum1" class="menu-costum slow-spin-4s hide"></menu>
 		<menu id="menuCostum2" class="menu-costum hide"></menu>
 		<menu class="box-body">
@@ -164,7 +168,7 @@
 		    <div class="menu-button" onclick="menu()"></div>
 		    <li class="item"><a><i class="fa-solid fa-vial fa-rotate-210"></i></a></li>
 		    <li class="attack"><a><i class="fa ra ra-sword fa-rotate-270"></i></a></li>
-		    <li class="skill" onclick="loadSkill()"><a><i class="fa-regular fa-hand-back-fist "></i></a></li>
+		    <li class="skill" onclick="loadSkill()"><a><i class="fa-solid fa-hand-back-fist "></i></a></li>
 		    <li class="magic"><a><i class="fa-solid fa-wand-sparkles"></i></a></li>
 		    <li class="defence"><a><i class="fa-solid fa-shield sheild-rotate"></i> </a></li>
 		    <li class="menuQuit"><a><i class="fa-solid fa-xmark"></i></a></li>
@@ -173,7 +177,7 @@
 		<div class="menu-action">
 		    <div id="0" class="action item"><i class="fa-solid fa-vial fa-rotate-270"></i></div>
 		    <div id="1" class="action attack"><i class="fa ra ra-sword fa-rotate-270"></i></div>
-		    <div id="2" class="action skill" onclick="loadSkill()"><i class="fa-regular fa-hand-back-fist fa-rotate-320"></i></div>
+		    <div id="2" class="action skill" onclick="loadSkill()"><i class="fa-solid fa-hand-back-fist fa-rotate-320"></i></div>
 		    <div id="3" class="action magic"><i class="fa-solid  fa-wand-sparkles fa-rotate-270"></i></div>
 		    <div id="4" class="action defence"><i class="fa-solid fa-shield"></i></div>
 		    <div id="5" class="action menuQuit"><i class="fa-solid fa-xmark"></i></div>
@@ -214,7 +218,7 @@
 					</div>
 				</div>
 				<div id="itemDetail" class="col col-4">
-					<div class="item-detail panel-style">
+					<!-- <div class="item-detail panel-style">
 						<h5 class="item-title-preview">Herp</h5>
 						<div class="detail "></div>
 						<div class="item-img-preview">
@@ -233,11 +237,12 @@
 							</ul>
 							
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
 	</div>
+
 	<div id="settingPanel" class="setting-panel">	
 		<h2> 
 			<span class="fa fa-cog slow-spin"></span> 

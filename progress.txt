@@ -43,3 +43,17 @@ convert party member detail to javasript
 - menu choose : defence (charge tp 20%(done), block damage 50%(unwork))
 - mapping action defence : BuildDefence()
 - show buff budge on party list: initBuff()
+
+17/12/2023
+- re init data buff
+- set buff trigger passive / active, to execute effect
+- remove buff when turn == 0
+- fixing Generate hp-bar (Fighter(NPC)/Enemy) : set MaxHp from status_build_base
+- itemCounterEffect: herp
+- update item amount: decrease item amount while successfuly used
+
+
+18/12/2023
+- fixing action:defence (buff)
+- reinit skill data
+- reinit skill list

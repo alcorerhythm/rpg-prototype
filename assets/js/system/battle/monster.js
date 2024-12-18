@@ -130,10 +130,10 @@ function generateProgressBarValueViewer(name, id, value, valueBase, type){
         progressBarValue = replaceString(progressBarValueColor, masterHolder[1], "0");
     }else{
         // progressBarValue = replaceString(progressBarValueColor, masterHolder[1], "100");
-        console.log("value : "+value);
-        console.log("valueBase : "+valueBase);
+        // console.log("value : "+value);
+        // console.log("valueBase : "+valueBase);
         let currrent = Math.round((value/valueBase)*100);
-        console.log("currrent : "+currrent)
+        // console.log("currrent : "+currrent)
         if(type == masterType[0] && value < valueBase){
             progressBarValue = replaceString(progressBarValueColor, masterHolder[1], currrent);
         }else{
