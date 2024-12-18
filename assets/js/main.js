@@ -46,6 +46,7 @@ $( document ).ready(function() {
 	loadPartyMemberDetail();
 	$("#battleQuestionPanel, .bg-panel.dark").hide();
 	$("#inventoryPanel").hide();
+	$('#skillPanelBattle').hide();
     console.log( "ready!" );
     // initBattle()
     initBattleField();

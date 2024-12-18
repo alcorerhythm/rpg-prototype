@@ -50,6 +50,8 @@ let player = {
 		},
 		"equipment_extend":[],
 		"buff":[],
+		"skill_master":[skill_punch_single,skill_punch_impact],
+		"skill_holder":[skill_punch_single,skill_punch_impact],
 	}
 };
 
@@ -128,7 +130,9 @@ let npc_rochart = {
 			"shoes":""
 		},
 		"equipment_extend":[],
-		"buff":[]
+		"buff":[],
+		"skill_master":[],
+		"skill_holder":[]
 	}
 }
 let npc_emilly = {
@@ -183,6 +187,8 @@ let npc_emilly = {
 		},
 		"equipment_extend":[],
 		"buff":[],
+		"skill_master":[],
+		"skill_holder":[]
 	}
 }
 

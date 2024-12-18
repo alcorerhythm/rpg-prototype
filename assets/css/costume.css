@@ -26,20 +26,44 @@ ul{
 .btn-skill:hover{
 	background: #efefef;
 }
-.skill-box{
+/* .skill-box{
     width: 360px;
     height: 100px;
     position: absolute;
     bottom: 0;
     right: 0;
     background: #222;
-}
+} */
 .skill-icon{
-	width: 8vh;
+	width: 2.25rem;
 }
 
 button.btn.btn-skill.active{
     background: #a5a5a5;
+}
+
+.skill-box {
+    width: 360px;
+    border-radius: 10px;
+    padding: 10px;
+    position: absolute;
+    bottom: 18%;
+    right: 11%;
+    background: rgb(255 255 255 / 25%);
+    z-index: 110;   
+}
+#skillList{
+    padding: 0px;
+    overflow-y: scroll;
+}
+.skill-item{
+    border-bottom: solid 2px #fff;
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+
+li.skill-item.active {
+    background: rgb(255 255 255 / 50%);
 }
 
 /* body{
@@ -583,6 +607,16 @@ padding: 1px;
     0%{transform:scale(1,1);}
 }
 
+@keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
+@-webkit-keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
 
 
 
@@ -642,4 +676,8 @@ padding: 1px;
     right: 6.5rem;
     padding: 10px;
     border-radius: 10px;
+}
+
+.p-2x{
+    padding: 2px;
 }

@@ -1,0 +1,75 @@
+<style>
+    .blink {
+        animation: blink-animation 1s steps(5, start) infinite;
+        -webkit-animation: blink-animation 1s steps(5, start) infinite;
+    }
+    @keyframes blink-animation {
+        to {
+            visibility: hidden;
+            
+        }
+    }
+    @-webkit-keyframes blink-animation {
+        to {
+            visibility: hidden;
+        }
+    }
+    body{
+        background: #c5c5c5!important;
+    }
+    .bgBoxImage.blink{
+        background: linear-gradient(120deg, rgb(255 255 255 / 56%), rgb(254 193 188 / 64%) 60%, rgb(255 196 196 / 75%) 37%, rgb(255 84 84 / 80%)) !important;
+        animation: blink-animation 1s steps(5, start) infinite;
+    }
+   
+</style>
+This is <span class="blink">blinking</span> text.
+
+
+<link href="../assets/vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="../assets/css/menu.css" rel="stylesheet">
+<link href="../assets/css/costume.css" rel="stylesheet">
+<link href="../assets/css/statusParty.css" rel="stylesheet">
+<link href="../assets/css/arrowSelect.css" rel="stylesheet">
+<body>
+    <div id="<!id>" class="bgBoxImage blink">
+        <img id="<!id>" class="party-profile" src="./assets/img/character/profile/Rochart.png">
+        <div id="<!id>" class="party-status">
+            <div id="<!id>" class="container-fluid d-flex justify-content-end party-member-status-title">
+                <div class="indicator-level justify-content-start half"><b>Rochart</b>
+                </div>
+                <div class="indicator-level float-end half">
+                    <span id="valueLevel" class="float-end"><b>1</b></span>
+                    <span class="float-end">Lv. </span>
+                </div>
+                </div>
+                    <div id="<!id>" class="progress-indicator-box">
+                        <div class="progress-label party-member"><b>HP</b></div>
+                        <div class="progress progress-indicator-party-member" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="30">
+                            <div id="party-3-hp-bar" class="progress-bar bg-danger progress-bar-party-member" style="width: 33%">
+                        </div>
+                    </div>
+                    <div class="progress-label party-member right"><b><span class="party-3-hp-value">10</span>/30</b></div>
+                </div>
+                <div id="<!id>" class="progress-indicator-box">
+                    <div class="progress-label party-member"><b>MP</b>
+                </div>
+                <div class="progress progress-indicator-party-member" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="10"><div id="party-3-mp-bar" class="progress-bar bg-primary progress-bar-party-member" style="width: 100%">
+                </div>
+    </div>
+                            <div class="progress-label party-member right"><b><span class="party-3-mp-value">10</span>/10</b>
+    </div>
+                        </div>
+                        <div id="<!id>" class="progress-indicator-box">
+                            <div class="progress-label party-member"><b>TP</b></div>
+                            <div class="progress progress-indicator-party-member" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><div id="party-3-tp-bar" class="progress-bar bg-warning progress-bar-party-member" style="width: 0%">
+            </div>
+            </div>
+            <div class="progress-label party-member right"><b><span class="party-3-tp-value">0</span>/100</b>
+            </div>
+            </div>
+            <div id="buff-status-party-3" class="buff-status-list">
+            </div>
+            </div>
+    </div>
+</body>

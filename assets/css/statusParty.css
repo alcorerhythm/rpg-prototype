@@ -59,6 +59,10 @@ menu div div.menu-light {
     border-radius: .5rem;
     cursor: pointer;
 }
+.bgBoxImage.damaged{
+    background: linear-gradient(120deg, rgb(255 255 255 / 56%), rgb(254 193 188 / 64%) 60%, rgb(255 196 196 / 75%) 37%, rgb(255 84 84 / 80%)) !important;
+    animation: blink-animation 1s steps(5, start) infinite;
+}
 
 .party-member-status-title{
     padding: 0 0.5rem !important;
