@@ -1,11 +1,49 @@
 let masterHolder = ['<!id>','<!value>','<!class>','<!onclick>', '<!currentValue>','<!minValue>','<!maxValue>','<!color>'];
 let masterType = ['npc','monster'];
 let masterClass = ['skill-icon'];
+let masterLevelExp = [
+	{
+		'level':1,
+		'exp':30
+	},
+	{
+		'level':1,
+		'exp':60
+	},
+	{
+		'level':2,
+		'exp':120
+	},
+	{
+		'level':3,
+		'exp':240
+	},
+	{
+		'level':4,
+		'exp':360
+	},
+	{
+		'level':5,
+		'exp':480
+	},
+	{
+		'level':6,
+		'exp':600
+	},
+	{
+		'level':7,
+		'exp':720
+	},
+	{
+		'level':8,
+		'exp':720
+	},
+];
 
 
 //default
-let battleFieldDefault = "terminate"
-let battleFieldUsedDefault = "mapped"
+let battleFieldDefault = "terminate";
+let battleFieldUsedDefault = "mapped";
 
 
 //area

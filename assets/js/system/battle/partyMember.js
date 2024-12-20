@@ -1,39 +1,3 @@
-// function generateProgressBarValueViewer(name, id, value){
-//     let progressBarValueViewerClass = replaceString(progressBarValueViewerComponent, masterHolder[2], id+"-hp-value");
-//     let progressBarValueViewer = replaceString(progressBarValueViewerClass, masterHolder[1], value); 
-
-//     let color = ""
-//     if (name == 'HP') {
-//         color = 'danger'
-//     }else if(name == 'MP'){
-//         color = 'primary'
-//     }else if(name == 'TP'){
-//         color = 'warning'
-//     }else if(name == 'EXP'){
-//         color = 'success'
-//     }else{
-//         console.log("Err: color not found!")
-//     }
-
-//     let progressBox =replaceString(divComponent['start'], masterHolder[2], 'progress-indicator-box')
-
-//     let progressBarValueId = replaceString(progressBarValueComponent['start'], masterHolder[0], id+"-hp-bar")
-//     let progressBarValueColor = replaceString(progressBarValueId, masterHolder[7], color)
-//     let progressBarValue = replaceString(progressBarValueColor, masterHolder[1], "100")
-
-//     let progressBarBodyCurrentValue = replaceString(progressBarBodyComponent['start'], masterHolder[4], value)
-//     let progressBarBodyMinValue = replaceString(progressBarBodyCurrentValue, masterHolder[5], "0")
-//     let progressBarBody= replaceString(progressBarBodyMinValue, masterHolder[6], value)
-
-//     let progressBarLabelComponentValue = replaceString(progressBarLabelComponent, masterHolder[1], name)
-
-
-//     let composeProgressBarValue = progressBox+progressBarLabelComponentValue+progressBarBody+progressBarValue+progressBarValueViewer+"/"+value+progressBarValueComponent['end']+progressBarBodyComponent['end']+divComponent['end'];
-
-//     return composeProgressBarValue
-// }
-
-
 function composePartyMember(id, npcName){
     let partyMember = eval(npcName);
 
@@ -128,4 +92,57 @@ function loadPlayerFormation(){
 
     }
     activationPartyMember()
+}
+
+composeDetailPartyMember()
+function composeDetailPartyMember(){
+    let i = 0;
+    
+    // for (var i = 0; i < formationParty.length; i++){
+    let partyMember = formationParty[i];
+    let customeId = i+1;
+    let id = "party-"+customeId;
+    let partyBoxStatus = replaceString(divComponent['start'], masterHolder[2], 'party-status');
+    let exp = generateProgressBarValueViewerDetail("EXP", id, partyMember['exp']['current'],partyMember['exp']['base'], masterType[0]);
+    let hp = generateProgressBarValueViewerDetail("HP", id, partyMember['data']['status_current']['hp'],partyMember['data']['status_build_base']['hp'], masterType[0]);
+    let mp = generateProgressBarValueViewerDetail("MP", id, partyMember['data']['status_current']['mp'],partyMember['data']['status_build_base']['mp'], masterType[0]);
+    let tp = generateProgressBarValueViewerDetail("TP", id, 100, 100, masterType[0]);
+
+
+    let levelBox = composeLevel(id, partyMember['level']);
+    let expFinal = replaceString(exp, masterHolder[1], levelBox);
+    let partyMemberStatus = replaceString(divComponent['start'], masterHolder[2],'container-fluid d-flex justify-content-end party-member-status-title');
+
+
+    let namePartyMember = composeName(partyMember['name']);
+    let classActive = composeActiveClass(id,"Swordman", 1, "ra", "ra-sword");
+    
+
+
+    let imgBox = replaceString(divComponent['start'], masterHolder[2], 'photo-layout');
+    let imgProfileClass = replaceString(imgCompoment, masterHolder[2], 'img-sequare');
+    let imgProfileId = replaceString(imgProfileClass, masterHolder[0], 'photoprofile');
+    let imgProfileValue = replaceString(imgProfileId, masterHolder[1], main_asset_path+partyMember['img']);
+
+    
+    let mainStatusComponent = replaceString(divComponent['start'], masterHolder[2],'menu-left-layout');
+    let mainStatus = mainStatusComponent+partyBoxStatus+partyMemberStatus+divComponent['end']+expFinal+hp+mp+tp+divComponent['end']+divComponent['end'];
+
+    let composePartyMemberMainStatus = classActive+imgBox+imgProfileValue+divComponent['end']+namePartyMember+mainStatus; //buff
+
+    let  partyMemberSingleDetail = replaceString(divComponent['start'], masterHolder[2],'party-member-single');
+    let partyMemberSingle = partyMemberSingleDetail+composePartyMemberMainStatus+divComponent['end'];
+    
+    $("#testDev").html(partyMemberSingle)
+    // }
+
+}
+
+
+function composeName(name){  
+    let nameComponent = replaceString(divComponent['start'], masterHolder[2], 'info-layout');
+    let nameBoxComponent = replaceString(divComponent['start'], masterHolder[2], 'nameUser');
+
+    let result = nameComponent+nameBoxComponent+name+divComponent['end']+divComponent['end'];
+    return result;
 }

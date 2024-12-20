@@ -185,6 +185,10 @@ function accessMenu(id){
 		pushLog("action", "defense");
 		buildDefence();
 	}else if (id == 5) {
+		partyMemberDetail = true;
+		pushLog("action", "switch");
+		loadPartyMemberDetail()
+	}else if (id == 6){
 		menuBattleAccess = true;
 		menu();
 		$("menu.box-body").addClass('hover');
@@ -283,7 +287,9 @@ function pushLog(type, value){
 	}else if(type == 'skill'){
 		mappingActionRow['skill'] = value;
 	}else if(type == 'magic'){
-		mappingActionRow['magic'] = value;		
+		mappingActionRow['magic'] = value;
+	}else if(type == 'magic'){
+		mappingActionRow['switch'] = value;
 	}else if(type == 'partyMember'){
 		mappingActionRow['partyMember'] = value;	
 	}else if(type == 'damage'){

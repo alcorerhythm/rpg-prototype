@@ -78,106 +78,106 @@ let monsterAssetId = {}
 
 
 
-function generateProgressBarValueViewer(name, id, value, valueBase, type){
-    let color = ""
-    let idType = ""
-    if (name == 'HP') {
-        color = 'danger'
-        idType = "-hp"
-    }else if(name == 'MP'){
-        color = 'primary'
-        idType = "-mp"
-    }else if(name == 'TP'){
-        idType = "-tp"
-        color = 'warning'
-    }else if(name == 'EXP'){
-        color = 'success'
-    }else{
-        console.log("Err: color not found!")
-    }
+// function generateProgressBarValueViewer(name, id, value, valueBase, type){
+//     let color = ""
+//     let idType = ""
+//     if (name == 'HP') {
+//         color = 'danger'
+//         idType = "-hp"
+//     }else if(name == 'MP'){
+//         color = 'primary'
+//         idType = "-mp"
+//     }else if(name == 'TP'){
+//         idType = "-tp"
+//         color = 'warning'
+//     }else if(name == 'EXP'){
+//         color = 'success'
+//     }else{
+//         console.log("Err: color not found!")
+//     }
 
-    let progressBarValueViewerClass = replaceString(progressBarValueViewerComponent, masterHolder[2], id+idType+"-value");
+//     let progressBarValueViewerClass = replaceString(progressBarValueViewerComponent, masterHolder[2], id+idType+"-value");
 
-    let currentValue = 0
-    if(name == 'TP'){
-        currentValue = 0
-    }else{
-        currentValue = value
-    }
-    let progressBarValueViewer = replaceString(progressBarValueViewerClass, masterHolder[1], currentValue); 
+//     let currentValue = 0
+//     if(name == 'TP'){
+//         currentValue = 0
+//     }else{
+//         currentValue = value
+//     }
+//     let progressBarValueViewer = replaceString(progressBarValueViewerClass, masterHolder[1], currentValue); 
 
-    // let progressBox = "";
-    // if (type == masterType[0]) {
-    //     progressBox =replaceString(divComponent['start'], masterHolder[2], 'progress-indicator-box')
-    // }else if (type == masterType[0]) {
-    //     progressBox =replaceString(divComponent['start'], masterHolder[2], 'progress-indicator-box')
-    // }else{
-    //     console.log("Err: type not found!")
-    // }
+//     // let progressBox = "";
+//     // if (type == masterType[0]) {
+//     //     progressBox =replaceString(divComponent['start'], masterHolder[2], 'progress-indicator-box')
+//     // }else if (type == masterType[0]) {
+//     //     progressBox =replaceString(divComponent['start'], masterHolder[2], 'progress-indicator-box')
+//     // }else{
+//     //     console.log("Err: type not found!")
+//     // }
     
-    let progressBox =replaceString(divComponent['start'], masterHolder[2], 'progress-indicator-box');
-    let progressBarValueClass = ""
-    if (type == masterType[0]) {
-        progressBarValueClass = replaceString(progressBarValueComponent['start'], masterHolder[2], "progress-bar-party-member");
-    }else if(type == masterType[1]){
-        progressBarValueClass = replaceString(progressBarValueComponent['start'], masterHolder[2], "");
+//     let progressBox =replaceString(divComponent['start'], masterHolder[2], 'progress-indicator-box');
+//     let progressBarValueClass = ""
+//     if (type == masterType[0]) {
+//         progressBarValueClass = replaceString(progressBarValueComponent['start'], masterHolder[2], "progress-bar-party-member");
+//     }else if(type == masterType[1]){
+//         progressBarValueClass = replaceString(progressBarValueComponent['start'], masterHolder[2], "");
 
-    }
-    let progressBarValueId = replaceString(progressBarValueClass, masterHolder[0], id+idType+"-bar");
-    let progressBarValueColor = replaceString(progressBarValueId, masterHolder[7], color);
-    let progressBarValue = ""
-    if(name == 'TP'){
-        progressBarValue = replaceString(progressBarValueColor, masterHolder[1], "0");
-    }else{
-        // progressBarValue = replaceString(progressBarValueColor, masterHolder[1], "100");
-        // console.log("value : "+value);
-        // console.log("valueBase : "+valueBase);
-        let currrent = Math.round((value/valueBase)*100);
-        // console.log("currrent : "+currrent)
-        if(type == masterType[0] && value < valueBase){
-            progressBarValue = replaceString(progressBarValueColor, masterHolder[1], currrent);
-        }else{
-            progressBarValue = replaceString(progressBarValueColor, masterHolder[1], "100");
-        }
-    }
+//     }
+//     let progressBarValueId = replaceString(progressBarValueClass, masterHolder[0], id+idType+"-bar");
+//     let progressBarValueColor = replaceString(progressBarValueId, masterHolder[7], color);
+//     let progressBarValue = ""
+//     if(name == 'TP'){
+//         progressBarValue = replaceString(progressBarValueColor, masterHolder[1], "0");
+//     }else{
+//         // progressBarValue = replaceString(progressBarValueColor, masterHolder[1], "100");
+//         // console.log("value : "+value);
+//         // console.log("valueBase : "+valueBase);
+//         let currrent = Math.round((value/valueBase)*100);
+//         // console.log("currrent : "+currrent)
+//         if(type == masterType[0] && value < valueBase){
+//             progressBarValue = replaceString(progressBarValueColor, masterHolder[1], currrent);
+//         }else{
+//             progressBarValue = replaceString(progressBarValueColor, masterHolder[1], "100");
+//         }
+//     }
 
-    // console.log(type)
-    let progressBarBodyCurrentClass = "";
-    if (type == masterType[0]) {
-        progressBarBodyCurrentClass = replaceString(progressBarBodyComponent['start'], masterHolder[2], 'progress-indicator-party-member');
-    }else if (type == masterType[1]) {
-        progressBarBodyCurrentClass = replaceString(progressBarBodyComponent['start'], masterHolder[2], 'progress-indicator');
-    }else{
-        console.log("Err: type not found!");
-    }
+//     // console.log(type)
+//     let progressBarBodyCurrentClass = "";
+//     if (type == masterType[0]) {
+//         progressBarBodyCurrentClass = replaceString(progressBarBodyComponent['start'], masterHolder[2], 'progress-indicator-party-member');
+//     }else if (type == masterType[1]) {
+//         progressBarBodyCurrentClass = replaceString(progressBarBodyComponent['start'], masterHolder[2], 'progress-indicator');
+//     }else{
+//         console.log("Err: type not found!");
+//     }
     
 
-    // let progressBarBodyCurrentClass = replaceString(progressBarBodyComponent['start'], masterHolder[2], "progress-indicator")
-    let progressBarBodyCurrentValue = replaceString(progressBarBodyCurrentClass, masterHolder[4], value);
-    let progressBarBodyMinValue = replaceString(progressBarBodyCurrentValue, masterHolder[5], "0");
-    let progressBarBody= replaceString(progressBarBodyMinValue, masterHolder[6], valueBase);
+//     // let progressBarBodyCurrentClass = replaceString(progressBarBodyComponent['start'], masterHolder[2], "progress-indicator")
+//     let progressBarBodyCurrentValue = replaceString(progressBarBodyCurrentClass, masterHolder[4], value);
+//     let progressBarBodyMinValue = replaceString(progressBarBodyCurrentValue, masterHolder[5], "0");
+//     let progressBarBody= replaceString(progressBarBodyMinValue, masterHolder[6], valueBase);
 
-    let progressBarLabelTitleClass = "";
-    // console.log(type)
-    if (type == masterType[0]) {
-        progressBarLabelTitleClass = replaceString(progressBarLabelComponent, masterHolder[2], 'party-member');
-    }else if (type == masterType[1]) {
-        progressBarLabelTitleClass = replaceString(progressBarLabelComponent, masterHolder[2], "");
-    }else{
-        console.log("Err: type not found!");
-    }
-    let progressBarLabelTitleValue = replaceString(progressBarLabelTitleClass, masterHolder[1], name)
+//     let progressBarLabelTitleClass = "";
+//     // console.log(type)
+//     if (type == masterType[0]) {
+//         progressBarLabelTitleClass = replaceString(progressBarLabelComponent, masterHolder[2], 'party-member');
+//     }else if (type == masterType[1]) {
+//         progressBarLabelTitleClass = replaceString(progressBarLabelComponent, masterHolder[2], "");
+//     }else{
+//         console.log("Err: type not found!");
+//     }
+//     let progressBarLabelTitleValue = replaceString(progressBarLabelTitleClass, masterHolder[1], name)
 
-    let progressBarLabelValueClass = replaceString(progressBarLabelComponent, masterHolder[2], "party-member right")
-    let progressBarLabelValue = replaceString(progressBarLabelValueClass, masterHolder[1], progressBarValueViewer+"/"+valueBase)
+//     let progressBarLabelValueClass = replaceString(progressBarLabelComponent, masterHolder[2], "party-member right")
+//     let progressBarLabelValue = replaceString(progressBarLabelValueClass, masterHolder[1], progressBarValueViewer+"/"+valueBase)
 
 
-    // console.log(progressBarValueViewer+"/"+value)
+//     // console.log(progressBarValueViewer+"/"+value)
 
-    let composeProgressBarValue = progressBox+progressBarLabelTitleValue+progressBarBody+progressBarValue+progressBarValueComponent['end']+progressBarBodyComponent['end']+progressBarLabelValue+divComponent['end'];
+//     let composeProgressBarValue = progressBox+progressBarLabelTitleValue+progressBarBody+progressBarValue+progressBarValueComponent['end']+progressBarBodyComponent['end']+progressBarLabelValue+divComponent['end'];
 
-    return composeProgressBarValue
-}
+//     return composeProgressBarValue
+// }
 
 function generateMonsterStatus(name, area, id){
     let level = player['level']

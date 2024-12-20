@@ -3,7 +3,10 @@ let player = {
 	"name":"Ren",
 	"img":"character/profile/Ren.png",
 	"level":1,
-	"exp":0,
+	"exp":{
+		'current':0,
+		'base':30,
+	},
 	"data":{
 		// "attack":10,
 		// "defence":8,
@@ -84,7 +87,10 @@ let npc_rochart = {
 	"name":"Rochart",
 	"img":"character/profile/Rochart.png",
 	"level":1,
-	"exp":0,
+	"exp":{
+		'current':0,
+		'base':0,
+	},
 	"data":{
 		// "attack":10,
 		// "defence":8,
@@ -140,7 +146,10 @@ let npc_emilly = {
 	"name":"Emilly",
 	"img":"character/profile/Emi.png",
 	"level":1,
-	"exp":0,
+	"exp":{
+		'current':0,
+		'base':0,
+	},
 	"data":{
 		// "attack":10,
 		// "defence":8,

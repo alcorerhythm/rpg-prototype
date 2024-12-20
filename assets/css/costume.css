@@ -180,6 +180,7 @@ li.skill-item.active {
 	display: inline-flex;
 	/*padding: 0.1vw 2vw;*/
 	border-radius: 3vw;
+    /* width: 15.5rem; */
 }
 .progress-label {
 	padding: 0px 1vw;
@@ -367,7 +368,7 @@ li.skill-item.active {
     text-align: left !important;
     font-weight: bold !important;
     color: #fff;
-    width: 17.4rem;
+    width: 14.75rem;
     height: 10px !important;
             }
             .userInfo{font-size: 7px; padding: 0px 5px 0px 10px;}
@@ -450,7 +451,8 @@ padding: 1px;
     position: relative;
     left: 4rem;
     margin-bottom: 20px;
-    width:19rem;
+    /* width:19rem; */
+    width:16rem;
 }
 
 
@@ -472,6 +474,10 @@ padding: 1px;
 .infoStatusRL{/*padding: 0px 0px 0px 10px; */   margin-bottom: 10px;}
 .infoDetailStatus {margin: 0px 0 -5px;}
 
+#partyMemberDetailPage{
+    padding: 1.5rem 4.25rem;
+}
+
             #partyMemberDetailPage{
                 background: #ffffff75;
                 z-index: 108;
@@ -479,10 +485,13 @@ padding: 1px;
                 margin: 5rem;
                 border-radius: 1rem;
             }
+            .title-component.party-member-detail{
+                padding: 0.5rem 2.5rem 1rem!important;
+            }
             .party-member-single{
                 background: rgb(255 255 255 / 75%);
                 padding: 1.5rem;
-                margin: 5.5rem 1.5rem;
+                margin: 1.5rem 1.5rem 5.5rem;
                 border-radius: 1rem;
                 height: 32rem;
             }
@@ -500,7 +509,7 @@ padding: 1px;
                 font-size: 10px;
                 margin-top: 0px;
                 text-align: right;
-                width: 13rem;
+                width: 12rem;
             }
             .progress-indicator-detail-box{
                     /*display: flex;*/
@@ -520,14 +529,14 @@ padding: 1px;
                 text-align: left !important;
                 font-weight: bold !important;
                 color: #fff;
-                width: 13rem;
+                width: 12rem;
                 height: 10px !important;
                 margin-bottom: 10px;
                 position: relative;
                 top: -10px;
             }
             .expBar{
-                width: 19rem;
+                width: 16.25rem;
                 height: 10px !important;
                 position: relative;
                 bottom: 8px;
@@ -559,11 +568,16 @@ padding: 1px;
 
 .party-member-controller{
     display: inline-flex;
-    padding: 20.5rem 1.5rem;
+    padding: 22.5rem 1.5rem;
     font-size: 2rem;
     color: #fff
 }
-.right-arrow{
+.left-arrow.float-start {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.right-arrow.float-end {
     position: absolute;
     right: 0;
     top: 0;
