@@ -6,6 +6,45 @@ fixing random amount enemy
 limit hp decrease turn into 0 only.
 ----
 
+Battle Flow
+choose Figher (PartyMember)
+choose menu action
+    -> attack -> choose enemy -> Loop (partyMember's amount)
+
+choose Figher (PartyMember)
+choose menu action
+    -> item -> choose item-> choose partyMember target(BUFF) || enemy target (DEBUFF)-> Loop (partyMember's amount)
+
+choose Figher (PartyMember)
+choose menu action
+    -> skill -> choose skill-> choose enemy target -> Loop (partyMember's amount)
+
+choose Figher (PartyMember)
+choose menu action
+    -> magic -> choose magic-> choose enemy target -> Loop (partyMember's amount)
+
+choose Figher (PartyMember)
+choose menu action
+    -> defence ->  Loop (partyMember's amount)
+
+
+Battle Flow
+choose menu action
+    -> attack -> choose figher -> choose enemy -> Loop (partyMember's amount)
+
+choose Figher (PartyMember)
+choose menu action
+    -> item -> choose figher -> choose item-> choose partyMember target(BUFF) || enemy target (DEBUFF)-> Loop (partyMember's amount)
+
+choose menu action
+    -> skill -> choose figher ->  choose skill-> choose enemy target -> Loop (partyMember's amount)
+
+choose menu action
+    -> magic -> choose figher -> choose magic-> choose enemy target -> Loop (partyMember's amount)
+
+choose menu action
+    -> defence -> choose figher ->  Loop (partyMember's amount)
+
 
 - cancel button: roll back choose menu to choose party member
 - cancel button: roll back choose enemy to choose menu 
@@ -54,6 +93,10 @@ convert party member detail to javasript
 
 
 18/12/2023
-- fixing action:defence (buff)
+- fixing action:defence (buff), sp bonus sp target
 - reinit skill data
 - reinit skill list
+- switch skill
+
+
+19/12/2023
