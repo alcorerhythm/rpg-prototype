@@ -94,47 +94,81 @@ function loadPlayerFormation(){
     activationPartyMember()
 }
 
-composeDetailPartyMember()
+
 function composeDetailPartyMember(){
-    let i = 0;
+    // let i = 0;
+    let result = "";
+    for (var i = 0; i < formationParty.length; i++){
+        let partyMember = formationParty[i];
+        let customeId = i;
+        let id = "party-"+customeId;
+        let partyBoxStatus = replaceString(divComponent['start'], masterHolder[2], 'party-status');
+        let exp = generateProgressBarValueViewerDetail("EXP", id, partyMember['exp']['current'],partyMember['exp']['base'], masterType[0]);
+        let hp = generateProgressBarValueViewerDetail("HP", id, partyMember['data']['status_current']['hp'],partyMember['data']['status_build_base']['hp'], masterType[0]);
+        let mp = generateProgressBarValueViewerDetail("MP", id, partyMember['data']['status_current']['mp'],partyMember['data']['status_build_base']['mp'], masterType[0]);
+        let tp = generateProgressBarValueViewerDetail("TP", id, 100, 100, masterType[0]);
+
+
+        let levelBox = composeLevel(id, partyMember['level']);
+        let expFinal = replaceString(exp, masterHolder[1], levelBox);
+        let partyMemberStatus = replaceString(divComponent['start'], masterHolder[2],'container-fluid d-flex justify-content-end party-member-status-title');
+
+
+        let namePartyMember = composeName(partyMember['name']);
+        let classActive = composeActiveClass(id,"Swordman", 1, "ra", "ra-sword");
+        
+
+
+        let imgBox = replaceString(divComponent['start'], masterHolder[2], 'photo-layout');
+        let imgProfileClass = replaceString(imgCompoment, masterHolder[2], 'img-sequare');
+        let imgProfileId = replaceString(imgProfileClass, masterHolder[0], 'photoprofile');
+        let imgProfileValue = replaceString(imgProfileId, masterHolder[1], main_asset_path+partyMember['img']);
+
+        
+        let mainStatusComponent = replaceString(divComponent['start'], masterHolder[2],'menu-left-layout');
+        let mainStatus = mainStatusComponent+partyBoxStatus+partyMemberStatus+divComponent['end']+expFinal+hp+mp+tp+divComponent['end']+divComponent['end'];
+
+        let composePartyMemberMainStatus = classActive+imgBox+imgProfileValue+divComponent['end']+namePartyMember+mainStatus; //buff
+
+
+        
+        let strStatus = generateProgressBarValueStatusDetail("STR", id, partyMember['data']['status_current']['strength'],partyMember['data']['status_build_base']['strength']);
+        let agiStatus = generateProgressBarValueStatusDetail("AGI", id, partyMember['data']['status_current']['agility'],partyMember['data']['status_build_base']['agility']);
+        let vitStatus = generateProgressBarValueStatusDetail("VIT", id, partyMember['data']['status_current']['vitality'],partyMember['data']['status_build_base']['vitality']);
+        let intStatus = generateProgressBarValueStatusDetail("INT", id, partyMember['data']['status_current']['intelegent'],partyMember['data']['status_build_base']['intelegent']);
+        let dexStatus = generateProgressBarValueStatusDetail("DEX", id, partyMember['data']['status_current']['dexterity'],partyMember['data']['status_build_base']['dexterity']);
+        let lukStatus = generateProgressBarValueStatusDetail("LUK", id, partyMember['data']['status_current']['luck'],partyMember['data']['status_build_base']['luck']);
+
+        
+        let rowComponent = composeDivClass("row");
+        let halfStatusLeftBoxComponent = composeDivClass("col-6 infoStatusRL");
+        let halfStatusRIghtBoxComponent = composeDivClass("col-6 infoStatusRL");
     
-    // for (var i = 0; i < formationParty.length; i++){
-    let partyMember = formationParty[i];
-    let customeId = i+1;
-    let id = "party-"+customeId;
-    let partyBoxStatus = replaceString(divComponent['start'], masterHolder[2], 'party-status');
-    let exp = generateProgressBarValueViewerDetail("EXP", id, partyMember['exp']['current'],partyMember['exp']['base'], masterType[0]);
-    let hp = generateProgressBarValueViewerDetail("HP", id, partyMember['data']['status_current']['hp'],partyMember['data']['status_build_base']['hp'], masterType[0]);
-    let mp = generateProgressBarValueViewerDetail("MP", id, partyMember['data']['status_current']['mp'],partyMember['data']['status_build_base']['mp'], masterType[0]);
-    let tp = generateProgressBarValueViewerDetail("TP", id, 100, 100, masterType[0]);
+        let halfStatusLeftComponent = replaceString(halfStatusLeftBoxComponent, masterHolder[1], strStatus+agiStatus+vitStatus);
+        // let statusLeftComponent = replaceString(rowComponent, masterHolder[1], halfStatusLeftBoxComponent);
+
+        let halfStatusRightComponent = replaceString(halfStatusRIghtBoxComponent, masterHolder[1], intStatus+dexStatus+lukStatus);
+        let statusComponent = replaceString(rowComponent, masterHolder[1], halfStatusLeftComponent+halfStatusRightComponent);
+
+        let buffComponent = composeBuff(id);
+        let btn = `<a class="config-button"><span>Config</span></a>
+        <a class="switch-button"><span>Switch</span></a>`;
+        let divZeroPadding = composeDivClass("zeroPadding");
+        let partySingleMemberdivZeroPadding = replaceString(divZeroPadding, masterHolder[1], composePartyMemberMainStatus+statusComponent+buffComponent+divComponent['end']);
+        let partyMemberSingleDetail = replaceString(divComponent['start'], masterHolder[2],'party-member-single');
+        let partyMemberSingleDetailId = replaceString(partyMemberSingleDetail, masterHolder[0],id+'-detail');
+        let partyMemberSingle = partyMemberSingleDetailId+btn+partySingleMemberdivZeroPadding+divComponent['end'];
 
 
-    let levelBox = composeLevel(id, partyMember['level']);
-    let expFinal = replaceString(exp, masterHolder[1], levelBox);
-    let partyMemberStatus = replaceString(divComponent['start'], masterHolder[2],'container-fluid d-flex justify-content-end party-member-status-title');
+        let divCol = composeDivClass("col");
+        let partySingleMemberCol = replaceString(divCol, masterHolder[1], partyMemberSingle);
+
+        result = result+partySingleMemberCol;
+    }
+    $("#partyMemberDetailList").html("");
+    $("#partyMemberDetailList").html(result);
 
 
-    let namePartyMember = composeName(partyMember['name']);
-    let classActive = composeActiveClass(id,"Swordman", 1, "ra", "ra-sword");
-    
-
-
-    let imgBox = replaceString(divComponent['start'], masterHolder[2], 'photo-layout');
-    let imgProfileClass = replaceString(imgCompoment, masterHolder[2], 'img-sequare');
-    let imgProfileId = replaceString(imgProfileClass, masterHolder[0], 'photoprofile');
-    let imgProfileValue = replaceString(imgProfileId, masterHolder[1], main_asset_path+partyMember['img']);
-
-    
-    let mainStatusComponent = replaceString(divComponent['start'], masterHolder[2],'menu-left-layout');
-    let mainStatus = mainStatusComponent+partyBoxStatus+partyMemberStatus+divComponent['end']+expFinal+hp+mp+tp+divComponent['end']+divComponent['end'];
-
-    let composePartyMemberMainStatus = classActive+imgBox+imgProfileValue+divComponent['end']+namePartyMember+mainStatus; //buff
-
-    let  partyMemberSingleDetail = replaceString(divComponent['start'], masterHolder[2],'party-member-single');
-    let partyMemberSingle = partyMemberSingleDetail+composePartyMemberMainStatus+divComponent['end'];
-    
-    $("#testDev").html(partyMemberSingle)
-    // }
 
 }
 
@@ -146,3 +180,83 @@ function composeName(name){
     let result = nameComponent+nameBoxComponent+name+divComponent['end']+divComponent['end'];
     return result;
 }
+
+
+function composeDivClass(nameClass){
+    let divIdComponent = replaceString(divComponent['start'], masterHolder[0], "");
+    let divClassComponent = replaceString(divIdComponent, masterHolder[2], nameClass);
+
+    let result = divClassComponent+'<!value>'+divComponent['end'];
+    return result;
+}
+
+function composeBuff(id){
+    let divRow = composeDivClass("row")
+    let divCol = composeDivClass("col")
+    let divTitleBuff = composeDivClass("detail-party-member-buff-title")
+    let divTitleComponent = replaceString(divTitleBuff, masterHolder[1], "BUFF");
+
+    let divBuffComponentId = replaceString(divComponent['start'], masterHolder[0], id+"-buff-list");
+    let divBuffComponentClass = replaceString(divBuffComponentId, masterHolder[2], "buffList");
+
+    let divBuffComponent = replaceString(divCol, masterHolder[1], divTitleComponent+divBuffComponentClass);
+    let buffComponent = replaceString(divRow, masterHolder[1], divBuffComponent);
+
+    return buffComponent;
+}
+
+
+
+let selectedPartyMemberDetail = 0;
+let switchPartyMemberDetail = false;
+let switchPartyMemberDetailActive = false;
+
+
+
+
+function callingPartyDetailActivate(){
+    switchPartyMemberDetail= true;
+    let value = mappingActionRow['partyMember'];
+    console.log("callingPartyDetailActivate : "+value);
+    $('#party-'+value+'-detail.party-member-single').addClass('selected');
+    selectedPartyMemberDetail = value;
+}
+function callingPartyDetailSelector(value){
+    $('div.party-member-single').removeClass('selected');
+    $('#party-'+value+'-detail.party-member-single').addClass('selected');
+    selectedPartyMemberDetail = value;
+}
+function callingPartyDetailSelectorChooesed(){
+    switchPartyMemberDetailActive = true;
+    switchPartyMemberDetail = false;
+    console.log('#party-'+selectedPartyMemberDetail+'-detail.party-member-single.selected')
+    $('#party-'+selectedPartyMemberDetail+'-detail.party-member-single.selected').addClass('choosed');
+}
+function callingPartyDetailSelectorUnchooesed(){
+    switchPartyMemberDetailActive = false;
+    switchPartyMemberDetail = true;
+    console.log('#party-'+selectedPartyMemberDetail+'-detail.party-member-single.selected.choosed')
+    $('#party-'+selectedPartyMemberDetail+'-detail.party-member-single.selected.choosed').removeClass('choosed');
+}
+$(document).on('keydown', function(e) {
+	let maxPartyMember = formationParty.length-1;
+	let value = 0;
+	if (switchPartyMemberDetail == true) {
+		switch (e.keyCode) {
+        case 37:
+        	value = selectedPartyMemberDetail-1;
+        	if (value < 0) {
+        		value = maxPartyMember;
+        	}
+            callingPartyDetailSelector(value)
+            break;
+        case 39:
+            value = selectedPartyMemberDetail+1;
+        	if (value > maxPartyMember) {
+        		value = 0;
+        	}
+            callingPartyDetailSelector(value)
+            break;
+    	}
+	}
+});

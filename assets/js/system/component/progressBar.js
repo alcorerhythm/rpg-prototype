@@ -245,6 +245,85 @@ function generateProgressBarValueViewerDetail(name, id, value, valueBase, type){
 }
 /*<span class="infoBar">HP</span>*/
 
+function generateProgressBarValueStatusDetail(name, id, value, valueBase){
+    let color = "info"
+    let idType = ""
+    let iconLabel =""
+    if (name == 'STR') {
+        idType = "-str"
+        iconLabel = composeLabel("infoStatus", name, "title", "Physical Attack");
+    }else if(name == 'AGI'){
+        idType = "-agi";
+        iconLabel = composeLabel("infoStatus", name, "title", "Attak Speed, Flee (Dodge");
+    }else if(name == 'VIT'){
+        idType = "-vit";
+        iconLabel = composeLabel("infoStatus", name, "title", "hysical Defense, Max HP, HP Regeneration");
+    }else if(name == 'INT'){
+        idType = "-int";
+        iconLabel = composeLabel("infoStatus", name, "title", "Magical Attack, Magic Defense, Max SP, SP Regeneration");
+    }else if(name == 'DEX'){
+        idType = "-dex";
+        iconLabel = composeLabel("infoStatus", name, "title", "Accuration, Skill Casting");
+    }else if(name == 'LUK'){
+        idType = "-luk";
+        iconLabel = composeLabel("infoStatus", name, "title", "Critical Rate, Lucky Flee");
+    }else{
+        console.log("Err: color not found!")
+    }
+
+    
+    let labelValueRemoveId = replaceString(spanComponent, masterHolder[0], "");
+    let labelValueClass = replaceString(labelValueRemoveId, masterHolder[2], id+idType+"-value");
+    let labelValue = replaceString(labelValueClass, masterHolder[1], value);
+
+    let labelValueMaxRemoveId = replaceString(spanComponent, masterHolder[0], "");
+    let labelValueMaxClass = replaceString(labelValueMaxRemoveId, masterHolder[2], id+idType+"-value-max");
+    let labelValueMax = replaceString(labelValueMaxClass, masterHolder[1], valueBase);
+
+    let labelCompose = composeDivClass("progress-indicator-detail-box")
+    
+    let valueComponentCompose = composeDivClass("progress-label valueBar float-end")
+    let valueComponent = replaceString(valueComponentCompose, masterHolder[1], labelValue+"/"+labelValueMax);
+    let labelValueComponent = replaceString(labelCompose, masterHolder[1], iconLabel+valueComponent);
+
+
+
+
+
+    let progressBox =replaceString(divComponent['start'], masterHolder[2], 'progress-indicator-box');
+    let progressBarBodyCurrentClass = replaceString(progressBarBodyComponent['start'], masterHolder[2], 'progress-bar-info pointSubBar');
+
+
+    // let progressBarBodyCurrentClass = replaceString(progressBarBodyComponent['start'], masterHolder[2], "progress-indicator")
+    let progressBarBodyCurrentValue = replaceString(progressBarBodyCurrentClass, masterHolder[4], value);
+    let progressBarBodyMinValue = replaceString(progressBarBodyCurrentValue, masterHolder[5], "0");
+    let progressBarBody= replaceString(progressBarBodyMinValue, masterHolder[6], valueBase);
+
+    let progressBarValueClass = replaceString(progressBarValueComponent['start'], masterHolder[2], "");
+
+    let progressBarValueId = replaceString(progressBarValueClass, masterHolder[0], id+idType+"-bar");
+    // let progressBarValueClass = replaceString(progressBarValueComponent['start'], masterHolder[2], "");
+    let progressBarValueColor = replaceString(progressBarValueId, masterHolder[7], color);
+    let progressBarValue = replaceString(progressBarValueColor, masterHolder[1], "100");
+    let progressBarComponent = progressBox+progressBarBody+progressBarValue+divComponent['end']+divComponent['end']+divComponent['end'];
+    // let labelTitle = replaceString(labelCompose, masterHolder[1], valueComponentCompose);
+
+
+    let composeAction = composeDivClass("infoDetailStatus");
+    let labelComponent = replaceString(composeAction, masterHolder[1], labelValueComponent+progressBarComponent);
+
+    
+
+
+    // let progressBox =replaceString(divComponent['start'], masterHolder[2], 'progress-indicator-box');
+    // let progressBarValueClass = replaceString(progressBarValueComponent['start'], masterHolder[2], "progress-bar-party-member");
+
+    // let progressBarValueId = replaceString(progressBarValueClass, masterHolder[0], id+idType+"-bar");
+    // let progressBarValueColor = replaceString(progressBarValueId, masterHolder[7], color);
+
+    return labelComponent
+}
+
 
 function composeLevel(id, level){
     let spanComponentId = replaceString(spanComponent, masterHolder[0], "level-"+id);
@@ -273,13 +352,19 @@ function composeIconAwesome(type, value){
 
 function composeLabel(className, text, fontId, fontIcon){
     let result = "";
-    let icon = composeIconAwesome(fontId, fontIcon);
+    
     let spanComponentRemoveId = replaceString(spanComponent, masterHolder[0], "");
-    let spanComponentClass = replaceString(spanComponentRemoveId, masterHolder[2], className);
-
-    if(fontId != "" || fontIcon != "" ){
+    if(fontId == "fa" ||  fontId == "ra"){
+        let icon = composeIconAwesome(fontId, fontIcon);
+        let spanComponentClass = replaceString(spanComponentRemoveId, masterHolder[2], className);
         result = replaceString(spanComponentClass, masterHolder[1], icon+" "+text);
+    }else if(fontId == "title"){
+        let spanComponentClass = replaceString(spanComponentRemoveId, masterHolder[2], className+'" title="'+fontIcon);
+        // result = replaceString(spanComponentClass, masterHolder[1], "' "+title+"='"+fontIcon+"'");
+        // result = spanComponentClass; 
+        result = replaceString(spanComponentClass, masterHolder[1], text);
     }else{
+        let spanComponentClass = replaceString(spanComponentRemoveId, masterHolder[2], className);
         result = replaceString(spanComponentClass, masterHolder[1], text);
     }
     return result;
@@ -302,7 +387,7 @@ function composeActiveClass(id,className, classLevel, fontId, fontIcon){
     let icon = composeIconAwesome(fontId, fontIcon);
     let spanLevelComponentId = replaceString(spanComponent, masterHolder[0], "class-level-"+id);
     let spanLevelComponentClass = replaceString(spanLevelComponentId, masterHolder[2], "level-size");
-    let spanLevelComponentValue = replaceString(spanLevelComponentClass, masterHolder[1], "Lv."+classLevel);
+    let spanLevelComponentValue = replaceString(spanLevelComponentClass, masterHolder[1], classLevel);
 
 
     let spanBoxComponentRemoveId = replaceString(spanComponent, masterHolder[0], "");

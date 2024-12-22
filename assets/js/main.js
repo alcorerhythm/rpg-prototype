@@ -5,9 +5,12 @@
 let partyMemberDetail = false; 
 function loadPartyMemberDetail(){
 	if (partyMemberDetail == true) {
-		$("#partyMemberDetailPage").show();
+		composeDetailPartyMember();
+		callingPartyDetailActivate();
+		$("#partyMemberDetailPage").fadeIn();
+		
 	}else{
-		$("#partyMemberDetailPage").hide();
+		$("#partyMemberDetailPage").fadeOut();
 	}
 
 }

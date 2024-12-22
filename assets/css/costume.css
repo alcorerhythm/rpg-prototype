@@ -477,6 +477,12 @@ padding: 1px;
 #partyMemberDetailPage{
     padding: 1.5rem 4.25rem;
 }
+.pointSubBar, .expBar, .pointBar{
+    background: #c8c8c8;
+}
+.party-member-single.selected{    
+	background: rgb(255 255 255 / 75%);
+}
 
             #partyMemberDetailPage{
                 background: #ffffff75;
@@ -489,7 +495,7 @@ padding: 1px;
                 padding: 0.5rem 2.5rem 1rem!important;
             }
             .party-member-single{
-                background: rgb(255 255 255 / 75%);
+                background: rgb(255 255 255 / 45%);
                 padding: 1.5rem;
                 margin: 1.5rem 1.5rem 5.5rem;
                 border-radius: 1rem;

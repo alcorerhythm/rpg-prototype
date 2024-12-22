@@ -13,6 +13,7 @@ function accept(){
 		if (idValue == "0") {
 			partyMemberDetail = true;
 			loadPartyMemberDetail()
+			// composeDetailPartyMember()
 		}else{
 			
 			chooseTargetPartyMember = false;
@@ -49,7 +50,7 @@ function accept(){
 		let idValue = replaceString(id, "party-", "")
 		let idInt = parseInt(idValue)
 		accessMenu(idInt)
-		menuSwitchLeave(mappingActionRow["action"])
+		$(".action.active.selected").removeClass('selected');
 	}else if(chooseTargetEnemy == true){
 		chooseTargetEnemy =false;
 
@@ -70,7 +71,7 @@ function accept(){
 	}else if(chooseTargetPartyMemberItemBattle == true){
 		chooseTargetPartyMemberItemBattle = false;
 		let id = $("div.bgBoxImage.active").parent().attr('id');
-		let idValue = replaceString(id, "party-", "")
+		let idValue = replaceString(id, "party-", "");
 		// hideSelectorPartyMember(idValue);
 
 
@@ -78,9 +79,9 @@ function accept(){
 		// let idValue = replaceString(id, "party-", "")
 		// hideSelectorPartyMember(idValue);
 		
-		let idInt = parseInt(idValue)-1
-		pushLog("target", idInt)
-		hideSelectorPartyMember(idInt)
+		let idInt = parseInt(idValue)-1;
+		pushLog("target", idInt);
+		hideSelectorPartyMember(idInt);
 		let fighter = getPartyMemberFromFormationParty(mappingActionRow['partyMember']);
 		let fighterSpeed = fighter["data"]["status_current"]["agility"];
 		pushLog("speed", fighterSpeed+userItemTimeSpeedDefault);
@@ -89,20 +90,34 @@ function accept(){
 		chooseTargetSkill = false;
 		// let id = $("div.bgBoxImage.active").parent().attr('id');
 		// pushLog("skill", id);
+	}else if(switchPartyMemberDetail == true){
+		partyMemberDetail = false;
+		console.log("test");
+		
+		callingPartyDetailSelectorChooesed()
 	}
-
 	
 
 	return null
 }
 
 function cancel() {
-	console.log("Test")
-	if (partyMemberDetail == true) {
-		partyMemberDetail = false;
-		loadPartyMemberDetail()
-	}
-	else if (chooseTargetPartyMember == true) {
+	console.log("Cancel")
+	console.log("partyMemberDetail : "+partyMemberDetail)
+	console.log("chooseTargetPartyMember : "+chooseTargetPartyMember)
+	console.log("menuBattleAccess : "+menuBattleAccess)
+	console.log("menuActionAccess : "+menuActionAccess)
+	console.log("chooseTargetEnemy : "+chooseTargetEnemy)
+	console.log("chooseInvenotyBattleItem : "+chooseInvenotyBattleItem)
+	console.log("chooseTargetSkill : "+chooseTargetSkill)
+
+	
+	// if (partyMemberDetail == true) {
+	// 	partyMemberDetail = false;
+	// 	loadPartyMemberDetail()
+	// }
+	// else
+	if (chooseTargetPartyMember == true) {
 		// disactivatePartyMember();
 		// let id = $("div.bgBoxImage.active").parent().attr('id');
 		// // console.log(id)
@@ -138,6 +153,7 @@ function cancel() {
 		menuActionAccess = false
 		formationPartyCurrentConfigAvailable[selectedPartyMember] = battleFieldPartyMember[selectedPartyMember]
 		callingPartySelector("init",selectedPartyMember)
+		$(".action.active.selected").removeClass('selected');
 				// let id = $("div.action.active.selected").attr("id");
 	}else if(chooseTargetEnemy == true){
 		chooseTargetEnemy = false
@@ -157,8 +173,14 @@ function cancel() {
 		menuActionAccess = true;
 		menuSwitch(selectedAction);
 		$("#skillPanelBattle").fadeOut();
-
-
+	}else if(partyMemberDetail == true) {
+		partyMemberDetail = false;
+		menuActionAccess = true;
+		menuSwitch(selectedAction);
+		$("#partyMemberDetailPage").fadeOut();
+		console.log(menuActionAccess);
+	}else if(switchPartyMemberDetailActive == true){			
+		callingPartyDetailSelectorUnchooesed()
 	}else{
 
 	}

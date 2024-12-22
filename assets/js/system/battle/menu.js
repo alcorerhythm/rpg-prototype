@@ -24,9 +24,9 @@ function menu() {
   }
 }
 
-function loadSkill() {
-  console.log("call Skill")
-}
+// function loadSkill() {
+//   console.log("call Skill")
+// }
 
 
 let menuDataList = ['item', 'attack', 'skill', 'magic', 'defence', 'formationBattle', 'menuQuit'];
