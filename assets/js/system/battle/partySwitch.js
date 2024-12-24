@@ -1,8 +1,8 @@
 //BattleFlow
-let selectedPartyMember = 1
-let selectedPartyMemberItemBattle = 1
-let chooseTargetPartyMember = false
-let chooseTargetPartyMemberItemBattle = false
+let selectedPartyMember = 1;
+let selectedPartyMemberItemBattle = 1;
+let chooseTargetPartyMember = false;
+let chooseTargetPartyMemberItemBattle = false;
 
 
 function activationPartyMember(){
@@ -55,6 +55,15 @@ function callingPartySelector(option, value){
     $(battleFieldPartyMember[selectedPartyMember]+" div.bgBoxImage").removeClass("active");
     $(battleFieldPartyMember[valueCostume]+" div.bgBoxImage").addClass("active");
     selectedPartyMember = valueCostume;
+}
+
+function callingPartyMemberDetailActionSelector(value){
+    $(battleFieldPartyMember[selectedPartyMemberDetailAction]+" div div.arrow").addClass("hide");
+    $(battleFieldPartyMember[selectedPartyMemberDetailAction]+" div.bgBoxImage").removeClass("active");
+    // .party-member-single a span
+    $(battleFieldPartyMember[value]+" div div.arrow").removeClass("hide");
+    $(battleFieldPartyMember[value]+" div.bgBoxImage").addClass("active");
+    selectedPartyMemberItemBattle = value;
 }
 
 function resetFormationPartyCurrent(){
@@ -136,6 +145,29 @@ $(document).on('keydown', function(e) {
     	}
 	}
 });
+
+// $(document).on('keydown', function(e) {
+// 	let maxPartyMemberDetail = partyMemberDetailAction.length-1;
+// 	let value = 0;
+// 	if (chooseTargetPartyMemberDetailAction == true) {
+// 		switch (e.keyCode) {
+//         case 38:
+//         	value = selectedPartyMemberDetailAction-1;
+//         	if (value < 0) {
+//         		value = maxPartyMemberDetail;
+//         	}
+//             callingPartyMemberDetailActionButtonSelector(value)
+//             break;
+//         case 40:
+//             value = selectedPartyMemberDetailAction+1;
+//         	if (value > maxPartyMemberDetail) {
+//         		value = 0;
+//         	}
+//             callingPartyMemberDetailActionButtonSelector(value)
+//             break;
+//     	}
+// 	}
+// });
 
 $(document).on('keydown', function(e) {
     switch (e.keyCode) {

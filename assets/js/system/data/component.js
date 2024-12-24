@@ -10,6 +10,8 @@ let labelComponent = {
 	"end":"</label>"
 };
 let spanComponent = '<span id="<!id>" class="<!class>"><!value></span>';
+let aComponent = '<a id="<!id>" class="<!class>"><!value></a>';
+let buttonComponent = '<a id="<!id>" class="<!class>"><!value></a>';
 let ulComponent = {'start':'<ul>','end':'</ul>'};
 let liComponent = {'start':'<li id="<!id>" class="<!class>">','end':'</li>'};
 let textComponent = [
@@ -21,7 +23,6 @@ let h5Component = {
 	'start': '<h5 class="<!class>">',
 	'end': '</h5>'
 }
-
 
 let alertComponent = 
 		`<div class="toast align-items-center text-white bg-<!color> border-0 " role="alert" aria-live="assertive" aria-atomic="true">
