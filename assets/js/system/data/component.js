@@ -5,6 +5,10 @@ let divComponent = {
 	"start":"<div id='<!id>' class='<!class>'>",	
 	"end":"</div>"
 };
+let labelComponent = {
+	"start":"<label id='<!id>' class='<!class>'>",	
+	"end":"</label>"
+};
 let spanComponent = '<span id="<!id>" class="<!class>"><!value></span>';
 let ulComponent = {'start':'<ul>','end':'</ul>'};
 let liComponent = {'start':'<li id="<!id>" class="<!class>">','end':'</li>'};

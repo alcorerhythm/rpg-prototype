@@ -517,3 +517,49 @@ menu li a:hover {
   bottom: 3%;
   z-index: 101;
 }
+
+
+/* Inventory Item */
+#item-temporary-5{
+  margin: -500px 0 0 92px;
+}
+#item-temporary-4{
+  margin: -408px 0 0 92px;
+}
+#item-temporary-3{
+  margin: -316px 0 0 92px;
+}
+#item-temporary-2{
+  margin: -224px 0 0 92px;
+}
+#item-temporary-1{
+  margin: -132px 0 0 92px;
+}
+.action.item.temporary{
+  background: #ffffff6b!important;
+}
+.badge-amount{
+  background: #cfcfcf;
+  position: absolute;
+  bottom: -8px;
+  left: 36px;
+}
+.menu-action div.action.temporary {
+  width: 60px;
+  height: 60px;
+  padding: 13px;
+  background: #fff;
+  text-align: center;
+  font-size: 18px;
+  color: #fbfdff;
+  border-radius: 50%;
+  position: fixed;
+  z-index: 100;
+}
+.action.temporary:hover {
+  background: none;
+  animation: none;
+  padding: none;
+}
+
+/* Inventory Item */

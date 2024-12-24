@@ -338,15 +338,20 @@ function composeLevel(id, level){
 }
 
 
-function composeIconAwesome(type, value){
+function composeIconAwesome(type, value, color){
     let spanComponentRemoveId = replaceString(spanComponent, masterHolder[0], "");
     let spanComponentRemoveValue = replaceString(spanComponentRemoveId, masterHolder[1], "");
-
+    let result = ""
     let iconValue = "";
     if(type == 'fa' || type == 'ra'){
         iconValue = type+" "+value;
     }
-    let result = replaceString(spanComponentRemoveValue, masterHolder[2], iconValue);
+    if(color != ""){
+        result = replaceString(spanComponentRemoveValue, masterHolder[2], iconValue+'" style="color:'+color+'"');
+    }else{
+        result = replaceString(spanComponentRemoveValue, masterHolder[2], iconValue);
+    }
+     
     return result;
 }
 
@@ -355,7 +360,7 @@ function composeLabel(className, text, fontId, fontIcon){
     
     let spanComponentRemoveId = replaceString(spanComponent, masterHolder[0], "");
     if(fontId == "fa" ||  fontId == "ra"){
-        let icon = composeIconAwesome(fontId, fontIcon);
+        let icon = composeIconAwesome(fontId, fontIcon, "");
         let spanComponentClass = replaceString(spanComponentRemoveId, masterHolder[2], className);
         result = replaceString(spanComponentClass, masterHolder[1], icon+" "+text);
     }else if(fontId == "title"){
@@ -372,7 +377,7 @@ function composeLabel(className, text, fontId, fontIcon){
 
 function composeActiveTitle(className, text, fontId, fontIcon){
     let result = "";
-    let icon = composeIconAwesome(fontId, fontIcon);
+    let icon = composeIconAwesome(fontId, fontIcon, "");
     let spanComponentRemoveId = replaceString(spanComponent, masterHolder[0], "");
     let spanComponentClass = replaceString(spanComponentRemoveId, masterHolder[2], className);
 
@@ -384,7 +389,7 @@ function composeActiveTitle(className, text, fontId, fontIcon){
     return result;
 }
 function composeActiveClass(id,className, classLevel, fontId, fontIcon){
-    let icon = composeIconAwesome(fontId, fontIcon);
+    let icon = composeIconAwesome(fontId, fontIcon, "");
     let spanLevelComponentId = replaceString(spanComponent, masterHolder[0], "class-level-"+id);
     let spanLevelComponentClass = replaceString(spanLevelComponentId, masterHolder[2], "level-size");
     let spanLevelComponentValue = replaceString(spanLevelComponentClass, masterHolder[1], classLevel);
