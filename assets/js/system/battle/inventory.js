@@ -132,6 +132,13 @@ function generateDetail(id){
 
 }
 
+function getInventoryById(id){
+    let inventoryIndex = playerInventory.findIndex(function(elem) {
+        return elem.id == id
+    });
+    let data = playerInventory[inventoryIndex];
+    return data;
+}
 
 function switchItem(id){
     $("li#"+selectedItem).removeClass('active');
@@ -212,3 +219,24 @@ $(document).on('keydown', function(e) {
 	}
 });
 
+
+
+// Item Menu
+let itemTempArr = [];
+// itemTempList("item_herb", idTemp)
+function itemTempList(idItem, idTemp){
+    let data = getInventoryById(idItem)
+    // let itemBadgeTemp = <div id="<!id>" class="<!class>"></div>
+
+    let id = "item-temporary-"+idTemp;
+    let icon = composeIconAwesome(data.icon.type, data.icon.logo, data.icon.color);
+    let labelBadgeItemAmountId = replaceString(labelComponent['start'], masterHolder[0], id+"-value");
+    let labelBadgeItemAmountClass = replaceString(labelBadgeItemAmountId, masterHolder[2], "badge badge-amount");
+    let labelBadgeItemAmount = labelBadgeItemAmountClass+data.amount+labelComponent['end'];
+
+    let itemBadgeTempId = replaceString(divComponent['start'], masterHolder[0], id);
+    let itemBadgeTempClass = replaceString(itemBadgeTempId, masterHolder[2], "action temporary");
+    let itemBadgeTemp = itemBadgeTempClass+icon+labelBadgeItemAmount+divComponent['end'];
+    itemTempArr.push(idItem)
+    $("#itemUsageTemporary").append(itemBadgeTemp);
+}
