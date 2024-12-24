@@ -17,6 +17,7 @@ let monster_formation = [
 	},
 ];
 
+let partyMemberDetailAction = ['Config', 'Switch'];
 
 //Systems
 // let interfaceLogListScroll = {

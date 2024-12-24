@@ -92,9 +92,14 @@ function accept(){
 		// pushLog("skill", id);
 	}else if(switchPartyMemberDetail == true){
 		partyMemberDetail = false;
-		console.log("test");
+		chooseTargetPartyMemberDetailAction = true;
 		
 		callingPartyDetailSelectorChooesed()
+		callingPartyMemberDetailActionButtonSelector(0)
+	}else if (switchPartyMemberDetailActive == true){
+		// switchPartyMemberDetailActive = false;
+		
+		
 	}
 	
 
@@ -103,13 +108,17 @@ function accept(){
 
 function cancel() {
 	console.log("Cancel")
-	console.log("partyMemberDetail : "+partyMemberDetail)
+	
 	console.log("chooseTargetPartyMember : "+chooseTargetPartyMember)
 	console.log("menuBattleAccess : "+menuBattleAccess)
 	console.log("menuActionAccess : "+menuActionAccess)
 	console.log("chooseTargetEnemy : "+chooseTargetEnemy)
 	console.log("chooseInvenotyBattleItem : "+chooseInvenotyBattleItem)
 	console.log("chooseTargetSkill : "+chooseTargetSkill)
+	console.log("partyMemberDetail : "+partyMemberDetail)
+	console.log("switchPartyMemberDetail : "+switchPartyMemberDetail)
+	console.log("switchPartyMemberDetailActive : "+switchPartyMemberDetailActive)
+	console.log("switchPartyMemberDetailActive : "+switchPartyMemberDetailActive)
 
 	
 	// if (partyMemberDetail == true) {
@@ -179,8 +188,18 @@ function cancel() {
 		menuSwitch(selectedAction);
 		$("#partyMemberDetailPage").fadeOut();
 		console.log(menuActionAccess);
+	}else if(switchPartyMemberDetail == true){	
+		switchPartyMemberDetail = false;	
+		menuActionAccess = true;
+		menuSwitch(selectedAction);
+		$("#partyMemberDetailPage").fadeOut();
 	}else if(switchPartyMemberDetailActive == true){			
 		callingPartyDetailSelectorUnchooesed()
+
+	}else if(chooseTargetPartyMemberDetailAction == true){
+		chooseTargetPartyMemberDetailAction = false;
+		switchPartyMemberDetailActive = true;
+		
 	}else{
 
 	}

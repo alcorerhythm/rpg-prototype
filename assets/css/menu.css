@@ -87,6 +87,9 @@ menu li.magic{
 menu li.defence{
 	margin: -16px 0 0 4px;
 }
+menu li.formationBattle {
+  margin: -102px 0 0 -98px;
+}
 menu li.menuQuit
 {
     margin: -51px 0px 0px -1px;
@@ -324,7 +327,6 @@ div.action i{
  .action.skill{
     margin: -40px 0 0 -43px;
 }
-
 .action.formationBattle {
   margin: 102px 0 0 98px
 }

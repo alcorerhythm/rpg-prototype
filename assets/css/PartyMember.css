@@ -57,3 +57,11 @@
 .party-member-single.selected.choosed div.zeroPadding{
     opacity: 0.3!important;
 }
+
+
+/* party member  detail */
+
+
+.party-member-single a span.active {
+    background: #727272!important;
+}

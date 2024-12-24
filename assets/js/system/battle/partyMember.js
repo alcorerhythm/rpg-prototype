@@ -151,8 +151,8 @@ function composeDetailPartyMember(){
         let statusComponent = replaceString(rowComponent, masterHolder[1], halfStatusLeftComponent+halfStatusRightComponent);
 
         let buffComponent = composeBuff(id);
-        let btn = `<a class="config-button"><span>Config</span></a>
-        <a class="switch-button"><span>Switch</span></a>`;
+        let btn = composeButtonPartyMemberDetailAction(id);
+
         let divZeroPadding = composeDivClass("zeroPadding");
         let partySingleMemberdivZeroPadding = replaceString(divZeroPadding, masterHolder[1], composePartyMemberMainStatus+statusComponent+buffComponent+divComponent['end']);
         let partyMemberSingleDetail = replaceString(divComponent['start'], masterHolder[2],'party-member-single');
@@ -167,8 +167,6 @@ function composeDetailPartyMember(){
     }
     $("#partyMemberDetailList").html("");
     $("#partyMemberDetailList").html(result);
-
-
 
 }
 
@@ -208,9 +206,10 @@ function composeBuff(id){
 
 
 let selectedPartyMemberDetail = 0;
+let selectedPartyMemberDetailAction = 1;
 let switchPartyMemberDetail = false;
 let switchPartyMemberDetailActive = false;
-
+let chooseTargetPartyMemberDetailAction = false;
 
 
 
@@ -256,6 +255,34 @@ $(document).on('keydown', function(e) {
         		value = 0;
         	}
             callingPartyDetailSelector(value)
+            break;
+    	}
+	}
+});
+
+function callingPartyMemberDetailActionButtonSelector(value){
+    $("#party-member-button-party-"+selectedPartyMemberDetail+"-"+partyMemberDetailAction[value]).addClass("active");
+    $("#party-member-button-party-"+selectedPartyMemberDetail+"-"+partyMemberDetailAction[selectedPartyMemberDetailAction]).removeClass("active");
+    selectedPartyMemberDetailAction = value;
+}
+$(document).on('keydown', function(e) {
+	let maxPartyMemberDetail = partyMemberDetailAction.length-1;
+	let value = 0;
+	if (chooseTargetPartyMemberDetailAction == true) {
+		switch (e.keyCode) {
+        case 38:
+        	value = selectedPartyMemberDetailAction-1;
+        	if (value < 0) {
+        		value = maxPartyMemberDetail;
+        	}
+            callingPartyMemberDetailActionButtonSelector(value)
+            break;
+        case 40:
+            value = selectedPartyMemberDetailAction+1;
+        	if (value > maxPartyMemberDetail) {
+        		value = 0;
+        	}
+            callingPartyMemberDetailActionButtonSelector(value)
             break;
     	}
 	}

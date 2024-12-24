@@ -26,3 +26,17 @@ function getNumber(value){
 	value = value.replace(/\D/g,'');
 	return value
 }
+
+//text handler
+
+function upperCaseFirstLetter(word){
+
+	let firstLetter = word.charAt(0)
+	let firstLetterCap = firstLetter.toUpperCase()
+	
+	let  remainingLetters = word.slice(1)
+	let  result = firstLetterCap + remainingLetters;
+	console.log(result)
+
+	return result;
+}
